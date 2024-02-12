@@ -63,6 +63,7 @@ abbr --add vim nvim
 abbr --add dc docker compose
 
 ## git
+abbr --add g git
 abbr --add ga git add
 abbr --add gb git branch
 abbr --add gc git commit
