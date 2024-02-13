@@ -76,6 +76,11 @@ abbr --add gsh git show
 abbr --add gst git status
 abbr --add gsw git switch
 
+## eza
+abbr --add la eza --icons --git -al
+abbr --add ll eza --icons --git -l
+abbr --add lar eza --icons --time-style relative --git -al
+abbr --add llr eza --icons --time-style relative --git -l
 
 # mise
 mise activate fish | source
