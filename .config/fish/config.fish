@@ -82,6 +82,9 @@ abbr --add ll eza --icons --git -l
 abbr --add lar eza --icons --time-style relative --git -al
 abbr --add llr eza --icons --time-style relative --git -l
 
+# brew
+fish_add_path /usr/local/sbin
+
 # mise
 mise activate fish | source
 
