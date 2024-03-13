@@ -33,5 +33,8 @@ config.leader = { key = "a", mods = "CTRL", timeout_milliseconds = 2000 }
 -- status
 config.status_update_interval = 1000
 
+-- Kitty Image Protocol Support
+-- see: https://github.com/wez/wezterm/issues/986
+config.enable_kitty_graphics = true
 -- and finally, return the configuration to wezterm
 return config
