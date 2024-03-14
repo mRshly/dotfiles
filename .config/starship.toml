@@ -62,7 +62,8 @@ format = '[[ $symbol ($version) ](fg:#769ff0 bg:#212736)]($style)'
 [python]
 symbol = "󰌠"
 style = "bg:#212736"
-format = '[[ $symbol ($version) ($virtualenv)](fg:#769ff0 bg:#212736)]($style)'
+python_binary = ['.venv/bin/python', 'python', 'python3']
+format = '[[ $symbol ($version) (\($virtualenv\))](fg:#769ff0 bg:#212736)]($style)'
 
 [php]
 symbol = ""
