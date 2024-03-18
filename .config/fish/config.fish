@@ -64,8 +64,11 @@ fish_add_path /usr/local/sbin
 mise activate fish | source
 
 # 1Password
-op completion fish | source
-set -gx SSH_AUTH_SOCK $HOME/.1password/agent.sock
+switch (uname)
+    case Darwin
+        op completion fish | source
+        set -gx SSH_AUTH_SOCK $HOME/.1password/agent.sock
+end
 
 # poetry
 fish_add_path $HOME/.local/bin
