@@ -41,6 +41,8 @@ if status is-interactive
     set -g theme_newline_cursor no
     set -g theme_newline_prompt '$ '
     set -x VIRTUAL_ENV_DISABLE_PROMPT 1
+    # see https://github.com/wez/wezterm/issues/415#issuecomment-755849623
+    set -x TERM wezterm
 end
 
 function fish_user_key_bindings
