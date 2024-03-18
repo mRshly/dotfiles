@@ -3,7 +3,9 @@ usage = "latest"
 node = "latest"
 python = "latest"
 rust = "latest"
-poetry = "latest"
 rust-analyzer = "latest"
 go = "latest"
 pnpm = "latest"
+
+[settings]
+activate_aggressive = true
