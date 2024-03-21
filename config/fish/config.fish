@@ -60,6 +60,10 @@ source (dirname (status --current-filename))/abbr.fish
 
 # brew
 fish_add_path /usr/local/sbin
+switch (uname)
+    case Linux
+        fish_add_path /home/linuxbrew/.linuxbrew/bin
+end
 
 # mise
 mise activate fish | source
