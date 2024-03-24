@@ -19,10 +19,12 @@ abbr --add gst git status
 abbr --add gsw git switch
 
 ## eza
-abbr --add la eza --icons --git -al
-abbr --add ll eza --icons --git -l
-abbr --add lar eza --icons --time-style relative --git -al
-abbr --add llr eza --icons --time-style relative --git -l
+abbr --add la eza --icons --git -al -s Name
+abbr --add ll eza --icons --git -l -s Name
+abbr --add lar eza --icons --time-style relative --git -al -s Name
+abbr --add llr eza --icons --time-style relative --git -l -s Name
+abbr --add lt eza --icons --time-style relative --git -lT -L 2 -s Name
+
 
 ## broot
 abbr --add br broot -sgh
