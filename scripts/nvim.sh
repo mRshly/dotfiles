@@ -8,6 +8,11 @@ set -o pipefail
 CONFIGPATH=~/.config/nvim
 DOTFILEPATH=~/dotfiles/config/nvim
 
+if [ ! -d "$CONFIG_DIR" ]; then
+	echo config directory does not exist, creating it
+	mkdir -p "${CONFIG_DIR:?}"
+fi
+
 echo begin linking neovim files
 ln -sf "${DOTFILEPATH:?}"/init.lua "${CONFIGPATH:?}"/
 ln -sf "${DOTFILEPATH:?}"/*.json "${CONFIGPATH:?}"/
