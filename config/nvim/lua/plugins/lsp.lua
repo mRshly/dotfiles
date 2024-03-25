@@ -48,7 +48,36 @@ return {
       })
     end,
   },
-
+  {
+    "williamboman/mason-lspconfig.nvim",
+  },
+  {
+    require("mason-lspconfig").setup({
+      ensure_installed = {
+        -- All
+        "typos_lsp",
+        -- Bash
+        "bashls",
+        -- CSS
+        "cssls",
+        -- Docker
+        "dockerls",
+        -- Docker Compose
+        "docker_compose_language_service",
+        -- JSON
+        "jsonls",
+        -- JavaScript
+        "tsserver",
+        -- Lua
+        "lua_ls",
+        -- Markdown
+        "vale_ls",
+        -- Python
+        "pyright",
+        "ruff_lsp",
+      },
+    }),
+  },
   {
     "stevearc/conform.nvim",
     -- https://github.com/stevearc/conform.nvim
