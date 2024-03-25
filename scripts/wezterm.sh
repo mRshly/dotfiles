@@ -23,3 +23,11 @@ ln -sf "${DOTFILES_DIR:?}/keybinds.lua" "$CONFIG_DIR/keybinds.lua"
 echo linking status.lua
 ln -sf "${DOTFILES_DIR:?}/status.lua" "$CONFIG_DIR/status.lua"
 echo end linking wezterm files
+
+# install wezterm TERM definition
+# see: https://wezfurlong.org/wezterm/config/lua/config/term.html
+tempfile=$(mktemp) \
+  && curl -o $tempfile https://raw.githubusercontent.com/wez/wezterm/main/termwiz/data/wezterm.terminfo \
+  && tic -x -o ~/.terminfo $tempfile \
+  && rm $tempfile
+
