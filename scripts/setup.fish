@@ -6,6 +6,7 @@ set -o pipefail
 set CONFIGPATH "~/.config/fish"
 set DOTFILEPATH "~/dotfiles/fish"
 
+mkdir -p $CONFIGPATH
 ln -s $DOTFILEPATH/* $CONFIGPATH/
 
 # install fisher
@@ -16,7 +17,7 @@ curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fi
 set plugins jethrokuan/z patrickf1/fzf.fish decors/fish-ghq
 
 for plugin in $plugins
-  fisher install $plugin
+    fisher install $plugin
 end
 
 # install oh-my-fish
