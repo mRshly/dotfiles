@@ -28,6 +28,7 @@ return {
         "lua-language-server",
         "stylua",
         "selene",
+        "typos-lsp",
         -- css
         "tailwindcss-language-server",
         "css-lsp",
