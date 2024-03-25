@@ -2,6 +2,11 @@
 -- Default autocmds that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/autocmds.lua
 -- Add any additional autocmds here
 
+-- disable spell checking
+-- see: https://github.com/LazyVim/LazyVim/discussions/392
+vim.api.nvim_del_augroup_by_name("lazyvim_wrap_spell")
+
+-- Python virtualenv
 local function find_python_executable()
   if vim.env.VIRTUAL_ENV then
     local paths = vim.fn.glob(vim.env.VIRTUAL_ENV .. "/**/bin/python", true, true)
