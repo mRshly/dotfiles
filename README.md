@@ -1,10 +1,10 @@
-# dotfiles
+# Dotfiles
 
 ## Python 🐍
 
 Based on [fredrikaverpil/dotfiles]( https://github.com/fredrikaverpil/dotfiles/tree/main/nvim-lazyvim )
 
-## Copilot in Neovim 🤖
+## Copilot in `Neovim` 🤖
 
 First, setup copilot in `neovim` with `:Copilot setup` command.
 
@@ -31,7 +31,7 @@ Describe below is the setup poetry for each python project.
     + poetry = { version="latest", pyproject="pyproject.toml"}
     ```
 
-## Create Symbolic link
+## Create symbolic link
 
 ```bash
 ln -s ~/dotfiles/config/<package> ~/.config/<package>
