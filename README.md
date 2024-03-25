@@ -1,8 +1,12 @@
 # dotfiles
 
-## Python
+## Python 🐍
 
 based on [fredrikaverpil/dotfiles]( https://github.com/fredrikaverpil/dotfiles/tree/main/nvim-lazyvim )
+
+## Copilot in Neovim 🤖
+
+First, setup copilot in `neovim` with `:Copilot setup` command.
 
 ## Mise
 
