@@ -2,7 +2,7 @@
 
 ## Python 🐍
 
-based on [fredrikaverpil/dotfiles]( https://github.com/fredrikaverpil/dotfiles/tree/main/nvim-lazyvim )
+Based on [fredrikaverpil/dotfiles]( https://github.com/fredrikaverpil/dotfiles/tree/main/nvim-lazyvim )
 
 ## Copilot in Neovim 🤖
 
@@ -28,7 +28,7 @@ Describe below is the setup poetry for each python project.
     ```diff
     [tools]
     - poetry = "latest"
-    + poetry = { version="latst", pyproject="pyproject.toml"}
+    + poetry = { version="latest", pyproject="pyproject.toml"}
     ```
 
 ## Create Symbolic link
