@@ -59,8 +59,9 @@ end
 source (dirname (status --current-filename))/abbr.fish
 
 # brew
-fish_add_path /usr/local/sbin
 switch (uname)
+    case Darwin
+        eval "$(/opt/homebrew/bin/brew shellenv)"
     case Linux
         fish_add_path /home/linuxbrew/.linuxbrew/bin
 end
