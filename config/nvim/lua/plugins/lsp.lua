@@ -36,7 +36,6 @@ return {
         "pyright",
         "ruff-lsp",
         "ruff",
-        "mypy",
         "black",
         -- docker
         "dockerfile-language-server",
@@ -46,29 +45,6 @@ return {
         -- shell
         "shellcheck",
       })
-    end,
-  },
-  {
-    "mfussenegger/nvim-lint",
-    enabled = true,
-    opts = function(_, opts)
-      local linters = require("lint").linters
-
-      linters.mypy.cmd = prefer_bin_from_venv("mypy")
-
-      local linters_by_ft = {
-        protobuf = { "buf", "protolint" },
-        python = { "mypy" },
-        sh = { "shellcheck" },
-        sql = { "sqlfluff" },
-        yaml = { "yamllint" },
-      }
-
-      -- extend opts.linters_by_ft
-      for ft, linters_ in pairs(linters_by_ft) do
-        opts.linters_by_ft[ft] = opts.linters_by_ft[ft] or {}
-        vim.list_extend(opts.linters_by_ft[ft], linters_)
-      end
     end,
   },
 }
