@@ -8,6 +8,7 @@ return {
       { "nvim-treesitter/nvim-treesitter" },
       { "antoinemadec/FixCursorHold.nvim" },
       { "folke/neodev.nvim" },
+      { "nvim-neotest/nvim-nio" },
 
       -- adapters
       { "nvim-neotest/neotest-vim-test" },
