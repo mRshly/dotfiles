@@ -23,7 +23,7 @@ Describe below is the setup poetry for each python project.
     mise use --env local poetry@latest
     ```
 
-2. Change `.mise.local.toml` to [ automatic activate poetry ](https://github.com/mise-plugins/mise-poetry?tab=readme-ov-file#virtualenv-activation).
+2. Change `.mise.local.toml` to [automatic activate poetry](https://github.com/mise-plugins/mise-poetry?tab=readme-ov-file#virtualenv-activation).
 
     ```diff
     [tools]
