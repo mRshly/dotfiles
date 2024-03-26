@@ -103,6 +103,7 @@ cask "font-tinos-nerd-font"
 cask "font-ubuntu-mono-nerd-font"
 cask "font-ubuntu-nerd-font"
 cask "font-victor-mono-nerd-font"
+cask "google-chrome"
 cask "karabiner-elements"
 cask "logseq"
 cask "postman"
@@ -112,3 +113,4 @@ cask "spotify"
 cask "wezterm"
 mas "Bumpr", id: 1166066070
 mas "Reeder", id: 1529448980
+mas "The Unarchiver", id: 425424353
