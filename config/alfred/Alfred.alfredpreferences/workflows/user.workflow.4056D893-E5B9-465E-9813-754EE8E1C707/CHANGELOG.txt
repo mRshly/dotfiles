@@ -1,5 +1,0 @@
-### Changelog
-- **chore**: cleanup
-- **fix(biome)**: matching of rules
-- **chore(mdn)**: cleanup
-- **build(changelog)**: fix bold not being applied to all cc-keywords
