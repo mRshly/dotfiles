@@ -44,9 +44,11 @@ brew "jesseduffield/lazygit/lazygit"
 cask "1password"
 cask "1password-cli"
 cask "alfred"
+cask "betterdiscord-installer"
 cask "bettertouchtool"
 cask "brave-browser"
 cask "dbeaver-community"
+cask "discord"
 cask "font-3270-nerd-font"
 cask "font-agave-nerd-font"
 cask "font-anonymice-nerd-font"
@@ -112,5 +114,6 @@ cask "rectangle"
 cask "spotify"
 cask "wezterm"
 mas "Bumpr", id: 1166066070
+mas "Omnivore", id: 1564031042
 mas "Reeder", id: 1529448980
 mas "The Unarchiver", id: 425424353
