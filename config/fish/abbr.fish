@@ -1,3 +1,7 @@
+# pushd / popd
+abbr --add pu pushd
+abbr --add po popd
+
 # nvim
 abbr --add vim nvim
 
