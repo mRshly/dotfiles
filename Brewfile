@@ -6,11 +6,11 @@ tap "homebrew/services"
 tap "jdx/tap"
 tap "jesseduffield/lazygit"
 tap "modularml/packages"
+brew "xz"
 brew "bat"
 brew "bottom"
 brew "broot"
 brew "readline"
-brew "xz"
 brew "colima"
 brew "commitizen"
 brew "docker-completion"
@@ -108,6 +108,7 @@ cask "font-ubuntu-mono-nerd-font"
 cask "font-ubuntu-nerd-font"
 cask "font-victor-mono-nerd-font"
 cask "google-chrome"
+cask "hhkb"
 cask "karabiner-elements"
 cask "logseq"
 cask "postman"
@@ -116,6 +117,7 @@ cask "rectangle"
 cask "spotify"
 cask "wezterm"
 mas "Bumpr", id: 1166066070
+mas "Gemini 2", id: 1090488118
 mas "Omnivore", id: 1564031042
 mas "Reeder", id: 1529448980
 mas "The Unarchiver", id: 425424353
