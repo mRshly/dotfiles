@@ -13,7 +13,8 @@ elif ! git config --global --get user.email; then
 fi
 
 # authentication for github
-# You shoud do setting ssh for github before this setup
+# You should do setting ssh for github before this setup
 gh auth login
 
 gh extension install github/gh-copilot
+gh extension install roziscoding/gh-ignore
