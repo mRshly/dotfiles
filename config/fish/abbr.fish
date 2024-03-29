@@ -13,6 +13,7 @@ abbr --add gd git diff
 abbr --add gl git log
 abbr --add gp git push origin
 abbr --add gcb git checkout -b
+abbr --add gch git checkout
 abbr --add gcz git cz
 abbr --add gsh git show
 abbr --add gst git status
