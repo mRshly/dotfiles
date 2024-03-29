@@ -17,6 +17,7 @@ plotly = "^5.20.0"
 pillow = "^10.2.0"
 pnglatex = "^1.1"
 cairosvg = "^2.7.1"
+ipykernel = "^6.29.4"
 
 
 [tool.poetry.group.dev.dependencies]

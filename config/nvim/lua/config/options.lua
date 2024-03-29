@@ -16,3 +16,5 @@ package.path = package.path .. ";" .. vim.fn.expand("$HOME") .. "/.luarocks/shar
 -- TODO: set those paths when just open python file.
 package.path = package.path .. ";" .. vim.fn.expand("$HOME") .. "/.local/share/mise/installs/python/latest/bin/python;"
 package.path = package.path .. ";" .. vim.fn.expand("$HOME") .. "/config/python/.venv/bin/python;"
+
+vim.g.python3_host_prog = vim.fn.expand("$HOME/.config/python/.venv/bin/python3")
