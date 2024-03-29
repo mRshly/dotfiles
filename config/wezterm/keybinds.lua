@@ -95,7 +95,7 @@ return {
 		{ key = "W", mods = "CTRL", action = act.CloseCurrentPane({ confirm = true }) },
 		{ key = "W", mods = "SHIFT|CTRL", action = act.CloseCurrentPane({ confirm = true }) },
 		{ key = "W", mods = "LEADER", action = act.CloseCurrentTab({ confirm = true }) },
-		{ key = "X", mods = "CTRL", action = act.ActivateCopyMode },
+		{ key = "x", mods = "LEADER", action = act.ActivateCopyMode },
 		{ key = "X", mods = "SHIFT|CTRL", action = act.ActivateCopyMode },
 		{ key = "Z", mods = "CTRL", action = act.TogglePaneZoomState },
 		{ key = "Z", mods = "SHIFT|CTRL", action = act.TogglePaneZoomState },
