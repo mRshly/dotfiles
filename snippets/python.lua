@@ -12,6 +12,12 @@ local rep = require("luasnip.extras").rep
 local expand_cond = require("luasnip.extras.conditions.expand")
 
 return {
+	-- main function
+	s({ trig = "main", name = "main function" }, {
+		t("if __name__ == '__main__':"),
+		t("<0>"),
+		i(0),
+	}),
 
 	-- Read CSV file with encoding
 	s(
