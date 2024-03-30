@@ -117,6 +117,7 @@ cask "postman"
 cask "raycast"
 cask "rectangle"
 cask "spotify"
+cask "steam"
 cask "wezterm"
 mas "Bumpr", id: 1166066070
 mas "Gemini 2", id: 1090488118
