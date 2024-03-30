@@ -13,6 +13,7 @@ local expand_cond = require("luasnip.extras.conditions.expand")
 
 return {
 
+	-- Read CSV file with encoding
 	s(
 		{ trig = "csv", name = "read csv file with encoding" },
 		fmta(
@@ -26,6 +27,41 @@ return {
 			{
 				[1] = i(1),
 				[0] = i(0),
+			}
+		)
+	),
+	-- Measuring time
+	s(
+		{ trig = "time", name = "measuring time include sleep time" },
+		fmta(
+			[[import time]]
+				.. "\n"
+				.. [[start_time = time.perf_counter()]]
+				.. "\n"
+				.. [[<1>]]
+				.. "\n"
+				.. [[end_time = time.perf_counter()]]
+				.. "\n"
+				.. [[print(f"Time taken: {end_time - start_time} ms", )]],
+			{
+				[1] = i(1),
+			}
+		)
+	),
+	s(
+		{ trig = "time", name = "measuring time exclude sleep time" },
+		fmta(
+			[[import time]]
+				.. "\n"
+				.. [[start_time = time.process_time()]]
+				.. "\n"
+				.. [[<1>]]
+				.. "\n"
+				.. [[end_time = time.process_time()]]
+				.. "\n"
+				.. [[print(f"Time taken: {end_time - start_time} ms", )]],
+			{
+				[1] = i(1),
 			}
 		)
 	),
