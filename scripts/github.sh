@@ -18,3 +18,6 @@ gh auth login
 
 gh extension install github/gh-copilot
 gh extension install roziscoding/gh-ignore
+
+gh config set editor nvim
+gh config set pager bat
