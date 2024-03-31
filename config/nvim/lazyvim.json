@@ -1,5 +1,7 @@
 {
-  "extras": [],
+  "extras": [
+    "lazyvim.plugins.extras.coding.yanky"
+  ],
   "news": {
     "NEWS.md": "3314"
   },
