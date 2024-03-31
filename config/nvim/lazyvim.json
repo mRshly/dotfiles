@@ -1,6 +1,7 @@
 {
   "extras": [
-    "lazyvim.plugins.extras.coding.yanky"
+    "lazyvim.plugins.extras.coding.yanky",
+    "lazyvim.plugins.extras.editor.leap"
   ],
   "news": {
     "NEWS.md": "3314"
