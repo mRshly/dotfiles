@@ -22,3 +22,14 @@ ln -sf "${DOTFILEPATH:?}"/LICENSE "${CONFIGPATH:?}"/
 ln -sf "${DOTFILEPATH:?}"/.gitignore "${CONFIGPATH:?}"/
 ln -sf "${DOTFILEPATH:?}"/lua "${CONFIGPATH:?}"/
 echo end linking neovim files
+
+## set gitconfig
+
+# core
+git config --global core.editor nvim
+
+# merge
+git config --global merge.tool nvimdiff
+git config --global mergetool.prompt false
+git config --global mergetool.keepBackup false
+git config --global mergetool "nvimdiff".layout "LOCAL,BASE,REMOTE /MERGED"
