@@ -120,6 +120,7 @@ cask "spotify"
 cask "steam"
 cask "wezterm"
 mas "Bumpr", id: 1166066070
+mas "Deliveries", id: 290986013
 mas "Gemini 2", id: 1090488118
 mas "Omnivore", id: 1564031042
 mas "Reeder", id: 1529448980
