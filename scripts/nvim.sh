@@ -32,4 +32,4 @@ git config --global core.editor nvim
 git config --global merge.tool nvimdiff
 git config --global mergetool.prompt false
 git config --global mergetool.keepBackup false
-git config --global mergetool "nvimdiff".layout "LOCAL,BASE,REMOTE /MERGED"
+git config --global mergetool."nvimdiff".layout "LOCAL,BASE,REMOTE /MERGED"
