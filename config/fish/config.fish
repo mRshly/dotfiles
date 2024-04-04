@@ -43,6 +43,7 @@ if status is-interactive
     set -g theme_newline_prompt '> '
     # see https://github.com/wez/wezterm/issues/415#issuecomment-755849623
     set -x TERM wezterm
+    set -g EDITOR nvim
 end
 
 function fish_user_key_bindings
