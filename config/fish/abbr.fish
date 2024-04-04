@@ -32,4 +32,4 @@ abbr --add lt eza --icons --time-style relative --git -lT -L 2 -s Name
 
 
 ## broot
-abbr --add br broot -sgh
+abbr --add br broot -sghd
