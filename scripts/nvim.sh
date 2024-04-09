@@ -8,7 +8,7 @@ set -o pipefail
 CONFIGPATH=~/.config/nvim
 DOTFILEPATH=~/dotfiles/config/nvim
 
-if [ ! -d "$CONFIG_DIR" ]; then
+if [ ! -d "$CONFIGPATH" ]; then
 	echo config directory does not exist, creating it
 	mkdir -p "${CONFIG_DIR:?}"
 fi
