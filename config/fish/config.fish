@@ -66,6 +66,7 @@ switch (uname)
         eval "$(/opt/homebrew/bin/brew shellenv)"
     case Linux
         fish_add_path /home/linuxbrew/.linuxbrew/bin
+        fish_add_path /home/linuxbrew/.linuxbrew/sbin
 end
 
 # mise
@@ -77,6 +78,11 @@ switch (uname)
         op completion fish | source
         set -gx SSH_AUTH_SOCK $HOME/.1password/agent.sock
 end
+
+# python via pyenv
+set -x PYENV_ROOT $HOME/.pyenv
+set -x PATH $PYENV_ROOT/bin $PATH
+pyenv init - | source
 
 # poetry
 fish_add_path $HOME/.local/bin
