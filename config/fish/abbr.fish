@@ -14,7 +14,7 @@ abbr --add ga git add
 abbr --add gb git branch
 abbr --add gc git commit
 abbr --add gd git diff
-abbr --add gl git log
+abbr --add gl "git log --graph --pretty=format='format:%C(yellow)%h%C(reset) %s %C(magenta)%cr%C(reset)%C(auto)%d%C(reset)'"
 abbr --add gp git push origin
 abbr --add gcb git checkout -b
 abbr --add gch git checkout
