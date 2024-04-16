@@ -1,3 +1,6 @@
 [submodule "config/vale/styles/Microsoft"]
 	path = config/vale/styles/Microsoft
 	url = git@github.com:errata-ai/Microsoft.git
+[submodule "themes/tokyonight.nvim"]
+	path = themes/tokyonight.nvim
+	url = git@github.com:folke/tokyonight.nvim.git
