@@ -1,5 +1,6 @@
 # fish
 fish_variables
+config/fish/themes
 
 # Mac
 .DS_Store
