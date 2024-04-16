@@ -9,6 +9,9 @@ set DOTFILEPATH "~/dotfiles/fish"
 mkdir -p $CONFIGPATH
 ln -s $DOTFILEPATH/* $CONFIGPATH/
 
+set -l THEMEPATH $DOTFILEPATH/../themes
+ln -s $THEMEPATH/tokyonight.nvim/extras/fish_themes/* ~/.config/fish/themes/
+
 # install fisher
 # see: https://github.com/jorgebucaran/fisher
 curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish | source && fisher install jorgebucaran/fisher
