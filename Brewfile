@@ -56,6 +56,7 @@ cask "alfred"
 cask "betterdiscord-installer"
 cask "bettertouchtool"
 cask "brave-browser"
+cask "cog"
 cask "dbeaver-community"
 cask "discord"
 cask "font-3270-nerd-font"
@@ -128,6 +129,8 @@ cask "wezterm"
 mas "Bumpr", id: 1166066070
 mas "Deliveries", id: 290986013
 mas "Gemini 2", id: 1090488118
+mas "Goodnotes", id: 1444383602
+mas "Kindle", id: 302584613
 mas "Omnivore", id: 1564031042
 mas "Reeder", id: 1529448980
 mas "The Unarchiver", id: 425424353
