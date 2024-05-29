@@ -9,6 +9,7 @@ return {
 		{ key = "!", mods = "CTRL", action = act.ActivateTab(0) },
 		{ key = "!", mods = "SHIFT|CTRL", action = act.ActivateTab(0) },
 		{ key = '"', mods = "LEADER", action = act.SplitVertical({ domain = "CurrentPaneDomain" }) },
+		{ key = '"', mods = "LEADER|SHIFT", action = act.SplitVertical({ domain = "CurrentPaneDomain" }) }, -- for windows
 		{ key = "#", mods = "CTRL", action = act.ActivateTab(2) },
 		{ key = "#", mods = "SHIFT|CTRL", action = act.ActivateTab(2) },
 		{ key = "$", mods = "CTRL", action = act.ActivateTab(3) },
@@ -16,6 +17,7 @@ return {
 		{ key = "%", mods = "CTRL", action = act.ActivateTab(4) },
 		{ key = "%", mods = "SHIFT|CTRL", action = act.ActivateTab(4) },
 		{ key = "%", mods = "LEADER", action = act.SplitHorizontal({ domain = "CurrentPaneDomain" }) },
+		{ key = "%", mods = "LEADER|SHIFT", action = act.SplitHorizontal({ domain = "CurrentPaneDomain" }) }, -- for windows
 		{ key = "%", mods = "SHIFT|ALT|CTRL", action = act.SplitHorizontal({ domain = "CurrentPaneDomain" }) },
 		{ key = "&", mods = "CTRL", action = act.ActivateTab(6) },
 		{ key = "&", mods = "SHIFT|CTRL", action = act.ActivateTab(6) },
