@@ -136,4 +136,5 @@ mas "Goodnotes", id: 1444383602
 mas "Kindle", id: 302584613
 mas "Omnivore", id: 1564031042
 mas "Reeder", id: 1529448980
+mas "RunCat", id: 1429033973
 mas "The Unarchiver", id: 425424353
