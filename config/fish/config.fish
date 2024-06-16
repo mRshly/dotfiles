@@ -79,10 +79,6 @@ switch (uname)
         set -gx SSH_AUTH_SOCK $HOME/.1password/agent.sock
 end
 
-# python via pyenv
-set -x PYENV_ROOT $HOME/.pyenv
-set -x PATH $PYENV_ROOT/bin $PATH
-pyenv init - | source
 
 # poetry
 fish_add_path $HOME/.local/bin
