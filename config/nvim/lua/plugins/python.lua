@@ -68,6 +68,9 @@ return {
   {
     -- see the image.nvim readme for more information about configuring this plugin
     "3rd/image.nvim",
+    -- PLEASE check this link https://github.com/3rd/image.nvim/issues/91#issuecomment-2065165485
+    -- You must check to install path for ImageMagick via brew info ImageMagick
+    -- And you edit ~/.luarocks/share/lua/5.1/magick/wand/lib.lua:L220 like above link
     opts = {
       backend = "kitty", -- whatever backend you would like to use
       max_width = 100,
