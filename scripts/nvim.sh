@@ -9,8 +9,8 @@ CONFIGPATH=~/.config/nvim
 DOTFILEPATH=~/dotfiles/config/nvim
 
 if [ ! -d "$CONFIGPATH" ]; then
-	echo config directory does not exist, creating it
-	mkdir -p "${CONFIG_DIR:?}"
+  echo config directory does not exist, creating it
+  mkdir -p "${CONFIGPATH:?}"
 fi
 
 echo begin linking neovim files
