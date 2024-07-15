@@ -10,6 +10,10 @@ set -o pipefail
 BIN_DIR="$HOME/dotfiles/bin"
 DEST_BIN_DIR="$HOME"/.local/bin
 
+if [ ! -d "{$DEST_BIN_DIR}" ]; then
+  echo "Creating directory for bin files"
+  mkdir -p "$DEST_BIN_DIR"
+fi
 # if [ ! -d "${CONFIG_DIR}" ]; then
 # 	echo "Config directory does not exist. Exiting..."
 # 	exit 1
