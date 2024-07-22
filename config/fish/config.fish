@@ -91,3 +91,7 @@ export XDG_CONFIG_HOME=$HOME/.config
 export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 ## https://github.com/sharkdp/bat?tab=readme-ov-file#highlighting---help-messages
 alias bathelp='bat --plain --language=help'
+
+if test -e ~/.nvm/nvm.sh
+    load_nvm >/dev/stderr
+end
