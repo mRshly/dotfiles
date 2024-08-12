@@ -8,10 +8,6 @@ vim.opt.mouse = ""
 vim.cmd([[let &t_Cs = "\e[4:3m"]])
 vim.cmd([[let &t_Ce = "\e[4:0m"]])
 
--- Example for configuring Neovim to load user-installed installed Lua rocks:
-package.path = package.path .. ";" .. vim.fn.expand("$HOME") .. "/.luarocks/share/lua/5.1/?/init.lua;"
-package.path = package.path .. ";" .. vim.fn.expand("$HOME") .. "/.luarocks/share/lua/5.1/?.lua;"
-
 -- Python path
 -- TODO: set those paths when just open python file.
 package.path = package.path .. ";" .. vim.fn.expand("$HOME") .. "/.local/share/mise/installs/python/latest/bin/python;"
