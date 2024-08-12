@@ -5,6 +5,7 @@ rust = "latest"
 rust-analyzer = "latest"
 go = "latest"
 pnpm = "latest"
+yarn = "latest"
 
 [settings]
 activate_aggressive = true
