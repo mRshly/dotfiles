@@ -22,6 +22,7 @@ abbr --add gcz git cz
 abbr --add gsh git show
 abbr --add gst git status
 abbr --add gsw git switch
+abbr --add lg lazygit
 
 ## eza
 abbr --add la eza --icons --git -al -s Name
