@@ -63,7 +63,16 @@ source (dirname (status --current-filename))/abbr.fish
 # brew
 switch (uname)
     case Darwin
-        eval "$(/opt/homebrew/bin/brew shellenv)"
+        switch (uname -m)
+            case arm64
+                fish_add_path /opt/homebrew/bin
+                fish_add_path /opt/homebrew/sbin
+                eval "$(/opt/homebrew/bin/brew shellenv)"
+            case x86_64
+                fish_add_path /usr/local/bin
+                fish_add_path /usr/local/sbin
+                eval "$(/usr/local/bin/brew shellenv)"
+        end
     case Linux
         fish_add_path /home/linuxbrew/.linuxbrew/bin
         fish_add_path /home/linuxbrew/.linuxbrew/sbin
