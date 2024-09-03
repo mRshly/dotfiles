@@ -17,7 +17,7 @@ config.color_scheme = "Tokyo Night"
 -- https://github.com/yuru7/HackGen
 
 config.font = wezterm.font("HackGen Console NF")
-config.font_size = 14.0
+config.font_size = 16.0
 config.window_frame = {
 	font = wezterm.font({ family = "HackGen Console NF", weight = "Bold" }),
 	font_size = 12.0,
