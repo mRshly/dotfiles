@@ -1,15 +1,12 @@
 #!/usr/bin/env fish
-set -o errexit
-set -o nounset
-set -o pipefail
 
-set CONFIGPATH "~/.config/fish"
-set DOTFILEPATH "~/dotfiles/fish"
+set CONFIGPATH ~/.config/fish
+set DOTFILEPATH ~/dotfiles/config/fish
 
 mkdir -p $CONFIGPATH
 ln -s $DOTFILEPATH/* $CONFIGPATH/
 
-set -l THEMEPATH $DOTFILEPATH/../themes
+set -l THEMEPATH $DOTFILEPATH/../../themes
 ln -s $THEMEPATH/tokyonight.nvim/extras/fish_themes/* ~/.config/fish/themes/
 
 # install fisher
