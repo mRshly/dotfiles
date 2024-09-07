@@ -35,7 +35,7 @@ config.keys = keybind.keys
 -- see: https://wezfurlong.org/wezterm/config/key-tables.html
 -- cojnfig file: keybinds.lua
 config.key_tables = keybind.key_tables
-config.leader = { key = "a", mods = "CTRL", timeout_milliseconds = 2000 }
+config.leader = { key = "z", mods = "CTRL", timeout_milliseconds = 2000 }
 
 -- status
 config.status_update_interval = 1000
