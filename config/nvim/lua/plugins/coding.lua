@@ -9,4 +9,9 @@ return {
       ["<"] = { input = { "%b<>", "^.().*().$" }, output = { left = "<", right = ">" } },
     },
   }),
+  {
+    "gbprod/yanky.nvim",
+    opts = {},
+    require("yanky").setup({}),
+  },
 }
