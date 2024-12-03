@@ -4,3 +4,6 @@
 [submodule "themes/tokyonight.nvim"]
 	path = themes/tokyonight.nvim
 	url = git@github.com:folke/tokyonight.nvim.git
+[submodule "solarized-osaka.nvim"]
+	path = solarized-osaka.nvim
+	url = git@github.com:craftzdog/solarized-osaka.nvim.git
