@@ -10,7 +10,11 @@ local config = wezterm.config_builder()
 -- This is where you actually apply your config choices
 
 -- https://wezfurlong.org/wezterm/colorschemes/t/index.html#tokyo-night
-config.color_scheme = "Tokyo Night"
+-- config.color_scheme = "Tokyo Night"
+-- config.color_scheme = "solarized-osaka_night"
+-- config.color_scheme = "solarized-osaka_storm"
+config.color_scheme = "Solarized Dark (Gogh)"
+-- config.color_scheme = "Solarized Dark - Patched"
 
 -- Font config
 -- see: https://wezfurlong.org/wezterm/config/fonts.html
