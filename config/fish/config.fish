@@ -36,7 +36,7 @@ if status is-interactive
     set -g theme_nerd_fonts yes
     set -g theme_show_exit_status yes
     set -g theme_display_jobs_verbose yes
-    set -g theme_color_scheme terminal-dark
+    set -g theme_color_scheme solarized
     set -g fish_prompt_pwd_dir_length 1
     set -g theme_project_dir_length 1
     set -g theme_newline_cursor yes
@@ -104,3 +104,6 @@ alias bathelp='bat --plain --language=help'
 if test -e ~/.nvm/nvm.sh
     load_nvm >/dev/stderr
 end
+
+# solarized-osaka_night
+# source (dirname (status --current-filename))/solarized-osaka_night.fish
