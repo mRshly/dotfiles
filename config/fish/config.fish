@@ -89,9 +89,6 @@ switch (uname)
 end
 
 
-# poetry
-fish_add_path $HOME/.local/bin
-
 # nvim
 export XDG_CONFIG_HOME=$HOME/.config
 
