@@ -104,3 +104,6 @@ alias bathelp='bat --plain --language=help'
 if test -e ~/.nvm/nvm.sh
     load_nvm >/dev/stderr
 end
+
+# starship
+starship init fish | source
