@@ -9,8 +9,8 @@ local config = wezterm.config_builder()
 
 -- This is where you actually apply your config choices
 
--- https://wezfurlong.org/wezterm/colorschemes/t/index.html#tokyo-night
-config.color_scheme = "Tokyo Night"
+-- https://github.com/Tsuzat/NeoSolarized.nvim
+config.color_scheme = "NeoSolarized Dark"
 
 -- Font config
 -- see: https://wezfurlong.org/wezterm/config/fonts.html
