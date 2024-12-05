@@ -46,7 +46,7 @@ return {
     event = "VeryLazy",
     opts = {
       options = {
-        theme = "tokyonight",
+        theme = "NeoSolarized",
       },
     },
   },
@@ -56,7 +56,7 @@ return {
   {
     "b0o/incline.nvim",
     dependencies = {
-      "folke/tokyonight.nvim",
+      "Tsuzat/NeoSolarized.nvim",
     },
     event = "BufReadPre",
     priority = 1200,
