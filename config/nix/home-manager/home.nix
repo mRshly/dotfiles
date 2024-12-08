@@ -74,6 +74,53 @@
 #     fi
 #   '';
 # };
+programs.git = {
+    enable = true;
+    delta.enable = true;
+    userName = "mRshly";
+    userEmail = "mshrm808@icloud.com";
+    extraConfig = {
+      user.signingKey = "~/.ssh/id_ed25519";
+      lfs = {
+        enable = true;
+      };
+      core = {
+        editor = "nvim";
+      };
+      delta = {
+        navigate = true;
+        line-numbers = true;
+        minus-style = "syntax '#37222c'";
+        minus-non-emph-style = "syntax '#37222c'";
+        minus-emph-style = "syntax '#713137'";
+        minus-empty-line-marker-style = "syntax '#b2555b'";
+        line-numbers-minus-style = "#b2555b";
+        plus-style = "syntax '#20303b'";
+        plus-non-emph-style = "syntax '#20303b'";
+        plus-emph-style = "syntax '#2c5a66'";
+        plus-empty-line-marker-style = "syntax '#20303b'";
+        line-numbers-plus-style = "#266d6a";
+        line-numbers-zero-style = "#3b4261";
+      };
+      merge = {
+        conflictstyle = "diff3";
+        tool = "nvimdiff";
+      };
+      diff = {
+        colorMoved = "default";
+      };
+      mergetool = {
+        prompt = false;
+        keepBackup = false;
+      };
+      mergetool-nvimdiff = {
+        layout = "LOCAL,BASE,REMOTE /MERGED";
+      };
+      init = {
+        defaultBranch = "main";
+      };
+    };
+  };
 
 programs.fish = {
     enable = true;
