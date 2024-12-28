@@ -10,4 +10,3 @@ uv = "latest"
 
 [settings]
 activate_aggressive = true
-python_compile = true
