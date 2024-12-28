@@ -169,10 +169,6 @@ KALEIDOSCOPE_INIT_PLUGINS(
   // both debugging, and in backing up one's EEPROM contents.
   FocusEEPROMCommand,
 
-  // The FirmwareVersion plugin lets Chrysalis query the version of the firmware
-  // programmatically.
-  // FirmwareVersion,
-
   // The LayerNames plugin allows Chrysalis to display - and edit - custom layer
   // names, to be shown instead of the default indexes.
   LayerNames,
@@ -184,19 +180,6 @@ KALEIDOSCOPE_INIT_PLUGINS(
   // Chrysalis. Keys with secondary actions will have their primary action
   // performed when tapped, but the secondary action when held.
   Qukeys,
-
-  // SpaceCadet can turn your shifts into parens on tap, while keeping them as
-  // Shifts when held. SpaceCadetConfig lets Chrysalis configure some aspects of
-  // the plugin.
-  // SpaceCadet,
-  // SpaceCadetConfig,
-
-  // Enables the "Sticky" behavior for modifiers, and the "Layer shift when
-  // held" functionality for layer keys.
-  // OneShot,
-  // OneShotConfig,
-  // EscapeOneShot,
-  // EscapeOneShotConfig,
 
   // The macros plugin adds support for macros
   Macros,
