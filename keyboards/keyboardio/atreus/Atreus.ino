@@ -34,6 +34,7 @@
 #include "Kaleidoscope-SpaceCadet.h"
 #include "Kaleidoscope-DynamicMacros.h"
 #include "Kaleidoscope-LayerNames.h"
+#include <Kaleidoscope-TapDance.h>
 
 #define MO(n) ShiftToLayer(n)
 #define TG(n) LockLayer(n)
@@ -79,19 +80,24 @@ enum {
 # define Key_Lang       MO(LANG)
 # define Key_Numpad     MO(NUMPAD)
 
+// Tap Dance
+enum {
+  CHANGE_JP_EN
+};
+
 // clang-format off
 KEYMAPS(
   [BASE] = KEYMAP_STACKED
   (
        Key_Q      ,Key_W    ,Key_E        ,Key_R          ,Key_T
       ,SFT_T(A)   ,CTL_T(S) ,ALT_T(D)     ,GUI_T(F)       ,Key_G
-      ,Key_Z      ,Key_X    ,Key_C        ,Key_V          ,Key_B      ,LT(LANG, Tab)
-      ,Key_Numpad ,Key_LAlt ,Key_LAlt     ,Key_LCtrl      ,Key_Space  ,Key_Esc
+      ,Key_Z      ,Key_X    ,Key_C        ,Key_V          ,Key_B          ,LT(LANG, Backtick)
+      ,Key_Numpad ,Key_LAlt ,Key_LAlt     ,MO(FUN)        ,Key_Backspace  ,Key_Esc
 
-                                ,Key_Y     ,Key_U      ,Key_I     ,Key_O      ,Key_P
-                                ,Key_H     ,GUI_T(J)   ,ALT_T(K)  ,CTL_T(L)   ,SFT_T(Semicolon)
-       ,Key_Minus               ,Key_N     ,Key_M      ,Key_Comma ,Key_Period ,Key_Slash
-       ,LT(SYMBOL, Backspace)   ,Key_Enter ,Key_Fun    ,Key_RCtrl ,Key_Quote  ,Key_Numpad
+                                ,Key_Y     ,Key_U             ,Key_I              ,Key_O      ,Key_P
+                                ,Key_H     ,GUI_T(J)          ,ALT_T(K)           ,CTL_T(L)   ,SFT_T(Semicolon)
+       ,Key_Minus               ,Key_N     ,Key_M             ,Key_Comma          ,Key_Period ,Key_Slash
+       ,LT(SYMBOL, Enter)       ,Key_Space ,Key_Tab           ,TD(CHANGE_JP_EN)   ,Key_Quote  ,Key_Numpad
   ),
 
   [SYMBOL] = KEYMAP_STACKED
@@ -147,6 +153,15 @@ KEYMAPS(
 )
 // clang-format on
 
+void tapDanceAction(uint8_t tap_dance_index, KeyAddr key_addr, uint8_t tap_count,
+                    kaleidoscope::plugin::TapDance::ActionType tap_dance_action) {
+  switch (tap_dance_index) {
+  case CHANGE_JP_EN:
+    return tapDanceActionKeys(tap_count, tap_dance_action,
+                              Key_F17, Key_F18);
+    }
+}
+
 KALEIDOSCOPE_INIT_PLUGINS(
   // ----------------------------------------------------------------------
   // Chrysalis plugins
@@ -189,7 +204,7 @@ KALEIDOSCOPE_INIT_PLUGINS(
 
   // The MouseKeys plugin lets you add keys to your keymap which move the mouse.
   MouseKeys,
-  MouseKeysConfig  //,
+  MouseKeysConfig,
 
   // The MagicCombo plugin lets you use key combinations to trigger custom
   // actions - a bit like Macros, but triggered by pressing multiple keys at the
@@ -199,6 +214,8 @@ KALEIDOSCOPE_INIT_PLUGINS(
   // Enables the GeminiPR Stenography protocol. Unused by default, but with the
   // plugin enabled, it becomes configurable - and then usable - via Chrysalis.
   // GeminiPR,
+
+  TapDance
 );
 
 const macro_t *macroAction(uint8_t macro_id, KeyEvent &event) {
