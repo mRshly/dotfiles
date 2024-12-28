@@ -38,11 +38,6 @@
 #define MO(n) ShiftToLayer(n)
 #define TG(n) LockLayer(n)
 
-enum {
-  MACRO_QWERTY,
-  MACRO_VERSION_INFO
-};
-
 #define Key_Exclamation LSHIFT(Key_1)
 #define Key_At          LSHIFT(Key_2)
 #define Key_Hash        LSHIFT(Key_3)
@@ -52,52 +47,102 @@ enum {
 #define Key_And         LSHIFT(Key_7)
 #define Key_Star        LSHIFT(Key_8)
 #define Key_Plus        LSHIFT(Key_Equals)
+// My aliases
+#define Key_LBrace      Key_LeftCurlyBracket
+#define Key_RBrace      Key_RightCurlyBracket
+#define Key_Tilde       LSHIFT(Key_Backslash)
+#define Key_Underscore  LSHIFT(Key_Minus)
 
+// Macros
 enum {
-  QWERTY,
-  FUN,
-  UPPER
+  MACRO_BASE,
+  MACRO_VERSION_INFO,
+  MACRO_PREVIOUS_TAB,
+  MACRO_NEXT_TAB,
+  MACRO_WIN_PREVIOUS_WINDOW,
+  MACRO_WIN_NEXT_WINDOW,
+  MACRO_SELECT_TO_HOME,
+  MACRO_SELECT_TO_END
 };
+
+// Layers
+enum {
+  BASE,
+  SYMBOL,
+  FUN,
+  LANG,
+  NUMPAD
+};
+
+# define Key_Symbol     MO(SYMBOL)
+# define Key_Fun        MO(FUN)
+# define Key_Lang       MO(LANG)
+# define Key_Numpad     MO(NUMPAD)
 
 // clang-format off
 KEYMAPS(
-  [QWERTY] = KEYMAP_STACKED
+  [BASE] = KEYMAP_STACKED
   (
-       Key_Q   ,Key_W   ,Key_E       ,Key_R         ,Key_T
-      ,Key_A   ,Key_S   ,Key_D       ,Key_F         ,Key_G
-      ,Key_Z   ,Key_X   ,Key_C       ,Key_V         ,Key_B, Key_Backtick
-      ,Key_Esc ,Key_Tab ,Key_LeftGui ,Key_LeftShift ,Key_Backspace ,Key_LeftControl
+       Key_Q      ,Key_W    ,Key_E        ,Key_R          ,Key_T
+      ,SFT_T(A)   ,CTL_T(S) ,ALT_T(D)     ,GUI_T(F)       ,Key_G
+      ,Key_Z      ,Key_X    ,Key_C        ,Key_V          ,Key_B      ,LT(LANG, Tab)
+      ,Key_Numpad ,Key_LAlt ,Key_LAlt     ,Key_LCtrl      ,Key_Space  ,Key_Esc
 
-                     ,Key_Y     ,Key_U      ,Key_I     ,Key_O      ,Key_P
-                     ,Key_H     ,Key_J      ,Key_K     ,Key_L      ,Key_Semicolon
-       ,Key_Backslash,Key_N     ,Key_M      ,Key_Comma ,Key_Period ,Key_Slash
-       ,Key_LeftAlt  ,Key_Space ,MO(FUN)    ,Key_Minus ,Key_Quote  ,Key_Enter
+                                ,Key_Y     ,Key_U      ,Key_I     ,Key_O      ,Key_P
+                                ,Key_H     ,GUI_T(J)   ,ALT_T(K)  ,CTL_T(L)   ,SFT_T(Semicolon)
+       ,Key_Minus               ,Key_N     ,Key_M      ,Key_Comma ,Key_Period ,Key_Slash
+       ,LT(SYMBOL, Backspace)   ,Key_Enter ,Key_Fun    ,Key_RCtrl ,Key_Quote  ,Key_Numpad
   ),
+
+  [SYMBOL] = KEYMAP_STACKED
+  (
+       Key_Exclamation ,Key_At           ,Key_Hash      ,Key_Dollar           ,Key_Percent
+      ,Key_Caret       ,Key_And          ,Key_Star      ,Key_LeftParen        ,Key_RightParen
+      ,Key_LBracket    ,Key_RBracket     ,Key_LBrace    ,Key_RBrace           ,Key_Plus           ,Key_Tilde
+      ,XXX             ,XXX              ,XXX           ,XXX                  ,XXX                ,XXX
+
+                   ,Key_Pipe        ,Key_Backslash     ,Key_Backtick          ,Key_Tilde ,XXX
+                   ,Key_Underscore  ,Key_Minus         ,XXX     ,XXX    ,XXX
+      ,Key_Delete  ,Key_Plus        ,Key_Equals        ,XXX     ,XXX    ,XXX
+      ,XXX ,XXX ,XXX ,XXX ,XXX ,XXX
+   ),
 
   [FUN] = KEYMAP_STACKED
   (
-       Key_Exclamation ,Key_At           ,Key_UpArrow   ,Key_Dollar           ,Key_Percent
-      ,Key_LeftParen   ,Key_LeftArrow    ,Key_DownArrow ,Key_RightArrow       ,Key_RightParen
-      ,Key_LeftBracket ,Key_RightBracket ,Key_Hash      ,Key_LeftCurlyBracket ,Key_RightCurlyBracket ,Key_Caret
-      ,TG(UPPER)       ,Key_Insert       ,Key_LeftGui   ,Key_LeftShift        ,Key_Delete         ,Key_LeftControl
-
-                   ,Key_PageUp   ,Key_7 ,Key_8      ,Key_9 ,Key_Backspace
-                   ,Key_PageDown ,Key_4 ,Key_5      ,Key_6 ,___
-      ,Key_And     ,Key_Star     ,Key_1 ,Key_2      ,Key_3 ,Key_Plus
-      ,Key_LeftAlt ,Key_Space    ,___   ,Key_Period ,Key_0 ,Key_Equals
-   ),
-
-  [UPPER] = KEYMAP_STACKED
-  (
        Key_Insert            ,Key_Home                 ,Key_UpArrow   ,Key_End        ,Key_PageUp
       ,Key_Delete            ,Key_LeftArrow            ,Key_DownArrow ,Key_RightArrow ,Key_PageDown
-      ,M(MACRO_VERSION_INFO) ,Consumer_VolumeIncrement ,XXX           ,XXX            ,___ ,___
-      ,MoveToLayer(QWERTY)   ,Consumer_VolumeDecrement ,___           ,___            ,___ ,___
+      ,M(MACRO_PREVIOUS_TAB) ,M(MACRO_NEXT_TAB)        ,M(MACRO_SELECT_TO_HOME)       ,M(MACRO_SELECT_TO_END) ,___ ,___
+      ,M(MACRO_WIN_PREVIOUS_WINDOW) ,M(MACRO_WIN_NEXT_WINDOW) ,___  ,___  ,___  ,___
 
-                ,Key_UpArrow   ,Key_F7              ,Key_F8          ,Key_F9         ,Key_F10
-                ,Key_DownArrow ,Key_F4              ,Key_F5          ,Key_F6         ,Key_F11
-      ,___      ,XXX           ,Key_F1              ,Key_F2          ,Key_F3         ,Key_F12
-      ,___      ,___           ,MoveToLayer(QWERTY) ,Key_PrintScreen ,Key_ScrollLock ,Consumer_PlaySlashPause
+                ,XXX          ,Key_F7              ,Key_F8          ,Key_F9         ,Key_F10
+                ,XXX          ,Key_F4              ,Key_F5          ,Key_F6         ,Key_F11
+      ,___      ,XXX          ,Key_F1              ,Key_F2          ,Key_F3         ,Key_F12
+      ,XXX      ,XXX          ,___ ,___ ,Key_ScrollLock ,XXX
+   ),
+
+  [LANG] = KEYMAP_STACKED
+  (
+       XXX  ,XXX  ,XXX  ,XXX  ,XXX
+      ,XXX  ,XXX  ,XXX  ,XXX  ,XXX
+      ,XXX  ,XXX  ,XXX  ,XXX  ,XXX  ,XXX
+      ,XXX  ,XXX  ,XXX  ,XXX  ,XXX  ,XXX
+
+                ,XXX    ,XXX      ,XXX        ,XXX      ,XXX
+                ,XXX    ,Key_F17  ,Key_F18    ,Key_F19  ,Key_F20
+      ,XXX      ,XXX    ,XXX      ,XXX        ,XXX      ,XXX
+      ,XXX      ,XXX    ,XXX      ,XXX        ,XXX      ,XXX
+   ),
+  [NUMPAD] = KEYMAP_STACKED
+  (
+       XXX  ,XXX  ,XXX        ,XXX        ,XXX
+      ,XXX  ,XXX  ,XXX        ,XXX        ,XXX
+      ,XXX  ,XXX  ,XXX        ,XXX        ,XXX          ,XXX
+      ,XXX  ,XXX  ,Key_LAlt   ,Key_LCtrl  ,Key_LShift   ,Key_LGui
+
+                    ,Key_Star     ,Key_Keypad7      ,Key_Keypad8    ,Key_Keypad9  ,Key_Plus
+                    ,XXX          ,Key_Keypad4      ,Key_Keypad5    ,Key_Keypad6  ,Key_Minus
+      ,XXX          ,XXX          ,Key_Keypad1      ,Key_Keypad2    ,Key_Keypad3  ,Key_Slash
+      ,Key_Delete   ,Key_Enter    ,Key_0            ,XXX            ,Key_Period   ,XXX
    )
 )
 // clang-format on
@@ -126,7 +171,7 @@ KALEIDOSCOPE_INIT_PLUGINS(
 
   // The FirmwareVersion plugin lets Chrysalis query the version of the firmware
   // programmatically.
-  FirmwareVersion,
+  // FirmwareVersion,
 
   // The LayerNames plugin allows Chrysalis to display - and edit - custom layer
   // names, to be shown instead of the default indexes.
@@ -143,15 +188,15 @@ KALEIDOSCOPE_INIT_PLUGINS(
   // SpaceCadet can turn your shifts into parens on tap, while keeping them as
   // Shifts when held. SpaceCadetConfig lets Chrysalis configure some aspects of
   // the plugin.
-  SpaceCadet,
-  SpaceCadetConfig,
+  // SpaceCadet,
+  // SpaceCadetConfig,
 
   // Enables the "Sticky" behavior for modifiers, and the "Layer shift when
   // held" functionality for layer keys.
-  OneShot,
-  OneShotConfig,
-  EscapeOneShot,
-  EscapeOneShotConfig,
+  // OneShot,
+  // OneShotConfig,
+  // EscapeOneShot,
+  // EscapeOneShotConfig,
 
   // The macros plugin adds support for macros
   Macros,
@@ -176,16 +221,34 @@ KALEIDOSCOPE_INIT_PLUGINS(
 const macro_t *macroAction(uint8_t macro_id, KeyEvent &event) {
   if (keyToggledOn(event.state)) {
     switch (macro_id) {
-    case MACRO_QWERTY:
+    case MACRO_BASE:
       // This macro is currently unused, but is kept around for compatibility
       // reasons. We used to use it in place of `MoveToLayer(QWERTY)`, but no
       // longer do. We keep it so that if someone still has the old layout with
       // the macro in EEPROM, it will keep working after a firmware update.
-      Layer.move(QWERTY);
+      Layer.move(BASE);
       break;
     case MACRO_VERSION_INFO:
       Macros.type(PSTR("Keyboardio Atreus - Kaleidoscope "));
       Macros.type(PSTR(BUILD_INFORMATION));
+      break;
+    case MACRO_PREVIOUS_TAB:
+      Macros.play(MACRO(D(LeftControl), D(LeftShift), T(Tab), U(LeftControl), U(LeftShift)));
+      break;
+    case MACRO_NEXT_TAB:
+      Macros.play(MACRO(D(LeftControl), T(Tab), U(LeftControl)));
+      break;
+    case MACRO_WIN_PREVIOUS_WINDOW:
+      Macros.play(MACRO(D(LeftControl), D(LeftGui), T(LeftArrow), U(LeftControl), U(LeftGui)));
+      break;
+    case MACRO_WIN_NEXT_WINDOW:
+      Macros.play(MACRO(D(LeftControl), D(LeftGui), T(RightArrow), U(LeftControl), U(LeftGui)));
+      break;
+    case MACRO_SELECT_TO_HOME:
+      Macros.play(MACRO(D(LeftShift), T(Home), U(LeftShift)));
+      break;
+    case MACRO_SELECT_TO_END:
+      Macros.play(MACRO(D(LeftShift), T(End), U(LeftShift)));
       break;
     default:
       break;
@@ -195,6 +258,10 @@ const macro_t *macroAction(uint8_t macro_id, KeyEvent &event) {
 }
 
 void setup() {
+
+  Qukeys.setMinimumHoldTime(200);
+  Qukeys.setOverlapThreshold(80);
+
   Kaleidoscope.setup();
   EEPROMKeymap.setup(9);
 
