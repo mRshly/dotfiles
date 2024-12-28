@@ -2,6 +2,7 @@ if status is-interactive
     # see https://github.com/wez/wezterm/issues/415#issuecomment-755849623
     set -x TERM wezterm
     set -gx EDITOR nvim
+    set -gx KALEIDOSCOPE_DIR $HOME/ghq/github.com/keyboardio/Kaleidoscope
 end
 
 function fish_user_key_bindings
