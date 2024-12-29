@@ -89,15 +89,15 @@ enum {
 KEYMAPS(
   [BASE] = KEYMAP_STACKED
   (
-       Key_Q      ,Key_W    ,Key_E        ,Key_R          ,Key_T
-      ,SFT_T(A)   ,CTL_T(S) ,ALT_T(D)     ,GUI_T(F)       ,Key_G
-      ,Key_Z      ,Key_X    ,Key_C        ,Key_V          ,Key_B          ,LT(LANG, Backtick)
-      ,Key_Numpad ,Key_LAlt ,Key_LAlt     ,MO(FUN)        ,Key_Backspace  ,Key_Esc
+       Key_Q      ,Key_W    ,Key_E        ,Key_R                ,Key_T
+      ,SFT_T(A)   ,CTL_T(S) ,ALT_T(D)     ,GUI_T(F)             ,Key_G
+      ,Key_Z      ,Key_X    ,Key_C        ,Key_V                ,Key_B          ,LT(LANG, Backtick)
+      ,Key_Numpad ,Key_LAlt ,Key_LAlt     ,LT(FUN, Backspace)   ,Key_Enter      ,Key_Esc
 
                                 ,Key_Y     ,Key_U             ,Key_I              ,Key_O      ,Key_P
                                 ,Key_H     ,GUI_T(J)          ,ALT_T(K)           ,CTL_T(L)   ,SFT_T(Semicolon)
        ,Key_Minus               ,Key_N     ,Key_M             ,Key_Comma          ,Key_Period ,Key_Slash
-       ,LT(SYMBOL, Enter)       ,Key_Space ,Key_Tab           ,TD(CHANGE_JP_EN)   ,Key_Quote  ,Key_Numpad
+       ,LT(SYMBOL, Tab)         ,Key_Space ,TD(CHANGE_JP_EN)  ,MO(FUN)            ,Key_Quote  ,Key_Numpad
   ),
 
   [SYMBOL] = KEYMAP_STACKED
