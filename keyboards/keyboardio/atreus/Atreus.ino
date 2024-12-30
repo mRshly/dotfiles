@@ -158,7 +158,7 @@ void tapDanceAction(uint8_t tap_dance_index, KeyAddr key_addr, uint8_t tap_count
   switch (tap_dance_index) {
   case CHANGE_JP_EN:
     return tapDanceActionKeys(tap_count, tap_dance_action,
-                              Key_F17, Key_F18);
+                              Key_F18, Key_F17);
     }
 }
 
