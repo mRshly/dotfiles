@@ -9,7 +9,7 @@
     };
   };
   nix.package = pkgs.nix;
-  nix.settings.truested-users = [
+  nix.settings.trusted-users = [
     "root"
     "mrshly"
   ];

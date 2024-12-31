@@ -34,6 +34,7 @@
 	        ./modules/home.nix
 		./modules/darwin
 		./modules/pkgs.nix
+		./modules/shell.nix
 	      ];
 	    };
 	  }
