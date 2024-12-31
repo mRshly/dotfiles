@@ -8,7 +8,7 @@
   };
   home.packages =
     with pkgs;
-    with pkgs.nodePackages_lates;
+    with pkgs.nodePackages_latest;
     [
       curl
       fd
