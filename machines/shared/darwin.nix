@@ -33,6 +33,8 @@
     ];
     casks = [
       "1password"
+      "font-hackgen"
+      "font-hackgen-nerd"
     ];
   };
 
