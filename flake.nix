@@ -36,6 +36,7 @@
           ./modules/pkgs.nix
           ./modules/fzf.nix
           ./modules/ghostty
+          ./modules/wezterm
           # NOTE: There are 2 problems to install lazygit via home-manager
           # 1. I don't know how to write "customCommand" in `.nix` file.
           # 2. How to set config dir to $XDG_CONFIG_HOME
