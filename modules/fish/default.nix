@@ -18,8 +18,8 @@
           fish_vi_key_bindings insert
       end
 
-      # op completion fish | source
-      # set -gx SSH_AUTH_SOCK $HOME/.1pasword/agent.sock
+      op completion fish | source
+      set -gx SSH_AUTH_SOCK $HOME/.1pasword/agent.sock
 
       export MANPAGER="sh -c 'col -bx | bat -l man -p'"
     '';
@@ -30,6 +30,7 @@
       set -a fish_complete_path ~/.nix-profile/share/fish/completions/ ~/.nix-profile/share/fish/vendor_completions.d/
       set -U XDG_CONFIG_HOME $HOME/.config
       fish_config theme choose "Solarized Dark"
+      set -gx KALEIDOSCOPE_DIR $HOME/ghq/github.com/keyboardio/Kaleidoscope
     '';
     shellAliases = {
       bathelp = "bat --plain --language=help";
