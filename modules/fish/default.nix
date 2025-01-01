@@ -18,6 +18,8 @@
           fish_vi_key_bindings insert
       end
 
+      mise completion fish > ~/.config/fish/completions/mise.fish
+
       op completion fish | source
       set -gx SSH_AUTH_SOCK $HOME/.1pasword/agent.sock
 
