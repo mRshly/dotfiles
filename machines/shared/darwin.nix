@@ -33,10 +33,32 @@
     ];
     casks = [
       "1password"
+      "1password-cli"
+      "alfred"
+      "arduino-ide"
+      "discord"
+      "firefox"
       "font-hackgen"
       "font-hackgen-nerd"
+      "google-chrome"
+      "obsidian"
+      "raycast"
+      "rectangle"
+      "spotify"
+      "visual-studio-code"
+      "vivaldi"
+      "vlc"
       "wezterm"
     ];
+    masApps = {
+      "Bumpr" = 1166066070;
+      "Deliveries" = 290986013;
+      "Goodnotes" = 1444383602;
+      "Kindle" = 302584613;
+      "Reeder Classic" = 1529448980;
+      "RunCat" = 1429033973;
+      "The Unarchiver" = 425424353;
+    };
   };
 
   system = {
