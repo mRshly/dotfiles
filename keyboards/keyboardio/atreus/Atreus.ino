@@ -259,7 +259,7 @@ const macro_t *macroAction(uint8_t macro_id, KeyEvent &event) {
 
 void setup() {
 
-  Qukeys.setMinimumHoldTime(200);
+  Qukeys.setMinimumHoldTime(150);
   Qukeys.setOverlapThreshold(80);
 
   Kaleidoscope.setup();
