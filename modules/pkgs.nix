@@ -13,6 +13,7 @@
       curl
       eza
       fd
+      ghq
       jq
       ripgrep
       wget
