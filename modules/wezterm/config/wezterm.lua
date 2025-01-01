@@ -7,8 +7,11 @@ local wezterm = require("wezterm")
 -- This will hold the configuration.
 local config = wezterm.config_builder()
 
--- This is where you actually apply your config choices
 config.color_scheme = "Solarized Dark (Gogh)"
+
+-- Font config
+-- see: https://wezfurlong.org/wezterm/config/fonts.html
+-- https://github.com/yuru7/HackGen
 
 config.font = wezterm.font("HackGen Console NF")
 config.font_size = 16.0
