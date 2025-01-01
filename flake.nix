@@ -36,7 +36,7 @@
           ./modules/pkgs.nix
           ./modules/fzf.nix
           ./modules/ghostty
-          ./modules/wezterm
+          # ./modules/wezterm
           ./modules/git
           ./modules/gh
           # NOTE: There are 2 problems to install lazygit via home-manager

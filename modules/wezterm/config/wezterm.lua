@@ -7,10 +7,7 @@ local wezterm = require("wezterm")
 -- This will hold the configuration.
 local config = wezterm.config_builder()
 
--- This is where you actually apply your config choices
-
--- https://github.com/Tsuzat/NeoSolarized.nvim
-config.color_scheme = "NeoSolarized Dark"
+config.color_scheme = "Solarized Dark (Gogh)"
 
 -- Font config
 -- see: https://wezfurlong.org/wezterm/config/fonts.html
