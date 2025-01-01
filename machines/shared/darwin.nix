@@ -35,6 +35,7 @@
       "1password"
       "font-hackgen"
       "font-hackgen-nerd"
+      "wezterm"
     ];
   };
 
