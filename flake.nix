@@ -32,9 +32,17 @@
 	    home-manager.users.mrshly = {
 	      imports = [
 	        ./modules/home.nix
-		./modules/darwin
-		./modules/pkgs.nix
-		./modules/shell.nix
+          ./modules/darwin
+          ./modules/pkgs.nix
+          ./modules/fzf.nix
+          # NOTE: There are 2 problems to install lazygit via home-manager
+          # 1. I don't know how to write "customCommand" in `.nix` file.
+          # 2. How to set config dir to $XDG_CONFIG_HOME
+          # Workaround:
+          #   Install lazygit via homebrew then its config dir path is set to $XDG_CONFIG_HOME
+          #   `lazygit -cd -> ~/.config`
+          # ./modules/lazygit.nix
+          ./modules/shell.nix
 	      ];
 	    };
 	  }

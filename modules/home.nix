@@ -9,6 +9,7 @@
 
   home.sessionVariables = {
     PROJECTS = "$HOME/Developer";
+    XDG_CONFIG_HOME = "$HOME/.config";
   };
 
   home.activation.developer = ''
