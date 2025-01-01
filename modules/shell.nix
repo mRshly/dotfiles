@@ -3,7 +3,7 @@
   imports = [
     ./fish
     ./starship.nix
-    # ./bat.nix
+    ./bat.nix
   ];
 
   programs.zoxide.enable = true;
