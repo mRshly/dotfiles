@@ -11,6 +11,7 @@
     with pkgs.nodePackages_latest;
     [
       curl
+      eza
       fd
       jq
       ripgrep
