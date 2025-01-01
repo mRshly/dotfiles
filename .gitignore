@@ -4,3 +4,6 @@ config/fish/themes
 
 # Mac
 .DS_Store
+
+# Nix
+result
