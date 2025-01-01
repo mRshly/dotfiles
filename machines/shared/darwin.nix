@@ -27,6 +27,10 @@
 
   homebrew = {
     enable = true;
+    brews = [
+      "commitizen"
+      "lazygit"
+    ];
     casks = [
       "1password"
     ];
