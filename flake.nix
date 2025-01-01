@@ -27,29 +27,24 @@
           ./machines/shadowcomet
           home-manager.darwinModules.home-manager
           {
-	    home-manager.useGlobalPkgs = true;
-	    home-manager.useUserPackages = false;
-	    home-manager.users.mrshly = {
-	      imports = [
-	        ./modules/home.nix
-          ./modules/darwin
-          ./modules/pkgs.nix
-          ./modules/fzf.nix
-          ./modules/ghostty
-          # ./modules/wezterm
-          ./modules/git
-          ./modules/gh
-          # NOTE: There are 2 problems to install lazygit via home-manager
-          # 1. I don't know how to write "customCommand" in `.nix` file.
-          # 2. How to set config dir to $XDG_CONFIG_HOME
-          # Workaround:
-          #   Install lazygit via homebrew then its config dir path is set to $XDG_CONFIG_HOME
-          #   `lazygit -cd -> ~/.config`
-          # ./modules/lazygit.nix
-          ./modules/shell.nix
-	      ];
-	    };
-	  }
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = false;
+            home-manager.backupFileExtension = "bak";
+            home-manager.users.mrshly = {
+              imports = [
+                ./modules/home.nix
+                ./modules/darwin
+                ./modules/pkgs.nix
+                ./modules/fzf.nix
+                ./modules/ghostty
+                # ./modules/wezterm
+                ./modules/git
+                ./modules/gh
+                ./modules/lazygit
+                ./modules/shell.nix
+              ];
+            };
+          }
         ];
       };
     };
