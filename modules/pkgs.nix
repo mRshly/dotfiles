@@ -17,5 +17,8 @@
       jq
       ripgrep
       wget
+
+      # treesitter, lsps, formatters, etc
+      nixfmt-rfc-style
     ];
 }

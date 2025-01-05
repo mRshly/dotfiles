@@ -1,4 +1,4 @@
-{ pkgs, config, ...}:
+{ pkgs, config, ... }:
 {
   programs.fish = {
     enable = true;
@@ -67,7 +67,6 @@
       lar = "eza --icons --time-style relative --git -al -s Name";
       llr = "eza --icons --time-style relative --git -l -s Name";
       lt = "eza --icons --time-style relative --git -lT -L 2 -s Name";
-
 
       ## broot
       br = "broot -sghd";
