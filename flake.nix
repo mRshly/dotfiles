@@ -13,41 +13,41 @@
   };
 
   outputs =
-  {
-    darwin,
-    home-manager,
-    nixpkgs,
-    ...
-  }:
-  {
-    darwinConfigurations = {
-      shadowcomet = darwin.lib.darwinSystem {
-        system = "aarch64-darwin";
-        modules = [
-          ./machines/shadowcomet
-          home-manager.darwinModules.home-manager
-          {
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = false;
-            home-manager.backupFileExtension = "bak";
-            home-manager.users.mrshly = {
-              imports = [
-                ./modules/home.nix
-                ./modules/darwin
-                ./modules/pkgs.nix
-                ./modules/fzf.nix
-                ./modules/ghostty
-                # ./modules/wezterm
-                ./modules/git
-                ./modules/gh
-                ./modules/lazygit
-                ./modules/mise.nix
-                ./modules/shell.nix
-              ];
-            };
-          }
-        ];
+    {
+      darwin,
+      home-manager,
+      nixpkgs,
+      ...
+    }:
+    {
+      darwinConfigurations = {
+        shadowcomet = darwin.lib.darwinSystem {
+          system = "aarch64-darwin";
+          modules = [
+            ./machines/shadowcomet
+            home-manager.darwinModules.home-manager
+            {
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = false;
+              home-manager.backupFileExtension = "bak";
+              home-manager.users.mrshly = {
+                imports = [
+                  ./modules/home.nix
+                  ./modules/darwin
+                  ./modules/pkgs.nix
+                  ./modules/fzf.nix
+                  ./modules/ghostty
+                  # ./modules/wezterm
+                  ./modules/git
+                  ./modules/gh
+                  ./modules/lazygit
+                  ./modules/mise.nix
+                  ./modules/shell.nix
+                ];
+              };
+            }
+          ];
+        };
       };
     };
-  };
 }

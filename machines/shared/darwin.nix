@@ -66,14 +66,14 @@
     defaults = {
       dock = {
         autohide = true;
-	autohide-delay = 0.0;
-	orientation = "bottom";
-	tilesize = 42;
-	showhidden = true;
-	show-recents = true;
-	show-process-indicators = true;
-	expose-animation-duration = 0.1;
-	expose-group-apps = true;
+        autohide-delay = 0.0;
+        orientation = "bottom";
+        tilesize = 42;
+        showhidden = true;
+        show-recents = true;
+        show-process-indicators = true;
+        expose-animation-duration = 0.1;
+        expose-group-apps = true;
       };
     };
   };
