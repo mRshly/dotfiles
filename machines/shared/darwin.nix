@@ -36,6 +36,7 @@
       "1password-cli"
       "alfred"
       "arduino-ide"
+      "brave-browser"
       "discord"
       "firefox"
       "font-hackgen"
