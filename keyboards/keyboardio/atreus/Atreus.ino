@@ -145,9 +145,9 @@ KEYMAPS(
       ,XXX  ,XXX  ,XXX        ,XXX        ,XXX          ,XXX
       ,XXX  ,XXX  ,Key_LAlt   ,Key_LCtrl  ,Key_LShift   ,Key_LGui
 
-                    ,Key_Star     ,Key_Keypad7      ,Key_Keypad8    ,Key_Keypad9  ,Key_Plus
-                    ,XXX          ,Key_Keypad4      ,Key_Keypad5    ,Key_Keypad6  ,Key_Minus
-      ,XXX          ,XXX          ,Key_Keypad1      ,Key_Keypad2    ,Key_Keypad3  ,Key_Slash
+                    ,Key_Star     ,Key_7      ,Key_8    ,Key_9  ,Key_Plus
+                    ,XXX          ,Key_4      ,Key_5    ,Key_6  ,Key_Minus
+      ,XXX          ,XXX          ,Key_1      ,Key_2    ,Key_3  ,Key_Slash
       ,Key_Delete   ,Key_Enter    ,Key_0            ,XXX            ,Key_Period   ,XXX
    )
 )
