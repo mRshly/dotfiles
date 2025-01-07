@@ -34,6 +34,8 @@
 #include "Kaleidoscope-SpaceCadet.h"
 #include "Kaleidoscope-DynamicMacros.h"
 #include "Kaleidoscope-LayerNames.h"
+#include <Kaleidoscope.h>
+#include <Kaleidoscope-Chord.h>
 #include <Kaleidoscope-TapDance.h>
 
 #define MO(n) ShiftToLayer(n)
@@ -63,7 +65,8 @@ enum {
   MACRO_WIN_PREVIOUS_WINDOW,
   MACRO_WIN_NEXT_WINDOW,
   MACRO_SELECT_TO_HOME,
-  MACRO_SELECT_TO_END
+  MACRO_SELECT_TO_END,
+  MACRO_DELETE_WORD
 };
 
 // Layers
@@ -97,7 +100,7 @@ KEYMAPS(
                                 ,Key_Y     ,Key_U             ,Key_I              ,Key_O      ,Key_P
                                 ,Key_H     ,GUI_T(J)          ,ALT_T(K)           ,CTL_T(L)   ,SFT_T(Semicolon)
        ,Key_Minus               ,Key_N     ,Key_M             ,Key_Comma          ,Key_Period ,Key_Slash
-       ,LT(SYMBOL, Tab)         ,Key_Space ,TD(CHANGE_JP_EN)  ,MO(FUN)            ,Key_Quote  ,Key_Numpad
+       ,LT(SYMBOL, Tab)         ,Key_Space ,MO(FUN)           ,MO(FUN)            ,Key_Quote  ,Key_Numpad
   ),
 
   [SYMBOL] = KEYMAP_STACKED
@@ -134,7 +137,7 @@ KEYMAPS(
       ,XXX  ,XXX  ,XXX  ,XXX  ,XXX  ,XXX
 
                 ,XXX    ,XXX      ,XXX        ,XXX      ,XXX
-                ,XXX    ,Key_F17  ,Key_F18    ,Key_F19  ,Key_F20
+                ,XXX    ,Key_Lang1  ,Key_Lang2    ,Key_F19  ,Key_F20
       ,XXX      ,XXX    ,XXX      ,XXX        ,XXX      ,XXX
       ,XXX      ,XXX    ,XXX      ,XXX        ,XXX      ,XXX
    ),
@@ -158,7 +161,7 @@ void tapDanceAction(uint8_t tap_dance_index, KeyAddr key_addr, uint8_t tap_count
   switch (tap_dance_index) {
   case CHANGE_JP_EN:
     return tapDanceActionKeys(tap_count, tap_dance_action,
-                              Key_F18, Key_F17);
+                              Key_Lang2, Key_Lang1);
     }
 }
 
@@ -215,7 +218,8 @@ KALEIDOSCOPE_INIT_PLUGINS(
   // plugin enabled, it becomes configurable - and then usable - via Chrysalis.
   // GeminiPR,
 
-  TapDance
+  TapDance,
+  Chord
 );
 
 const macro_t *macroAction(uint8_t macro_id, KeyEvent &event) {
@@ -250,6 +254,9 @@ const macro_t *macroAction(uint8_t macro_id, KeyEvent &event) {
     case MACRO_SELECT_TO_END:
       Macros.play(MACRO(D(LeftShift), T(End), U(LeftShift)));
       break;
+    case MACRO_DELETE_WORD:
+      Macros.play(MACRO(D(LeftAlt), T(Backspace), U(LeftAlt)));
+      break;
     default:
       break;
     }
@@ -261,6 +268,12 @@ void setup() {
 
   Qukeys.setMinimumHoldTime(150);
   Qukeys.setOverlapThreshold(80);
+
+  CHORDS (
+    CHORD(Key_V, Key_B), Key_Lang2,
+    CHORD(Key_N, Key_M), Key_Lang1,
+    CHORD(Key_W, Key_T), M(MACRO_DELETE_WORD),
+  )
 
   Kaleidoscope.setup();
   EEPROMKeymap.setup(9);
