@@ -35,6 +35,8 @@
 #include "Kaleidoscope-DynamicMacros.h"
 #include "Kaleidoscope-LayerNames.h"
 #include <Kaleidoscope.h>
+#include <Kaleidoscope-Macros.h>
+#include <Kaleidoscope-MagicCombo.h>
 #include <Kaleidoscope-Chord.h>
 #include <Kaleidoscope-TapDance.h>
 
@@ -76,6 +78,11 @@ enum {
   FUN,
   LANG,
   NUMPAD
+};
+
+// MagicCombo
+enum {
+  ESC_WITH_LANG2
 };
 
 # define Key_Symbol     MO(SYMBOL)
@@ -156,6 +163,16 @@ KEYMAPS(
 )
 // clang-format on
 
+void escapeWithLang2(uint8_t combo_index) {
+    Macros.play(MACRO(T(Lang2), T(Escape)));
+}
+
+USE_MAGIC_COMBOS(
+[ESC_WITH_LANG2] = {
+  .action = escapeWithLang2,
+  .keys = {R3C5}
+});
+
 void tapDanceAction(uint8_t tap_dance_index, KeyAddr key_addr, uint8_t tap_count,
                     kaleidoscope::plugin::TapDance::ActionType tap_dance_action) {
   switch (tap_dance_index) {
@@ -212,7 +229,7 @@ KALEIDOSCOPE_INIT_PLUGINS(
   // The MagicCombo plugin lets you use key combinations to trigger custom
   // actions - a bit like Macros, but triggered by pressing multiple keys at the
   // same time.
-  // MagicCombo,
+  MagicCombo,
 
   // Enables the GeminiPR Stenography protocol. Unused by default, but with the
   // plugin enabled, it becomes configurable - and then usable - via Chrysalis.
