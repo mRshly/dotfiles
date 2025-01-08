@@ -257,25 +257,25 @@ const macro_t *macroAction(uint8_t macro_id, KeyEvent &event) {
       Macros.type(PSTR(BUILD_INFORMATION));
       break;
     case MACRO_PREVIOUS_TAB:
-      Macros.play(MACRO(D(LeftControl), D(LeftShift), T(Tab), U(LeftControl), U(LeftShift)));
+      return MACRO(D(LeftControl), D(LeftShift), T(Tab), U(LeftControl), U(LeftShift));
       break;
     case MACRO_NEXT_TAB:
-      Macros.play(MACRO(D(LeftControl), T(Tab), U(LeftControl)));
+      return MACRO(D(LeftControl), T(Tab), U(LeftControl));
       break;
     case MACRO_WIN_PREVIOUS_WINDOW:
-      Macros.play(MACRO(D(LeftControl), D(LeftGui), T(LeftArrow), U(LeftControl), U(LeftGui)));
+      return MACRO(D(LeftControl), D(LeftGui), T(LeftArrow), U(LeftControl), U(LeftGui));
       break;
     case MACRO_WIN_NEXT_WINDOW:
-      Macros.play(MACRO(D(LeftControl), D(LeftGui), T(RightArrow), U(LeftControl), U(LeftGui)));
+      return MACRO(D(LeftControl), D(LeftGui), T(RightArrow), U(LeftControl), U(LeftGui));
       break;
     case MACRO_SELECT_TO_HOME:
-      Macros.play(MACRO(D(LeftShift), T(Home), U(LeftShift)));
+      return MACRO(D(LeftShift), T(Home), U(LeftShift));
       break;
     case MACRO_SELECT_TO_END:
-      Macros.play(MACRO(D(LeftShift), T(End), U(LeftShift)));
+      return MACRO(D(LeftShift), T(End), U(LeftShift));
       break;
     case MACRO_DELETE_WORD:
-      Macros.play(MACRO(D(LeftAlt), T(Backspace), U(LeftAlt)));
+      return MACRO(D(LeftAlt), T(Backspace), U(LeftAlt));
       break;
     case MACRO_DUO_PAREN:
       // this seq doesn't work
