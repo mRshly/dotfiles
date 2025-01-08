@@ -68,7 +68,10 @@ enum {
   MACRO_WIN_NEXT_WINDOW,
   MACRO_SELECT_TO_HOME,
   MACRO_SELECT_TO_END,
-  MACRO_DELETE_WORD
+  MACRO_DELETE_WORD,
+  MACRO_DUO_PAREN,
+  MACRO_DUO_BRACE,
+  MACRO_DUO_BRACKET
 };
 
 // Layers
@@ -274,6 +277,17 @@ const macro_t *macroAction(uint8_t macro_id, KeyEvent &event) {
     case MACRO_DELETE_WORD:
       Macros.play(MACRO(D(LeftAlt), T(Backspace), U(LeftAlt)));
       break;
+    case MACRO_DUO_PAREN:
+      // this seq doesn't work
+      // SEQ(K(LeftParen), K(RightParen), K(LeftArrow));
+      return MACRO(T(LeftParen), T(RightParen), T(LeftArrow));
+      break;
+    case MACRO_DUO_BRACE:
+      return MACRO(T(LBrace), T(RBrace), T(LeftArrow));
+      break;
+    case MACRO_DUO_BRACKET:
+      return MACRO(T(LBracket), T(RBracket), T(LeftArrow));
+      break;
     default:
       break;
     }
@@ -290,6 +304,9 @@ void setup() {
     CHORD(Key_V, Key_B), Key_Lang2,
     CHORD(Key_N, Key_M), Key_Lang1,
     CHORD(Key_W, Key_T), M(MACRO_DELETE_WORD),
+    CHORD(Key_Z, Key_X), M(MACRO_DUO_PAREN),
+    CHORD(Key_X, Key_C), M(MACRO_DUO_BRACKET),
+    CHORD(Key_C, Key_V), M(MACRO_DUO_BRACE),
   )
 
   Kaleidoscope.setup();
