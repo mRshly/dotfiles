@@ -304,7 +304,7 @@ void setup() {
     CHORD(Key_V, Key_B), Key_Lang2,
     CHORD(Key_N, Key_M), Key_Lang1,
     CHORD(Key_W, Key_T), M(MACRO_DELETE_WORD),
-    CHORD(Key_Z, Key_X), M(MACRO_DUO_PAREN),
+    CHORD(Key_F, Key_G), M(MACRO_DUO_PAREN),
     CHORD(Key_X, Key_C), M(MACRO_DUO_BRACKET),
     CHORD(Key_C, Key_V), M(MACRO_DUO_BRACE),
   )
