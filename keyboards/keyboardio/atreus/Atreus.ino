@@ -310,6 +310,7 @@ void setup() {
     CHORD(Key_I, Key_O), Key_Backspace,
   )
 
+  Chord.setTimeout(25);
   Kaleidoscope.setup();
   EEPROMKeymap.setup(9);
 
