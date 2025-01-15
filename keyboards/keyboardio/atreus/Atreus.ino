@@ -307,6 +307,7 @@ void setup() {
     CHORD(Key_F, Key_G), M(MACRO_DUO_PAREN),
     CHORD(Key_X, Key_C), M(MACRO_DUO_BRACKET),
     CHORD(Key_C, Key_V), M(MACRO_DUO_BRACE),
+    CHORD(Key_I, Key_O), Key_Backspace,
   )
 
   Kaleidoscope.setup();
