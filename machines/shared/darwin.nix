@@ -76,6 +76,9 @@
         expose-animation-duration = 0.1;
         expose-group-apps = true;
       };
+      NSGlobalDomain = {
+        AppleKeyboardUIMode = 3;
+      };
     };
   };
 }
