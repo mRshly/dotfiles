@@ -105,7 +105,7 @@ KEYMAPS(
        Key_Q      ,Key_W    ,Key_E        ,Key_R                ,Key_T
       ,SFT_T(A)   ,CTL_T(S) ,ALT_T(D)     ,GUI_T(F)             ,Key_G
       ,Key_Z      ,Key_X    ,Key_C        ,Key_V                ,Key_B          ,LT(LANG, Backtick)
-      ,Key_Numpad ,Key_LAlt ,Key_LAlt     ,LT(FUN, Backspace)   ,Key_Enter      ,Key_Esc
+      ,Key_Numpad ,Key_LAlt ,Key_LAlt     ,MO(FUN)   ,Key_Enter      ,Key_Esc
 
                                 ,Key_Y     ,Key_U             ,Key_I              ,Key_O      ,Key_P
                                 ,Key_H     ,GUI_T(J)          ,ALT_T(K)           ,CTL_T(L)   ,SFT_T(Semicolon)
