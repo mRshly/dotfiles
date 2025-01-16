@@ -71,12 +71,15 @@ enum {
   MACRO_DELETE_WORD,
   MACRO_DUO_PAREN,
   MACRO_DUO_BRACE,
-  MACRO_DUO_BRACKET
+  MACRO_DUO_BRACKET,
+  SPC_WITH_MOVE_TO_BASE,
+  LOCK_SHIFTED_LETTERS_WITH_LANG2
 };
 
 // Layers
 enum {
   BASE,
+  SHIFTED_LETTERS,
   SYMBOL,
   FUN,
   LANG,
@@ -107,10 +110,22 @@ KEYMAPS(
       ,Key_Z      ,Key_X    ,Key_C        ,Key_V                ,Key_B          ,LT(LANG, Backtick)
       ,Key_Numpad ,Key_LAlt ,Key_LAlt     ,MO(FUN)   ,Key_Enter      ,Key_Esc
 
-                                ,Key_Y     ,Key_U             ,Key_I              ,Key_O      ,Key_P
-                                ,Key_H     ,GUI_T(J)          ,ALT_T(K)           ,CTL_T(L)   ,SFT_T(Semicolon)
-       ,Key_Minus               ,Key_N     ,Key_M             ,Key_Comma          ,Key_Period ,Key_Slash
-       ,LT(SYMBOL, Tab)         ,Key_Space ,MO(FUN)           ,MO(FUN)            ,Key_Quote  ,Key_Numpad
+                                ,Key_Y     ,Key_U             ,Key_I                              ,Key_O      ,Key_P
+                                ,Key_H     ,GUI_T(J)          ,ALT_T(K)                           ,CTL_T(L)   ,SFT_T(Semicolon)
+       ,Key_Minus               ,Key_N     ,Key_M             ,Key_Comma                          ,Key_Period ,Key_Slash
+       ,LT(SYMBOL, Tab)         ,Key_Space ,MO(FUN)           ,M(LOCK_SHIFTED_LETTERS_WITH_LANG2) ,Key_Quote  ,Key_Numpad
+  ),
+  [SHIFTED_LETTERS] = KEYMAP_STACKED
+  (
+       LSHIFT(Key_Q)      ,LSHIFT(Key_W)    ,LSHIFT(Key_E)        ,LSHIFT(Key_R)                ,LSHIFT(Key_T)
+      ,LSHIFT(Key_A)      ,LSHIFT(Key_S)    ,LSHIFT(Key_D)        ,LSHIFT(Key_F)                ,LSHIFT(Key_G)
+      ,LSHIFT(Key_Z)      ,LSHIFT(Key_X)    ,LSHIFT(Key_C)        ,LSHIFT(Key_V)                ,LSHIFT(Key_B)          ,___
+      ,___ ,___ ,___     ,___   ,___      ,___
+
+                      ,LSHIFT(Key_Y)      ,LSHIFT(Key_U)        ,LSHIFT(Key_I)        ,LSHIFT(Key_O)      ,LSHIFT(Key_P)
+                      ,LSHIFT(Key_H)      ,LSHIFT(Key_J)        ,LSHIFT(Key_K)        ,LSHIFT(Key_L)      ,___
+       ,___           ,LSHIFT(Key_N)      ,LSHIFT(Key_M)        ,___                  ,___                ,___
+       ,___           ,M(SPC_WITH_MOVE_TO_BASE)                ,___                  ,UnlockLayer(SHIFTED_LETTERS)             ,___                ,___
   ),
 
   [SYMBOL] = KEYMAP_STACKED
@@ -288,6 +303,10 @@ const macro_t *macroAction(uint8_t macro_id, KeyEvent &event) {
     case MACRO_DUO_BRACKET:
       return MACRO(T(LBracket), T(RBracket), T(LeftArrow));
       break;
+    case SPC_WITH_MOVE_TO_BASE:
+      return MACRO(Tr(UnlockLayer(SHIFTED_LETTERS)), T(Space));
+    case LOCK_SHIFTED_LETTERS_WITH_LANG2:
+      return MACRO(T(Lang2), Tr(LockLayer(SHIFTED_LETTERS)));
     default:
       break;
     }
