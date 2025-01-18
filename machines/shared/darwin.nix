@@ -78,6 +78,8 @@
       };
       NSGlobalDomain = {
         AppleKeyboardUIMode = 3;
+        NSAutomaticCapitalizationEnabled = false;
+        AppleInterfaceStyle = "Dark";
       };
     };
     startup = {
