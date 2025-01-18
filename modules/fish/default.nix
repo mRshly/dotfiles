@@ -44,6 +44,10 @@
       pu = "pushd";
       po = "popd";
 
+      # specific directory
+      dot = "z dotfiles";
+      atreus = "z atreus";
+
       vim = "nvim";
 
       dc = "docker compose";
