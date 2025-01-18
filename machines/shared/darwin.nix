@@ -80,5 +80,8 @@
         AppleKeyboardUIMode = 3;
       };
     };
+    startup = {
+      chime = false;
+    };
   };
 }
