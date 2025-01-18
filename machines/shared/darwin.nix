@@ -81,6 +81,11 @@
         NSAutomaticCapitalizationEnabled = false;
         AppleInterfaceStyle = "Dark";
       };
+      finder = {
+        AppleShowAllFiles = true;
+        ShowStatusBar = true;
+        ShowPathbar = true;
+      };
     };
     startup = {
       chime = false;
