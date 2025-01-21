@@ -51,6 +51,7 @@
       "vivaldi"
       "vlc"
       "wezterm"
+      "zen-browser"
     ];
     masApps = {
       "Bumpr" = 1166066070;
