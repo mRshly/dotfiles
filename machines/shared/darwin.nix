@@ -43,6 +43,7 @@
       "font-hackgen-nerd"
       "google-chrome"
       "obsidian"
+      "orbstack"
       "raycast"
       "rectangle"
       "spotify"
