@@ -10,11 +10,11 @@ local config = wezterm.config_builder()
 -- This is where you actually apply your config choices
 config.color_scheme = "Solarized Dark (Gogh)"
 
-config.font = wezterm.font("HackGen35 Console NF")
-config.font_size = 16.0
+config.font = wezterm.font("HackGen Console NF")
+config.font_size = 18.0
 config.window_frame = {
-	font = wezterm.font({ family = "HackGen35 Console NF", weight = "Bold" }),
-	font_size = 12.0,
+	font = wezterm.font({ family = "HackGen Console NF", weight = "Bold" }),
+	font_size = 14.0,
 }
 
 -- Window config
