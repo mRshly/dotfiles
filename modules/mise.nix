@@ -10,6 +10,7 @@
       tools = {
         usage = "latest";
         node = "latest";
+        pipx = "latest";
         rust = "latest";
         rust-analyzer = "latest";
         go = "latest";
