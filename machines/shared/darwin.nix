@@ -3,11 +3,6 @@
   nixpkgs.config = {
     allowUnfree = true;
   };
-  services = {
-    nix-daemon = {
-      enable = true;
-    };
-  };
   nix.package = pkgs.nix;
   nix.settings.trusted-users = [
     "root"
