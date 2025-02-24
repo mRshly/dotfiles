@@ -27,7 +27,6 @@
             ./machines/shadowcomet
             home-manager.darwinModules.home-manager
             {
-              home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = false;
               home-manager.backupFileExtension = "bak";
               home-manager.users.mrshly = {
