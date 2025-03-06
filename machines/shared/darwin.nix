@@ -13,8 +13,6 @@
   '';
   system.stateVersion = 5;
 
-  security.pam.enableSudoTouchIdAuth = true;
-
   users.users.mrshly = {
     name = "mrshly";
     home = "/Users/mrshly";
@@ -25,6 +23,7 @@
     brews = [
       "commitizen"
       "lazygit"
+      "mise"
     ];
     casks = [
       "1password"

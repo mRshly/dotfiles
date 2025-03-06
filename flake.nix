@@ -40,7 +40,6 @@
                   ./modules/git
                   ./modules/gh
                   ./modules/lazygit
-                  ./modules/mise.nix
                   ./modules/shell.nix
                 ];
               };

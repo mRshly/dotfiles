@@ -19,6 +19,7 @@
       end
 
       mise completion fish > ~/.config/fish/completions/mise.fish
+      mise activate | source
 
       op completion fish | source
       set -gx SSH_AUTH_SOCK $HOME/.1pasword/agent.sock
