@@ -8,3 +8,4 @@ nix build ./#darwinConfigurations.shadowcomet.system
 scripts/wezterm.sh
 scripts/nvim.sh
 scripts/fzf.sh
+scripts/lazygit.sh

@@ -48,7 +48,6 @@
                   # ./modules/wezterm
                   ./modules/git
                   ./modules/gh
-                  ./modules/lazygit
                   ./modules/shell.nix
                 ];
               };
