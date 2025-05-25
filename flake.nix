@@ -19,11 +19,20 @@
       nixpkgs,
       ...
     }:
+    let
+      configuration =
+        { pkgs, config, ... }:
+        {
+          system.primaryUser = "mrshly";
+          # [...]
+        };
+    in
     {
       darwinConfigurations = {
         shadowcomet = darwin.lib.darwinSystem {
           system = "aarch64-darwin";
           modules = [
+            configuration
             ./machines/shadowcomet
             home-manager.darwinModules.home-manager
             {
