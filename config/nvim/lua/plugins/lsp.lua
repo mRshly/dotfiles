@@ -19,7 +19,6 @@ return {
         "css-lsp",
         -- python
         "pyright",
-        "ruff-lsp",
         "ruff",
         "black",
         -- docker
