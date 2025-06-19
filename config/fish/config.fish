@@ -1,6 +1,6 @@
 status is-interactive; and begin
     set fish_greeting
-    set -U XDG_CONFIG_HOME $HOME/.config
+    set -Ux XDG_CONFIG_HOME $HOME/.config
     fish_add_path -p ~/.local/bin
     fish_config theme choose "Solarized Dark"
 end
