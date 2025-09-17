@@ -73,7 +73,6 @@ enum {
   MACRO_DUO_BRACE,
   MACRO_DUO_BRACKET,
   SPC_WITH_MOVE_TO_BASE,
-  LOCK_SHIFTED_LETTERS_WITH_LANG2
 };
 
 // Layers
@@ -113,7 +112,7 @@ KEYMAPS(
                                 ,Key_Y     ,Key_U             ,Key_I                              ,Key_O      ,Key_P
                                 ,Key_H     ,GUI_T(J)          ,ALT_T(K)                           ,CTL_T(L)   ,SFT_T(Semicolon)
        ,Key_Minus               ,Key_N     ,Key_M             ,Key_Comma                          ,Key_Period ,Key_Slash
-       ,LT(SYMBOL, Tab)         ,Key_Space ,MO(FUN)           ,M(LOCK_SHIFTED_LETTERS_WITH_LANG2) ,Key_Quote  ,Key_Numpad
+       ,LT(SYMBOL, Tab)         ,Key_Space ,MO(FUN)           ,Key_RAlt                           ,Key_Quote  ,Key_Numpad
   ),
   [SHIFTED_LETTERS] = KEYMAP_STACKED
   (
@@ -305,8 +304,6 @@ const macro_t *macroAction(uint8_t macro_id, KeyEvent &event) {
       break;
     case SPC_WITH_MOVE_TO_BASE:
       return MACRO(Tr(UnlockLayer(SHIFTED_LETTERS)), T(Space));
-    case LOCK_SHIFTED_LETTERS_WITH_LANG2:
-      return MACRO(T(Lang2), Tr(LockLayer(SHIFTED_LETTERS)));
     default:
       break;
     }
