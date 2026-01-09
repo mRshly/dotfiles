@@ -2,9 +2,15 @@
 
 ## How to manage my dotfiles
 
-Totally managed by Homebrew.
+Managed by brew, chezmoi, mise.
 
-Programming languages and environment are managed by mise.
+## First step
+
+Clone this repository, brew install with `Brewfile`.
+
+```bash
+brew install
+```
 
 ## Supported Platforms
 
@@ -12,14 +18,10 @@ Programming languages and environment are managed by mise.
 - [ ] Linux
 - [ ] Windows
 
-## 🤖 Copilot in `Neovim`
-
-First, setup copilot in `neovim` with `:Copilot auth` command.
-
-## Create symbolic link
+## Apply config
 
 ```bash
-ln -s ~/dotfiles/config/<package> ~/.config/<package>
+chezmoi apply
 ```
 
 ## Keyboardio Atreus
@@ -32,4 +34,4 @@ Clone repository by [ghq](https://github.com/x-motemen/ghq) like,
 ghq get git@github.com:keyboardio/Kaleidoscope.git`
 ```
 
-then, move to `keyboards/keyboardio/atreus` and flash by `./compile.sh && flash.sh` .
+Then, move to `keyboards/keyboardio/atreus` and flash by `./compile.sh && flash.sh` .
