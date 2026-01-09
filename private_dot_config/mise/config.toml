@@ -1,0 +1,26 @@
+[tools]
+pipx = "latest"
+pnpm = "latest"
+rust = "latest"
+rust-analyzer = "latest"
+uv = "latest"
+yarn = "latest"
+node = "latest"
+usage = "latest"
+lazydocker = "latest"
+lazygit = "latest"
+gh = "latest"
+ghq = "latest"
+gemini-cli = "latest"
+fzf = "latest"
+dagger = "latest"
+bat = "latest"
+bat-extras = "latest"
+zoxide = "latest"
+ripgrep = "latest"
+starship = "latest"
+eza = "latest"
+fd = "latest"
+
+[settings]
+idiomatic_version_file_enable_tools = ["python"]
