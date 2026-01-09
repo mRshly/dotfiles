@@ -2,7 +2,7 @@
 abbr --add -- atreus 'z atreus'
 abbr --add -- br 'broot -sghd'
 abbr --add -- dc 'docker compose'
-abbr --add -- dot 'z dotfiles'
+abbr --add -- dot 'z chez'
 abbr --add -- g git
 abbr --add -- ga 'git add'
 abbr --add -- gb 'git branch'
