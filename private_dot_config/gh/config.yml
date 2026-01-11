@@ -1,5 +1,5 @@
 aliases:
-  co: pr checkout
+    co: pr checkout
 editor: nvim
 git_protocol: ssh
 pager: delta -s
