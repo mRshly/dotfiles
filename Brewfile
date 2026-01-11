@@ -64,8 +64,13 @@ cask "zen"
 mas "1Password for Safari", id: 1569813296
 mas "Bumpr", id: 1166066070
 mas "Deliveries", id: 290986013
+mas "GarageBand", id: 682658836
 mas "Goodnotes", id: 1444383602
+mas "iMovie", id: 408981434
+mas "Keynote", id: 409183694
 mas "Kindle", id: 302584613
+mas "Numbers", id: 409203825
+mas "Pages", id: 409201541
 mas "Reeder", id: 1529448980
 mas "Reeder", id: 6475002485
 mas "RunCat", id: 1429033973
@@ -80,7 +85,6 @@ vscode "github.vscode-pull-request-github"
 vscode "gruntfuggly.todo-tree"
 vscode "hbenl.vscode-test-explorer"
 vscode "janisdd.vscode-edit-csv"
-vscode "knisterpeter.vscode-commitizen"
 vscode "littlefoxteam.vscode-python-test-adapter"
 vscode "marp-team.marp-vscode"
 vscode "mechatroner.rainbow-csv"
@@ -93,6 +97,7 @@ vscode "ms-python.isort"
 vscode "ms-python.mypy-type-checker"
 vscode "ms-python.python"
 vscode "ms-python.vscode-pylance"
+vscode "ms-python.vscode-python-envs"
 vscode "ms-toolsai.jupyter"
 vscode "ms-toolsai.jupyter-keymap"
 vscode "ms-toolsai.jupyter-renderers"
@@ -101,6 +106,7 @@ vscode "ms-toolsai.vscode-jupyter-slideshow"
 vscode "ms-vscode-remote.remote-containers"
 vscode "ms-vscode-remote.remote-ssh"
 vscode "ms-vscode-remote.remote-ssh-edit"
+vscode "ms-vscode-remote.remote-wsl"
 vscode "ms-vscode-remote.vscode-remote-extensionpack"
 vscode "ms-vscode.live-server"
 vscode "ms-vscode.remote-explorer"
