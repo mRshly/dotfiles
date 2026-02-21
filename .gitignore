@@ -7,3 +7,6 @@ config/fish/themes
 
 # Nix
 result
+
+# npm
+node_modules
