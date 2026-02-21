@@ -3,7 +3,7 @@ tap "osx-cross/arm"
 tap "osx-cross/avr"
 tap "qmk/qmk"
 brew "asciinema"
-brew "atuin"
+brew "atuin", restart_service: :changed
 brew "bat"
 brew "bat-extras"
 brew "broot"
