@@ -3,6 +3,7 @@ status is-interactive; and begin
     set -Ux XDG_CONFIG_HOME $HOME/.config
     fish_add_path -p ~/.local/bin
     fish_config theme choose "Solarized Dark"
+    bind -M insert \cg ghq_fzf_cd
 end
 
 # abbreviations
