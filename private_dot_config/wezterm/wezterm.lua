@@ -28,7 +28,7 @@ config.window_frame = {
 
 -- Window config
 -- see: https://wezfurlong.org/wezterm/config/appearance.html?h=opacity#window-background-opacity
-config.window_background_opacity = 0.75
+config.window_background_opacity = 0.85
 
 -- Keybinds
 -- see: https://wezfurlong.org/wezterm/config/default-keys.html?h=disable_default
