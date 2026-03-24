@@ -3,8 +3,8 @@ status is-interactive; and begin
     set -Ux XDG_CONFIG_HOME $HOME/.config
     fish_add_path -p ~/.local/bin
     fish_config theme choose "Solarized Dark"
-    bind \cg ghq_repo_browser
-    bind -M insert \cg ghq_repo_browser
+    bind alt-g ghq_repo_browser
+    bind -M insert alt-g ghq_repo_browser
 end
 
 # abbreviations
@@ -63,3 +63,10 @@ atuin init fish | source
 # bind to ctrl-r in normal and insert mode, add any other bindings you want here too
 bind \cr _atuin_search
 bind -M insert \cr _atuin_search
+
+# devbox
+devbox global shellenv --init-hook | source
+
+# Added by OrbStack: command-line tools and integration
+# This won't be added again if you remove it.
+source ~/.orbstack/shell/init2.fish 2>/dev/null || :
