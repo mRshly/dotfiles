@@ -5,6 +5,12 @@ status is-interactive; and begin
     fish_config theme choose "Solarized Dark"
     bind alt-g ghq_repo_browser
     bind -M insert alt-g ghq_repo_browser
+
+    # WezTerm: OSC 7 でカレントディレクトリを通知 (pane:get_current_working_dir() を有効化)
+    function wezterm_osc7 --on-variable PWD
+        printf "\e]7;file://%s%s\a" (hostname) $PWD
+    end
+    wezterm_osc7
 end
 
 # abbreviations
