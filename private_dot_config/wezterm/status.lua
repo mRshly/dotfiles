@@ -7,8 +7,8 @@ local DEFAULT_BG = { Color = "#333333" }
 local one_space = " "
 local three_spaces = "   "
 
-local HEADER_KEY_NORMAL = { Foreground = DEFAULT_FG, Text = "" }
-local HEADER_LEADER = { Foreground = { Color = "#ffffff" }, Text = "" }
+local HEADER_KEY_NORMAL = { Foreground = DEFAULT_FG, Text = "" }
+local HEADER_LEADER = { Foreground = { Color = "#ffffff" }, Text = "" }
 local HEADER_IME = { Foreground = DEFAULT_FG, Text = "あ" }
 
 local function AddIcon(elems, icon)
@@ -26,10 +26,23 @@ local function GetKeyboard(elems, window)
 	AddIcon(elems, window:composition_status() and HEADER_IME or HEADER_KEY_NORMAL)
 end
 
+local HEADER_WORKSPACE = { Foreground = { Color = "#c3a6ff" }, Text = "" }
+
+local function GetWorkspace(elems, window)
+	local name = window:active_workspace()
+	if name and name ~= "default" then
+		AddIcon(elems, HEADER_WORKSPACE)
+		table.insert(elems, { Foreground = DEFAULT_FG })
+		table.insert(elems, { Background = DEFAULT_BG })
+		table.insert(elems, { Text = name .. three_spaces })
+	end
+end
+
 local function LeftUpdate(window, pane)
 	local elems = {}
 
 	GetKeyboard(elems, window)
+	GetWorkspace(elems, window)
 
 	window:set_left_status(wezterm.format(elems))
 end
@@ -52,24 +65,24 @@ local function AddElement(elems, header, str)
 end
 
 local function GetHostAndCwd(elems, pane)
-	local uri = pane:get_current_working_dir()
+	local url = pane:get_current_working_dir()
 
-	if not uri then
+	if not url then
 		return
 	end
 
-	local cwd_uri = uri:sub(8)
-	local slash = cwd_uri:find("/")
+	-- url は URL オブジェクト: .host, .file_path プロパティを使用
+	local host = url.host or ""
+	local cwd  = url.file_path or ""
 
-	if not slash then
-		return
+	-- 末尾スラッシュを除去
+	if cwd:sub(-1) == "/" then
+		cwd = cwd:sub(1, -2)
 	end
 
-	local host = cwd_uri:sub(1, slash - 1)
 	local dot = host:find("[.]")
-
 	AddElement(elems, HEADER_HOST, dot and host:sub(1, dot - 1) or host)
-	AddElement(elems, HEADER_CWD, cwd_uri:sub(slash))
+	AddElement(elems, HEADER_CWD, cwd)
 end
 
 local function GetDate(elems)
@@ -93,7 +106,7 @@ end
 local function RightUpdate(window, pane)
 	local elems = {}
 
-	-- GetHostAndCwd(elems, pane)
+	GetHostAndCwd(elems, pane)
 	GetDate(elems)
 	GetBattery(elems, window)
 	GetTime(elems)

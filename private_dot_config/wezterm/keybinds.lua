@@ -164,6 +164,21 @@ return {
 		{ key = "J", mods = "LEADER", action = act.AdjustPaneSize({ "Down", 1 }) },
 		{ key = "Copy", mods = "NONE", action = act.CopyTo("Clipboard") },
 		{ key = "Paste", mods = "NONE", action = act.PasteFrom("Clipboard") },
+
+		-- Workspace management (tmux の prefix+s / prefix+$ に相当)
+		{ key = "s", mods = "LEADER", action = act.ShowLauncherArgs({ flags = "WORKSPACES" }) },
+		{
+			key = "n",
+			mods = "LEADER",
+			action = act.PromptInputLine({
+				description = "Workspace name:",
+				action = wezterm.action_callback(function(window, pane, line)
+					if line and #line > 0 then
+						window:perform_action(act.SwitchToWorkspace({ name = line }), pane)
+					end
+				end),
+			}),
+		},
 	},
 
 	key_tables = {
