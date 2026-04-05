@@ -9,7 +9,7 @@ require("format")
 require("status")
 
 -- Color scheme
-config.color_scheme = "Solarized Dark (Gogh)"
+config.color_scheme = "Solarized Osaka"
 
 -- Font
 config.font = wezterm.font_with_fallback({
