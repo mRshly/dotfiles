@@ -1,0 +1,78 @@
+# Solarized Osaka Dark for btop
+# Based on craftzdog/solarized-osaka.nvim
+
+# Colors in 6-char hex "#RRGGBB"
+# Gradient: set start+end for 2-color, start+mid+end for 3-color. Empty mid = 2-color.
+
+# Main background (empty = terminal default / transparent)
+theme[main_bg]=""
+
+# Main text color
+theme[main_fg]="#839395"
+
+# Title color for boxes
+theme[title]="#9eabac"
+
+# Highlight color for keyboard shortcuts
+theme[hi_fg]="#b28500"
+
+# Background color of selected items
+theme[selected_bg]="#002c38"
+
+# Foreground color of selected items
+theme[selected_fg]="#b28500"
+
+# Color of inactive/disabled text
+theme[inactive_fg]="#063540"
+
+# Misc colors for processes box
+theme[proc_misc]="#849900"
+
+# Box outline colors
+theme[cpu_box]="#063540"
+theme[mem_box]="#063540"
+theme[net_box]="#063540"
+theme[proc_box]="#063540"
+
+# Box divider line color
+theme[div_line]="#063540"
+
+# Temperature graph colors
+theme[temp_start]="#268bd3"
+theme[temp_mid]="#6d71c4"
+theme[temp_end]="#d23681"
+
+# TODO(human): CPU graph gradient colors (start=low load, mid=medium, end=high load)
+theme[cpu_start]="#29a298"
+theme[cpu_mid]="#6d71c4"
+theme[cpu_end]="#d23681"
+
+# Mem/Disk free meter
+theme[free_start]="#001e2c"
+theme[free_mid]=""
+theme[free_end]="#849900"
+
+# Mem/Disk cached meter
+theme[cached_start]="#001e2c"
+theme[cached_mid]=""
+theme[cached_end]="#268bd3"
+
+# Mem/Disk available meter
+theme[available_start]="#3a2400"
+theme[available_mid]=""
+theme[available_end]="#b28500"
+
+# Mem/Disk used meter
+theme[used_start]="#3d0a0a"
+theme[used_mid]=""
+theme[used_end]="#db302d"
+
+# Download graph colors
+theme[download_start]="#1a1e4a"
+theme[download_mid]="#6d71c4"
+theme[download_end]="#9ca0f5"
+
+# Upload graph colors
+theme[upload_start]="#3d0a28"
+theme[upload_mid]="#d23681"
+theme[upload_end]="#f06daa"
