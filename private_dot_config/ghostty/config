@@ -1,0 +1,15 @@
+# config
+font-family = "Intel One Mono"
+font-family = "HackGen Console"
+font-size = "20"
+
+# theme
+theme = "Solarized Osaka Night"
+
+background-opacity = 0.65
+cursor-opacity = 0.75
+
+shell-integration = fish
+
+# Scrolling
+mouse-scroll-multiplier = 2
