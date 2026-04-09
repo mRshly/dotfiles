@@ -1,0 +1,6 @@
+{
+  "language": "Japanese",
+  "permissions": {
+    "allow": [ "WebSearch", "WebFetch"]
+  }
+}
