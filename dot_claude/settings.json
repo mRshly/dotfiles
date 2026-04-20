@@ -63,5 +63,9 @@
     "commit-commands@claude-plugins-official": true,
     "skill-creator@claude-plugins-official": true
   },
-  "language": "Japanese"
+  "language": "Japanese",
+  "statusLine": {
+    "type": "command",
+    "command": "bash /Users/shadowcomet/.claude/statusline-command.sh"
+  }
 }
