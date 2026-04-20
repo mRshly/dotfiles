@@ -1,6 +1,67 @@
 {
-  "language": "Japanese",
   "permissions": {
-    "allow": [ "WebSearch", "WebFetch"]
-  }
+    "allow": [
+      "WebSearch",
+      "WebFetch"
+    ],
+    "deny": [
+      "Bash(git push -f *)",
+      "Bash(git push --force *)",
+      "Bash(git reset --hard *)",
+      "Bash(git checkout .)",
+      "Bash(git clean -f *)",
+      "Bash(git add .)",
+      "Bash(git add -A)",
+
+      "Bash(rm -rf *)",
+      "Bash(rm -r *)",
+
+      "Bash(chmod 777 *)",
+      "Bash(chmod -R *)",
+      "Bash(chown -R *)",
+      "Bash(killall *)",
+      "Bash(pkill *)",
+      "Bash(kill -9 *)",
+      "Bash(sudo *)",
+      "Bash(su *)",
+
+      "Bash(curl *|*sh)",
+      "Bash(wget *|*sh)",
+
+      "Bash(open *)",
+      "Bash(osascript *)",
+      "Bash(defaults write *)",
+
+      "Bash(ssh *)",
+      "Bash(scp *)",
+      "Bash(rsync *)",
+
+      "Bash(npm publish *)",
+      "Bash(yarn publish *)",
+      "Bash(pnpm publish *)",
+      "Bash(*deploy*)",
+
+      "Bash(terraform apply *)",
+      "Bash(terraform destroy *)",
+      "Bash(kubectl apply *)",
+      "Bash(kubectl delete *)",
+      "Bash(helm install *)",
+      "Bash(helm upgrade *)",
+      "Bash(docker push *)",
+      "Bash(podman push *)",
+      "Bash(aws * --no-cli-pager)",
+      "Bash(gcloud * --quiet)",
+
+      "Read(**/.env)",
+      "Read(**/.env.*)",
+
+      "mcp__claude_ai_Slack__slack_send_message",
+      "mcp__claude_ai_Slack__slack_schedule_message"
+    ]
+  },
+  "enabledPlugins": {
+    "commit-commands@claude-plugins-official": true,
+    "skill-creator@claude-plugins-official": true
+  },
+  "language": "Japanese"
 }
