@@ -1,0 +1,40 @@
+{ pkgs, ... }:
+
+{
+  home.packages = with pkgs; [
+    asciinema
+    atuin
+    bat
+    bat-extras.batdiff
+    bat-extras.batgrep
+    bat-extras.batman
+    bat-extras.batpipe
+    bat-extras.batwatch
+    bat-extras.prettybat
+    broot
+    btop
+    ccusage
+    chafa
+    chezmoi
+    claude-code
+    commitizen
+    curl
+    devbox
+    difftastic
+    eza
+    fd
+    fzf
+    gemini-cli
+    gh
+    ghq
+    gitleaks
+    glow
+    gnupg
+    lazydocker
+    lazygit
+    neovim
+    ripgrep
+    wget
+    zellij
+  ];
+}
