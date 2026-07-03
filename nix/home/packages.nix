@@ -16,7 +16,6 @@
     ccusage
     chafa
     chezmoi
-    claude-code
     commitizen
     curl
     devbox

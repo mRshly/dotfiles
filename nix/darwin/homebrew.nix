@@ -56,7 +56,6 @@
       "alfred"
       "arduino-ide"
       "brave-browser"
-      "claude"
       "cmux"
       "cursor"
       "discord"
