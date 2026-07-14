@@ -31,25 +31,30 @@ This file-selection step grants RunCat Neo the required macOS sandbox access.
 
 ## Nix workflow
 
-First-time nix-darwin install: follow [docs/migration/first-switch-checklist.md](docs/migration/first-switch-checklist.md) (one-time backups and ordering constraints), then:
+Two Apple Silicon hosts share the packages and Home Manager modules under `nix/darwin` and `nix/home`. Machine-specific settings stay under `nix/hosts`.
+
+- `ShadowComet`: M1 MacBook Air (`shadowcomet`)
+- `ShadowMercury`: M4 Mac mini (`shadowmercury`)
+
+First-time nix-darwin install on ShadowMercury:
 
 ```bash
 nix flake check
-nix build .#darwinConfigurations.ShadowComet.system
-sudo nix run github:nix-darwin/nix-darwin#darwin-rebuild -- switch --flake .#ShadowComet
+nix build .#darwinConfigurations.ShadowMercury.system
+sudo nix run github:nix-darwin/nix-darwin#darwin-rebuild -- switch --flake .#ShadowMercury
 ```
 
 Daily build without activating:
 
 ```bash
 nix flake check
-darwin-rebuild build --flake .#ShadowComet
+darwin-rebuild build --flake ".#$(scutil --get LocalHostName)"
 ```
 
 Activate after reviewing the build:
 
 ```bash
-darwin-rebuild switch --flake .#ShadowComet
+darwin-rebuild switch --flake ".#$(scutil --get LocalHostName)"
 ```
 
 
