@@ -1,4 +1,4 @@
-{ ... }:
+{ username, ... }:
 
 {
   imports = [
@@ -8,9 +8,11 @@
     ./programs/mise.nix
   ];
 
-  home.username = "shadowcomet";
-  home.homeDirectory = "/Users/shadowcomet";
+  home.username = username;
+  home.homeDirectory = "/Users/${username}";
   home.stateVersion = "26.05";
 
+  # macOS では man-db パッケージを使わないため、キャッシュ生成も行わない。
+  programs.man.generateCaches = false;
   programs.home-manager.enable = true;
 }

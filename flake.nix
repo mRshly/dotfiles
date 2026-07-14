@@ -1,5 +1,5 @@
 {
-  description = "shadowcomet dotfiles";
+  description = "ShadowComet and ShadowMercury dotfiles";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
@@ -9,19 +9,38 @@
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = inputs@{ nix-darwin, home-manager, nixpkgs, ... }: {
-    darwinConfigurations.ShadowComet = nix-darwin.lib.darwinSystem {
-      system = "aarch64-darwin";
-      specialArgs = { inherit inputs; };
-      modules = [
-        ./nix/hosts/ShadowComet
-        home-manager.darwinModules.home-manager
-        {
-          home-manager.useGlobalPkgs = true;
-          home-manager.useUserPackages = true;
-          home-manager.users.shadowcomet = import ./nix/home;
-        }
-      ];
+  outputs = inputs@{ nix-darwin, home-manager, ... }:
+    let
+      mkDarwinConfiguration = { hostModule, username, userUid }:
+        nix-darwin.lib.darwinSystem {
+          system = "aarch64-darwin";
+          specialArgs = { inherit inputs username userUid; };
+          modules = [
+            ./nix/darwin/common.nix
+            hostModule
+            home-manager.darwinModules.home-manager
+            {
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              home-manager.extraSpecialArgs = { inherit username; };
+              home-manager.users.${username} = import ./nix/home;
+            }
+          ];
+        };
+    in
+    {
+      darwinConfigurations = {
+        ShadowComet = mkDarwinConfiguration {
+          hostModule = ./nix/hosts/ShadowComet;
+          username = "shadowcomet";
+          userUid = 501;
+        };
+
+        ShadowMercury = mkDarwinConfiguration {
+          hostModule = ./nix/hosts/ShadowMercury;
+          username = "shadowmercury";
+          userUid = 501;
+        };
+      };
     };
-  };
 }
