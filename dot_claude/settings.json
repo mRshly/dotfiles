@@ -59,11 +59,30 @@
       "mcp__claude_ai_Slack__slack_schedule_message"
     ]
   },
+  "model": "claude-fable-5[1m]",
+  "effortLevel": "medium",
+  "env": {
+    "CLAUDE_CODE_SUBAGENT_MODEL": "claude-sonnet-5"
+  },
   "enabledPlugins": {
     "commit-commands@claude-plugins-official": true,
-    "skill-creator@claude-plugins-official": true
+    "skill-creator@claude-plugins-official": true,
+    "superpowers@superpowers-marketplace": true,
+    "feature-dev@claude-plugins-official": true,
+    "rust-analyzer-lsp@claude-plugins-official": true
+  },
+  "extraKnownMarketplaces": {
+    "superpowers-marketplace": {
+      "source": {
+        "source": "github",
+        "repo": "obra/superpowers-marketplace"
+      }
+    }
   },
   "language": "Japanese",
+  "tui": "fullscreen",
+  "theme": "dark-daltonized",
+  "editorMode": "vim",
   "statusLine": {
     "type": "command",
     "command": "bash /Users/shadowcomet/.claude/statusline-command.sh"

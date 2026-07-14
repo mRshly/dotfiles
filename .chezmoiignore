@@ -1,0 +1,6 @@
+# リポジトリ管理用ファイル。ホームディレクトリへの適用対象ではない。
+docs
+flake.lock
+flake.nix
+nix
+result
