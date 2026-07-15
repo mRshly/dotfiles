@@ -20,6 +20,15 @@ Clone this repository, then follow the [Nix workflow](#nix-workflow) below to in
 chezmoi apply
 ```
 
+## RunCat Neo: Codex usage
+
+Apply the Codex hook and converter with `chezmoi apply`. Restart Codex, open
+`/hooks`, and trust the new user-level `Stop` hook when prompted.
+
+After the first completed Codex turn creates `~/.codex/runcat-usage.json`, open
+RunCat Neo settings and add that file as a Custom Metrics source named `Codex`.
+This file-selection step grants RunCat Neo the required macOS sandbox access.
+
 ## Nix workflow
 
 First-time nix-darwin install: follow [docs/migration/first-switch-checklist.md](docs/migration/first-switch-checklist.md) (one-time backups and ordering constraints), then:

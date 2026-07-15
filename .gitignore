@@ -10,3 +10,10 @@ result
 
 # npm
 node_modules
+
+# Python
+__pycache__/
+*.py[cod]
+
+# Local git worktrees
+.worktrees/
