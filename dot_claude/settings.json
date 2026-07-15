@@ -85,6 +85,6 @@
   "editorMode": "vim",
   "statusLine": {
     "type": "command",
-    "command": "bash /Users/shadowcomet/.claude/statusline-command.sh"
+    "command": "bash -c 'input=$(cat); printf %s \"$input\" | python3 \"$HOME/.claude/runcat-statusline.py\" >/dev/null 2>&1; printf %s \"$input\" | bash \"$HOME/.claude/statusline-command.sh\"'"
   }
 }
