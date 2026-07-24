@@ -27,14 +27,6 @@
         name = "k1low/tap";
         trusted = true;
       }
-      {
-        name = "osx-cross/arm";
-        trusted = true;
-      }
-      {
-        name = "osx-cross/avr";
-        trusted = true;
-      }
     ];
 
     # nixpkgs へ移せないものだけを brew で管理する。
