@@ -29,6 +29,7 @@
     gitleaks
     glow
     gnupg
+    gwq
     lazydocker
     lazygit
     neovim

@@ -20,10 +20,6 @@
 
     taps = [
       {
-        name = "d-kuro/tap";
-        trusted = true;
-      }
-      {
         name = "dotenvx/brew";
         trusted = true;
       }
@@ -43,9 +39,8 @@
     #          podman-tui は本体と API/CLI のバージョン整合が要るため、
     #          導入経路を podman 本体に揃えて brew のままにする。
     #   prek : nixpkgs は 0.4.4 で古い。
-    #   dotenvx : nixpkgs は 2.3.2 で大幅に古い。
+    #   dotenvx : nixpkgs は 2.14.0 で brew (2.17.4) より古い。
     #   mo   : nixpkgs の mo は Bash 用 mustache テンプレートエンジンで別物。
-    #   gwq  : flake.lock が固定する nixpkgs (2026-07-02) にまだ無い。
     brews = [
       "gcc"
       "make"
@@ -54,7 +49,6 @@
       "podman-compose"
       "podman-tui"
       "prek"
-      "d-kuro/tap/gwq"
       "dotenvx/brew/dotenvx"
       "k1low/tap/mo"
     ];
