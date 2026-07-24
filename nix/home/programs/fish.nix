@@ -55,6 +55,14 @@
       set -gx EDITOR nvim
       fish_add_path -a ~/Applications/Ghostty.app/Contents/MacOS/
       fish_add_path -p ~/.orbstack/bin
+
+      # Homebrew
+      # homebrew.enableFishIntegration を false にしたため brew shellenv は
+      # 走らない。fish は path_helper を呼ばないので /etc/paths.d/homebrew も
+      # 効かず、ここで明示的に PATH へ入れないと brew が引けない。
+      fish_add_path -ga --path /opt/homebrew/bin
+      fish_add_path -ga --path /opt/homebrew/sbin
+
       set -gx KALEIDOSCOPE_DIR $HOME/ghq/github.com/keyboardio/Kaleidoscope
 
       if type -q atuin
@@ -64,9 +72,9 @@
           bind -M insert \cr _atuin_search
       end
 
-      if type -q devbox
-          devbox global shellenv --init-hook | source
-      end
+      # devbox はプロジェクト単位 (devbox shell / run, CI) でのみ使い、
+      # devbox global は使わない方針。shellenv の出力形式は bash と nushell
+      # のみで fish 用が無く、source すると構文エラーになるため統合しない。
 
       if test -e ~/.orbstack/shell/init2.fish
           source ~/.orbstack/shell/init2.fish
