@@ -33,8 +33,14 @@
     lazydocker
     lazygit
     neovim
+    # nodejs は npm / npx / corepack も提供する。pnpm と yarn-berry は
+    # shebang で自前の nodejs を絶対指定するので PATH の node には依存
+    # しないが、package.json の scripts が node を呼ぶため本体も入れる。
+    nodejs
+    pnpm
     ripgrep
     wget
+    yarn-berry
     zellij
   ];
 }
