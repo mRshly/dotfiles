@@ -51,10 +51,11 @@ nix flake check
 darwin-rebuild build --flake ".#$(scutil --get LocalHostName)"
 ```
 
-Activate after reviewing the build:
+Activate after reviewing the build. System activation must run as root, so
+`sudo` is required for `switch`:
 
 ```bash
-darwin-rebuild switch --flake ".#$(scutil --get LocalHostName)"
+sudo darwin-rebuild switch --flake ".#$(scutil --get LocalHostName)"
 ```
 
 
@@ -64,8 +65,21 @@ Fish itself and its config are managed by Home Manager (`nix/home/programs/fish.
 
 ```bash
 curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish | source && fisher install jorgebucaran/fisher
-fisher install jethrokuan/z patrickf1/fzf.fish decors/fish-ghq edc/bass
+fisher install jethrokuan/z patrickf1/fzf.fish edc/bass
 ```
+
+## Homebrew
+
+Homebrew is managed declaratively by the nix-darwin `homebrew` module in
+`nix/darwin/homebrew.nix`, with `onActivation.cleanup = "uninstall"`.
+
+Anything not declared there is uninstalled on every `darwin-rebuild switch`.
+This covers formulae, casks, taps, and Mac App Store apps. A manual
+`brew install` only survives until the next switch, so add it to
+`nix/darwin/homebrew.nix` to keep it.
+
+Packages live in Homebrew only when they cannot move to nixpkgs. The reason for
+each one is recorded as a comment above the `brews` list.
 
 ## Keyboardio Atreus
 
