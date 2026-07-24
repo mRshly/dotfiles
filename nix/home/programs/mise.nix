@@ -6,15 +6,15 @@
     package = pkgs.mise;
     enableFishIntegration = true;
 
+    # mise はプロジェクト単位のバージョン管理とタスクランナーとして使う。
+    # グローバルに置くのは nixpkgs へ移せていないものだけに絞る。
+    # node / pnpm / yarn は nix/home/packages.nix へ移行済み。
     globalConfig = {
       tools = {
         pipx = "latest";
-        pnpm = "latest";
         rust = "latest";
         rust-analyzer = "latest";
         uv = "latest";
-        yarn = "latest";
-        node = "latest";
         usage = "latest";
       };
     };
