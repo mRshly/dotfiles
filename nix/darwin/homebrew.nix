@@ -3,7 +3,11 @@
 {
   homebrew = {
     enable = true;
-    enableFishIntegration = true;
+
+    # brew shellenv が fish_add_path --path で /opt/homebrew を PATH 先頭に
+    # 強制配置し、nix プロファイルより優先されてしまうため無効化する。
+    # 代わりに nix/home/programs/fish.nix で PATH 末尾に追加している。
+    enableFishIntegration = false;
     onActivation = {
       autoUpdate = false;
       upgrade = false;

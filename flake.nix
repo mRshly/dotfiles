@@ -22,6 +22,10 @@
             {
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
+              # 既存ファイルと衝突しても activation を中断せず退避させる。
+              # 未設定だと 1 ファイルの衝突で以降の home files が全て
+              # 配置されないまま黙って終わる。
+              home-manager.backupFileExtension = "hm-bak";
               home-manager.extraSpecialArgs = { inherit username; };
               home-manager.users.${username} = import ./nix/home;
             }
