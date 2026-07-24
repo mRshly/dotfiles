@@ -39,6 +39,7 @@
     nodejs
     pnpm
     ripgrep
+    uv
     wget
     yarn-berry
     zellij
