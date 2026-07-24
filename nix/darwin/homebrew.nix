@@ -20,10 +20,6 @@
         trusted = true;
       }
       {
-        name = "dagger/tap";
-        trusted = true;
-      }
-      {
         name = "dotenvx/brew";
         trusted = true;
       }
@@ -41,6 +37,19 @@
       }
     ];
 
+    # nixpkgs へ移せないものだけを brew で管理する。
+    #   gcc  : nixpkgs 版は cc/ld/as など binutils 一式を提供し Xcode の
+    #          ツールチェーンを上書きするため。brew 版は gcc-16 で衝突しない。
+    #   make : brew 版は macOS 標準と衝突させない gmake として入る。
+    #          nixpkgs 版は make を提供してしまう。
+    #   mas  : nix-darwin の masApps が brew 版の mas を前提としている。
+    #   podman  : nixpkgs は 5.8.4 でメジャー 1 つ古い。podman-compose と
+    #          podman-tui は本体と API/CLI のバージョン整合が要るため、
+    #          導入経路を podman 本体に揃えて brew のままにする。
+    #   prek : nixpkgs は 0.4.4 で古い。
+    #   dotenvx : nixpkgs は 2.3.2 で大幅に古い。
+    #   mo   : nixpkgs の mo は Bash 用 mustache テンプレートエンジンで別物。
+    #   gwq  : flake.lock が固定する nixpkgs (2026-07-02) にまだ無い。
     brews = [
       "gcc"
       "make"
