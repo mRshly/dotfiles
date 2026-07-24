@@ -11,7 +11,11 @@
     onActivation = {
       autoUpdate = false;
       upgrade = false;
-      cleanup = "none";
+      # 宣言外の formula / cask / tap / masApps を switch のたびに
+      # アンインストールする。手動で入れたものは次の switch で消えるため、
+      # 残したいものは必ずこのファイルに追記すること。
+      # App Store アプリも対象で、root 所有だと削除に失敗してエラーになる。
+      cleanup = "uninstall";
     };
 
     taps = [
@@ -102,6 +106,7 @@
       "Reeder" = 6475002485;
       "Reeder Classic" = 1529448980;
       "RunCat" = 1429033973;
+      "RunCatNeo" = 6757801838;
       "Save to Reader" = 1640236961;
       "The Unarchiver" = 425424353;
     };
