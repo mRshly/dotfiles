@@ -83,12 +83,9 @@ each one is recorded as a comment above the `brews` list.
 
 ## Keyboardio Atreus
 
-My [Keyboardio Atreus](https://shop.keyboard.io/products/keyboardio-atreus) firmware is [kaleidoscope](https://github.com/keyboardio/Kaleidoscope).
+Keymaps and flashing scripts for my
+[Keyboardio Atreus](https://shop.keyboard.io/products/keyboardio-atreus) live in
+a separate repository: [mRshly/atreus-config](https://github.com/mRshly/atreus-config).
 
-Clone repository by [ghq](https://github.com/x-motemen/ghq) like,
-
-```bash
-ghq get git@github.com:keyboardio/Kaleidoscope.git`
-```
-
-Then, move to `keyboards/keyboardio/atreus` and flash by `./compile.sh && flash.sh` .
+`nix/home/programs/fish.nix` exports `KALEIDOSCOPE_DIR`, which those scripts use
+to locate [Kaleidoscope](https://github.com/keyboardio/Kaleidoscope).
