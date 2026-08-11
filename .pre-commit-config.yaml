@@ -1,8 +1,8 @@
 repos:
   - repo: local
     hooks:
-      - id: secretlint
-        name: secretlint
-        entry: npx secretlint
+      - id: gitleaks
+        name: gitleaks
+        entry: gitleaks git --staged --redact --no-banner
         language: system
-        types: [text]
+        pass_filenames: false
