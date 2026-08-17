@@ -28,7 +28,6 @@
     eza
     fd
     fzf
-    gemini-cli
     gh
     ghq
     gitleaks
