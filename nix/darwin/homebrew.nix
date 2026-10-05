@@ -78,7 +78,6 @@
       "rectangle"
       "spotify"
       "steam"
-      "visual-studio-code"
       "vivaldi"
       "vlc"
       "wezterm"
