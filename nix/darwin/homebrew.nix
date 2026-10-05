@@ -9,7 +9,7 @@
     # 代わりに nix/home/programs/fish.nix で PATH 末尾に追加している。
     enableFishIntegration = false;
     onActivation = {
-      autoUpdate = false;
+      autoUpdate = true;
       upgrade = false;
       # 宣言外の formula / cask / tap / masApps を switch のたびに
       # アンインストールする。手動で入れたものは次の switch で消えるため、
