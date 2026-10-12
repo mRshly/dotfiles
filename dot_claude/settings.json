@@ -8,6 +8,8 @@
       "WebFetch"
     ],
     "deny": [
+      "Agent(model:opus)",
+      "Agent(model:fable)",
       "Bash(git push -f *)",
       "Bash(git push --force *)",
       "Bash(git reset --hard *)",
