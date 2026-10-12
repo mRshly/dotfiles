@@ -7,6 +7,7 @@
       "WebSearch",
       "WebFetch"
     ],
+    "ask": ["Bash(npm install *)"],
     "deny": [
       "Agent(model:opus)",
       "Agent(model:fable)",
