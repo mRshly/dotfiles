@@ -6,7 +6,15 @@ Managed by chezmoi, Nix flakes, nix-darwin, Home Manager, and Homebrew.
 
 ## First step
 
-Clone this repository, then follow the [Nix workflow](#nix-workflow) below to install packages via nix-darwin/Home Manager. 
+Clone this repository and run the initial script once. It sets up the
+repository-local settings that a clone does not carry, such as the commit
+hooks. It is safe to run again.
+
+```bash
+./scripts/init.sh
+```
+
+Then follow the [Nix workflow](#nix-workflow) below to install packages via nix-darwin/Home Manager.
 
 ## Supported Platforms
 
@@ -172,8 +180,8 @@ mostly come in through those gaps.
 - **Homebrew taps** are arbitrary Ruby from GitHub. Add a third-party tap only
   when nixpkgs cannot provide the tool, and record why in
   `nix/darwin/homebrew.nix`.
-- **Secrets:** run `prek install` after cloning so the gitleaks pre-commit hook
-  is active. Keep tokens in 1Password / dotenvx, never in this repository.
+- **Secrets:** run `./scripts/init.sh` after cloning so the gitleaks
+  pre-commit hook is active. Keep tokens in 1Password / dotenvx, never in this repository.
 - **Fisher** is installed by `curl | source` from `main`. Read the script
   first, or pin it to a release tag.
 

@@ -1,0 +1,19 @@
+#!/bin/sh
+# scripts/init.sh が core.hooksPath を設定して有効化する。
+set -eu
+
+# シークレットの混入を防ぐ。
+gitleaks git --staged --redact --no-banner
+
+# README のルールと Home Manager の設定のずれ・下限割れを検出する。
+# 作業ツリーには未ステージの変更が混ざるため、index の内容だけを
+# 一時ディレクトリへ書き出し、コミットされる状態そのものを検査する。
+if git diff --cached --name-only --diff-filter=ACMRD |
+  grep -Eq '^(README\.md|flake\.(nix|lock)|nix/.*\.nix)$'; then
+  # macOS の /var は /private/var への symlink で、nix は symlink を含む
+  # path: を拒否するため実体のパスに解決する。
+  tmp=$(cd "$(mktemp -d)" && pwd -P)
+  trap 'rm -rf "$tmp"' EXIT
+  git checkout-index --all --prefix="$tmp/"
+  nix flake check "path:$tmp"
+fi
