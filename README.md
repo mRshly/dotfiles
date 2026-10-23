@@ -41,7 +41,9 @@ First-time nix-darwin install on ShadowMercury:
 ```bash
 nix flake check
 nix build .#darwinConfigurations.ShadowMercury.system
-sudo nix run github:nix-darwin/nix-darwin#darwin-rebuild -- switch --flake .#ShadowMercury
+# Run the nix-darwin revision pinned in flake.lock, not the latest master,
+# because this runs as root.
+sudo nix run "github:nix-darwin/nix-darwin/$(jq -r '.nodes["nix-darwin"].locked.rev' flake.lock)#darwin-rebuild" -- switch --flake .#ShadowMercury
 ```
 
 Daily build without activating:
@@ -93,6 +95,83 @@ other version managers are not used):
 - **devbox** (`devbox.json`): enter with `devbox shell`, or run a command with
   `devbox run <script>`. Use this for a lighter setup or when non-Nix users
   and CI need the same environment. `devbox global` is not used.
+
+## Security maintenance
+
+Nix pins the toolchain (node, pnpm, yarn, uv, ...) with hashes and signed
+binary caches. It does **not** protect the packages those tools download from
+npm / PyPI, Homebrew, or code fetched at run time. Supply chain attacks
+(malicious releases, compromised maintainer accounts, install-script worms)
+mostly come in through those gaps.
+
+### Daily
+
+- **Build before switch, and review what changed.**
+
+  ```bash
+  darwin-rebuild build --flake ".#$(scutil --get LocalHostName)"
+  nix store diff-closures /run/current-system ./result
+  sudo darwin-rebuild switch --flake ".#$(scutil --get LocalHostName)"
+  ```
+
+  Unexpected new packages or version jumps are the signal to stop.
+- **Review lockfile diffs before committing or installing.** This covers
+  `flake.lock`, `devbox.lock`, `pnpm-lock.yaml`, `package-lock.json`,
+  `yarn.lock` and `uv.lock`. Check that the sources are the expected
+  repositories and registries, not forks or tarball URLs.
+- **Install from the lockfile only:** `pnpm install --frozen-lockfile`,
+  `npm ci`, `yarn install --immutable`, `uv sync --locked`. Add or upgrade a
+  dependency as a separate, intentional step.
+- **Do not run unpinned remote code.** Avoid `npx <pkg>`, `pnpm dlx`, `uvx`,
+  `nix run github:owner/repo` and `curl ... | sh` without a pinned version or
+  revision. Pin it (`npx pkg@1.2.3`, `github:owner/repo/<rev>`) when you need it.
+- **Read before entering a cloned project.** `nix develop` runs `shellHook`;
+  `devbox shell` runs `init_hook` and plugins. Read them first in repositories
+  you do not own. Answer **no** when a flake asks to accept its `nixConfig`
+  (extra substituters or trusted keys).
+
+### Weekly
+
+- Update this flake: `nix flake update`, then build, `diff-closures` and switch
+  as above. Commit `flake.lock` separately so a bad update is easy to revert
+  (`sudo darwin-rebuild --rollback` also works).
+- Update each active project: `nix flake update` or `devbox update`, review and
+  commit the lockfile. Old nixpkgs revisions keep unpatched CVEs.
+- Homebrew is not pinned: run `brew outdated` and upgrade on purpose.
+  Casks also update themselves.
+- Check advisories for the projects you work on (`pnpm audit`, `npm audit`,
+  GitHub Dependabot alerts).
+
+### Rules to keep
+
+- **Nix daemon:** keep `trusted-users = root`, `require-sigs = true` and only
+  `cache.nixos.org` as substituter. Adding yourself to `trusted-users` is
+  equivalent to root, because it lets any flake add caches and keys. Check
+  `/etc/nix/nix.conf` on both hosts (ShadowMercury is managed by Determinate).
+- **Package manager quarantine:** `nix/home/programs/package-managers.nix`
+  makes the user configs skip releases younger than 7 days and keeps
+  dependency install scripts disabled. Do not edit the generated files by hand.
+
+  | Tool | File | Setting |
+  | ---- | ---- | ------- |
+  | npm  | `~/.npmrc` | `min-release-age=7`, `ignore-scripts=true` |
+  | pnpm | `~/.config/pnpm/config.yaml` | `minimumReleaseAge: 10080`, `strictDepBuilds: true` |
+  | yarn | `~/.yarnrc.yml` | `npmMinimalAgeGate: 10080`, `enableScripts: false` |
+  | uv   | `~/.config/uv/uv.toml` | `exclude-newer = "7 days"` |
+
+  When an urgent security fix cannot wait, override it per project or per
+  command (for example `pnpm-workspace.yaml` `minimumReleaseAgeExclude`,
+  `npm install --min-release-age=0`, `uv lock --exclude-newer-package`).
+  Allow a dependency's build script per project only after reading it
+  (`pnpm approve-builds`, `dependenciesMeta` in yarn).
+
+- **Homebrew taps** are arbitrary Ruby from GitHub. Add a third-party tap only
+  when nixpkgs cannot provide the tool, and record why in
+  `nix/darwin/homebrew.nix`.
+- **Secrets:** run `prek install` after cloning so the gitleaks pre-commit hook
+  is active. Keep tokens in 1Password / dotenvx, never in this repository.
+- **Fisher** is installed by `curl | source` from `main`. Read the script
+  first, or pin it to a release tag.
 
 ## Keyboardio Atreus
 
