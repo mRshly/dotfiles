@@ -151,13 +151,17 @@ mostly come in through those gaps.
 - **Package manager quarantine:** `nix/home/programs/package-managers.nix`
   makes the user configs skip releases younger than 7 days and keeps
   dependency install scripts disabled. Do not edit the generated files by hand.
+  Build-time assertions reject values below this floor, and `nix flake check`
+  fails when the table below differs from the Home Manager settings.
 
+  <!-- BEGIN generated: package-manager-policy -->
   | Tool | File | Setting |
   | ---- | ---- | ------- |
-  | npm  | `~/.npmrc` | `min-release-age=7`, `ignore-scripts=true` |
+  | npm | `~/.npmrc` | `ignore-scripts=true`, `min-release-age=7` |
   | pnpm | `~/.config/pnpm/config.yaml` | `minimumReleaseAge: 10080`, `strictDepBuilds: true` |
-  | yarn | `~/.yarnrc.yml` | `npmMinimalAgeGate: 10080`, `enableScripts: false` |
-  | uv   | `~/.config/uv/uv.toml` | `exclude-newer = "7 days"` |
+  | yarn | `~/.yarnrc.yml` | `enableScripts: false`, `npmMinimalAgeGate: 10080` |
+  | uv | `~/.config/uv/uv.toml` | `exclude-newer = "7 days"` |
+  <!-- END generated: package-manager-policy -->
 
   When an urgent security fix cannot wait, override it per project or per
   command (for example `pnpm-workspace.yaml` `minimumReleaseAgeExclude`,
