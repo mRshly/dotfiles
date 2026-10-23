@@ -9,7 +9,7 @@
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = inputs@{ nix-darwin, home-manager, ... }:
+  outputs = inputs@{ self, nixpkgs, nix-darwin, home-manager, ... }:
     let
       mkDarwinConfiguration = { hostModule, username, userUid }:
         nix-darwin.lib.darwinSystem {
@@ -46,5 +46,15 @@
           userUid = 501;
         };
       };
+
+      # nix flake check で README と Home Manager の設定のずれを検出する。
+      # Home Manager のモジュールは両ホスト共通なので片方で検査すれば足りる。
+      checks.aarch64-darwin.package-manager-policy =
+        import ./nix/checks/package-manager-policy.nix {
+          pkgs = nixpkgs.legacyPackages.aarch64-darwin;
+          inherit (nixpkgs) lib;
+          hmConfig = self.darwinConfigurations.ShadowComet.config.home-manager.users.shadowcomet;
+          readme = ./README.md;
+        };
     };
 }
