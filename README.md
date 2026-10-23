@@ -2,7 +2,7 @@
 
 ## How to manage my dotfiles
 
-Managed by chezmoi, Nix flakes, nix-darwin, Home Manager, Homebrew, and mise.
+Managed by chezmoi, Nix flakes, nix-darwin, Home Manager, and Homebrew.
 
 ## First step
 
@@ -80,6 +80,19 @@ This covers formulae, casks, taps, and Mac App Store apps. A manual
 
 Packages live in Homebrew only when they cannot move to nixpkgs. The reason for
 each one is recorded as a comment above the `brews` list.
+
+## Per-project development environments
+
+Global tools live in `nix/home/packages.nix`. Project-specific toolchains are
+pinned inside each project with one of the following two options (mise and
+other version managers are not used):
+
+- **Nix flake** (`flake.nix` with a `devShells` output): enter with
+  `nix develop`. Use this when the project already uses Nix or needs full
+  control over the environment.
+- **devbox** (`devbox.json`): enter with `devbox shell`, or run a command with
+  `devbox run <script>`. Use this for a lighter setup or when non-Nix users
+  and CI need the same environment. `devbox global` is not used.
 
 ## Keyboardio Atreus
 
