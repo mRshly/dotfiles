@@ -5,7 +5,6 @@
     ./packages.nix
     ./programs/fish.nix
     ./programs/git.nix
-    ./programs/mise.nix
   ];
 
   home.username = username;
