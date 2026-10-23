@@ -38,7 +38,8 @@
     #   podman  : nixpkgs は 5.8.4 でメジャー 1 つ古い。podman-compose と
     #          podman-tui は本体と API/CLI のバージョン整合が要るため、
     #          導入経路を podman 本体に揃えて brew のままにする。
-    #   prek : nixpkgs は 0.4.4 で古い。
+    #   prek : nixpkgs は 0.4.4 で古い。commit hook は .githooks の素の
+    #          git hook が基本で、prek はそれで扱えない検査にだけ使う。
     #   dotenvx : nixpkgs は 2.14.0 で brew (2.17.4) より古い。
     #   mo   : nixpkgs の mo は Bash 用 mustache テンプレートエンジンで別物。
     brews = [
