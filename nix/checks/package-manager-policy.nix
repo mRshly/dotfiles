@@ -10,41 +10,42 @@ let
     else if lib.isString v then v
     else toString v;
 
+  # Home Manager が実際にそのパスへ配置するかどうか。home.file のキーは
+  # モジュールの実装次第で相対・絶対パスが混在するため、配置先の target で判定する。
+  # xdg.configFile も home.file に合流し、target はホームからの相対パスになる。
+  deployed = file:
+    lib.any (f: f.target == lib.removePrefix "~/" file) (lib.attrValues hmConfig.home.file);
+
   # 各ツールの設定ファイルの書式で 1 項目を表示する。
-  # deployed は Home Manager が実際にそのパスへ配置するかどうか。
   tools = [
     {
       name = "npm";
       file = "~/.npmrc";
-      deployed = hmConfig.home.file ? ".npmrc";
       settings = hmConfig.programs.npm.settings;
       show = k: v: "${k}=${render v}";
     }
     {
       name = "pnpm";
       file = "~/.config/pnpm/config.yaml";
-      deployed = hmConfig.xdg.configFile ? "pnpm/config.yaml";
       settings = hmConfig.programs.pnpm.settings;
       show = k: v: "${k}: ${render v}";
     }
     {
       name = "yarn";
       file = "~/.yarnrc.yml";
-      deployed = hmConfig.home.file ? ".yarnrc.yml";
       settings = hmConfig.programs.yarn.settings;
       show = k: v: "${k}: ${render v}";
     }
     {
       name = "uv";
       file = "~/.config/uv/uv.toml";
-      deployed = hmConfig.xdg.configFile ? "uv/uv.toml";
       settings = hmConfig.programs.uv.settings;
       show = k: v: if lib.isString v then ''${k} = "${v}"'' else "${k} = ${render v}";
     }
   ];
 
   row = t:
-    assert lib.assertMsg t.deployed "${t.name}: ${t.file} が Home Manager で配置されていません。";
+    assert lib.assertMsg (deployed t.file) "${t.name}: ${t.file} が Home Manager で配置されていません。";
     let
       cells = lib.mapAttrsToList (k: v: "`${t.show k v}`") t.settings;
     in
