@@ -6,6 +6,7 @@
     ./programs/fish.nix
     ./programs/git.nix
     ./programs/package-managers.nix
+    ./programs/taskwarrior.nix
   ];
 
   home.username = username;

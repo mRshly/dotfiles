@@ -66,6 +66,23 @@ herdr --skill > dot_claude/skills/herdr/SKILL.md
 
 Restart Codex, open `/hooks`, and trust the new `SessionStart` hook.
 
+## Taskwarrior: shared task board for herdr agents
+
+Taskwarrior 3 is configured by Home Manager (`nix/home/programs/taskwarrior.nix`).
+The generated config is `~/.config/task/home-manager-taskrc`, included from the
+mutable `~/.config/task/taskrc`; data lives in `~/.local/share/task`.
+
+- `uda.agent` holds the herdr agent name (`agent:human` for the human).
+- `task board` lists pending tasks with their assignee.
+- `dot_claude/skills/taskwarrior/SKILL.md` defines the claim / annotate /
+  handoff protocol, linked into `~/.agents/skills/taskwarrior` for Codex.
+
+Name agents in herdr (`herdr agent rename <pane> <name>`) before assigning
+tasks to them; the skill uses that name as the assignee.
+
+Codex's `workspace-write` sandbox cannot write outside the worktree, so
+`~/.local/share/task` is added to `sandbox_workspace_write.writable_roots`.
+
 ## Codex config.toml
 
 Codex writes runtime state (project trust, `hooks.state` hashes, marketplace
