@@ -93,10 +93,10 @@
       "GarageBand" = 682658836;
       "Goodnotes" = 1444383602;
       "iMovie" = 408981434;
-      "Keynote" = 409183694;
+      "Keynote" = 361285480;
       "Kindle" = 302584613;
-      "Numbers" = 409203825;
-      "Pages" = 409201541;
+      "Numbers" = 361304891;
+      "Pages" = 361309726;
       "Reeder" = 6475002485;
       "Reeder Classic" = 1529448980;
       "RunCat" = 1429033973;
