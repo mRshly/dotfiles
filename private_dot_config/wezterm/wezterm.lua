@@ -7,6 +7,7 @@ local config = wezterm.config_builder()
 -- Side-effect modules (event handlers) are loaded after config_builder()
 require("format")
 require("status")
+local font_size = require("font_size")
 
 -- Color scheme
 config.color_scheme = "Solarized Osaka"
@@ -19,7 +20,8 @@ config.font = wezterm.font_with_fallback({
   { family = "Noto Color Emoji",       weight = "Regular" },
   { family = "Noto Emoji",             weight = "Medium" },
 })
-config.font_size = 16.0
+-- Overridden per window by font_size.lua according to the display size
+config.font_size = font_size.default
 config.window_frame = {
   font = wezterm.font_with_fallback({
     { family = "Intel One Mono",     weight = "Bold" },
