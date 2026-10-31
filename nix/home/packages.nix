@@ -34,6 +34,7 @@
     glow
     gnupg
     gwq
+    herdr
     lazydocker
     lazygit
     neovim

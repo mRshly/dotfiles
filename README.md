@@ -37,6 +37,35 @@ After the first completed Codex turn creates `~/.codex/runcat-usage.json`, open
 RunCat Neo settings and add that file as a Custom Metrics source named `Codex`.
 This file-selection step grants RunCat Neo the required macOS sandbox access.
 
+## herdr: Claude Code and Codex
+
+[herdr](https://herdr.dev) is installed from nixpkgs (`nix/home/packages.nix`).
+Its Claude Code and Codex integrations are checked in here instead of being
+written by `herdr integration install`:
+
+- `dot_claude/hooks/executable_herdr-agent-state.sh` and the `SessionStart`
+  hook in `dot_claude/settings.json`
+- `private_dot_codex/executable_herdr-agent-state.sh` and the `SessionStart`
+  hook in `private_dot_codex/hooks.json`
+- `dot_claude/skills/herdr/SKILL.md` (from `herdr --skill`), linked into
+  `~/.agents/skills/herdr` for Codex
+
+Do not run `herdr integration install` on the target: it does not recognise
+the `$HOME` form of the hook command and adds a second entry, which the next
+`chezmoi apply` then reverts. After upgrading herdr, regenerate the files in
+a scratch directory and copy them in:
+
+```bash
+d=$(mktemp -d); mkdir "$d/claude" "$d/codex"
+CLAUDE_CONFIG_DIR="$d/claude" herdr integration install claude
+CODEX_HOME="$d/codex" herdr integration install codex
+cp "$d/claude/hooks/herdr-agent-state.sh" dot_claude/hooks/executable_herdr-agent-state.sh
+cp "$d/codex/herdr-agent-state.sh" private_dot_codex/executable_herdr-agent-state.sh
+herdr --skill > dot_claude/skills/herdr/SKILL.md
+```
+
+Restart Codex, open `/hooks`, and trust the new `SessionStart` hook.
+
 ## Nix workflow
 
 Two Apple Silicon hosts share the packages and Home Manager modules under `nix/darwin` and `nix/home`. Machine-specific settings stay under `nix/hosts`.
