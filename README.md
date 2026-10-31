@@ -66,6 +66,15 @@ herdr --skill > dot_claude/skills/herdr/SKILL.md
 
 Restart Codex, open `/hooks`, and trust the new `SessionStart` hook.
 
+## Codex config.toml
+
+Codex writes runtime state (project trust, `hooks.state` hashes, marketplace
+revisions, desktop appearance) back into `~/.codex/config.toml`, so the file is
+not managed as a whole. `private_dot_codex/modify_private_config.toml` is a
+chezmoi modify template that only ensures the keys it lists and returns the
+live file byte-for-byte when they are already set. Add shared settings to that
+template; never `chezmoi re-add ~/.codex/config.toml`.
+
 ## Nix workflow
 
 Two Apple Silicon hosts share the packages and Home Manager modules under `nix/darwin` and `nix/home`. Machine-specific settings stay under `nix/hosts`.

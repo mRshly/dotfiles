@@ -1,0 +1,32 @@
+{{- /* chezmoi:modify-template */ -}}
+{{- /*
+  ~/.codex/config.toml は Codex が trust や hooks.state を書き戻す可変ファイル。
+  丸ごとは管理せず、ここで挙げたキーだけを保証する。
+  - 既に揃っていれば live の内容をバイト単位でそのまま返し、
+    Codex の整形との差分を作らない。
+  - テーブル自体が無ければ末尾に追記し、既存部分の整形を保つ。
+  - テーブルはあるが値が足りない時だけ toToml で書き出し直す。
+  chezmoi re-add は使わないこと (マシン固有の状態を取り込んでしまう)。
+*/ -}}
+{{- $taskData := joinPath .chezmoi.homeDir ".local/share/task" -}}
+{{- $cfg := dict -}}
+{{- if .chezmoi.stdin -}}
+{{-   $cfg = fromToml .chezmoi.stdin -}}
+{{- end -}}
+{{- $sww := get $cfg "sandbox_workspace_write" -}}
+{{- if not $sww -}}
+{{- /* Taskwarrior の DB は worktree の外にあるため workspace-write から書けるようにする */ -}}
+{{ with .chezmoi.stdin }}{{ . | trimSuffix "\n" }}
+
+{{ end -}}
+[sandbox_workspace_write]
+writable_roots = [{{ $taskData | quote }}]
+{{ else -}}
+{{-   $roots := get $sww "writable_roots" | default list -}}
+{{-   if has $taskData $roots -}}
+{{ .chezmoi.stdin }}
+{{-   else -}}
+{{-     $cfg = setValueAtPath "sandbox_workspace_write.writable_roots" (append $roots $taskData) $cfg -}}
+{{ toToml $cfg }}
+{{-   end -}}
+{{- end -}}
