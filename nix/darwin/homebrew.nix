@@ -99,7 +99,6 @@
       "Pages" = 361309726;
       "Reeder" = 6475002485;
       "Reeder Classic" = 1529448980;
-      "RunCat" = 1429033973;
       "RunCatNeo" = 6757801838;
       "Save to Reader" = 1640236961;
       "The Unarchiver" = 425424353;
