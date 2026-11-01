@@ -92,6 +92,31 @@ chezmoi modify template that only ensures the keys it lists and returns the
 live file byte-for-byte when they are already set. Add shared settings to that
 template; never `chezmoi re-add ~/.codex/config.toml`.
 
+Tests run with a Python that has `tomllib` (the system `python3` is 3.9):
+
+```bash
+uv run --no-project python -m unittest tests/test_codex_config_modify.py tests/test_codex_rules.py
+```
+
+## Codex permissions: parity with Claude Code
+
+Codex agents started from herdr should not stall on approval dialogs any more
+than Claude Code does, so Codex mirrors `dot_claude/settings.json`:
+
+| Claude Code | Codex |
+| --- | --- |
+| `defaultMode: "auto"` | `approval_policy = "on-request"` + `approvals_reviewer = "auto_review"` + `sandbox_mode = "workspace-write"` (same as `--approve-for-me`), ensured by the modify template |
+| `allow: WebSearch` | `web_search = "live"` |
+| `deny: Bash(...)` | `decision = "forbidden"` in `private_dot_codex/rules/claude-parity.rules` |
+| `ask: Bash(npm install *)` | `decision = "prompt"` in the same rules file |
+
+`prefix_rule` only matches a token prefix, so pipe (`curl *|*sh`), substring
+(`*deploy*`) and suffix (`aws * --no-cli-pager`) patterns, `Read(**/.env*)`,
+`Agent(...)` and the Slack MCP denies are not mirrored; auto review handles
+those. When the Claude Code deny/ask lists change, update the rules file and
+`tests/test_codex_rules.py` too. Codex's own "always allow" choices keep going
+to the unmanaged `~/.codex/rules/default.rules`.
+
 ## Nix workflow
 
 Two Apple Silicon hosts share the packages and Home Manager modules under `nix/darwin` and `nix/home`. Machine-specific settings stay under `nix/hosts`.
