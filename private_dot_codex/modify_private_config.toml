@@ -4,29 +4,66 @@
   丸ごとは管理せず、ここで挙げたキーだけを保証する。
   - 既に揃っていれば live の内容をバイト単位でそのまま返し、
     Codex の整形との差分を作らない。
-  - テーブル自体が無ければ末尾に追記し、既存部分の整形を保つ。
-  - テーブルはあるが値が足りない時だけ toToml で書き出し直す。
+  - トップレベルキーが欠けているだけなら先頭に前置する
+    (末尾に書くと最後のテーブルの中に入ってしまうため)。
+  - [sandbox_workspace_write] が無ければ末尾に追記し、既存部分の整形を保つ。
+  - 値が食い違う / writable_roots が足りない時だけ toToml で書き出し直す。
   chezmoi re-add は使わないこと (マシン固有の状態を取り込んでしまう)。
 */ -}}
 {{- $taskData := joinPath .chezmoi.homeDir ".local/share/task" -}}
+{{- /*
+  承認モードを Claude Code の defaultMode: "auto" に揃える。
+  on-request + auto_review は `codex --approve-for-me` と同じで、承認要求を
+  自動レビューに回す。明示的な deny は rules/claude-parity.rules が担う。
+  web_search = "live" は Claude の WebSearch allow 相当。
+*/ -}}
+{{- $top := dict
+      "approval_policy" "on-request"
+      "approvals_reviewer" "auto_review"
+      "sandbox_mode" "workspace-write"
+      "web_search" "live" -}}
 {{- $cfg := dict -}}
 {{- if .chezmoi.stdin -}}
 {{-   $cfg = fromToml .chezmoi.stdin -}}
 {{- end -}}
+{{- $missing := list -}}
+{{- $conflict := false -}}
+{{- range $k, $v := $top -}}
+{{-   if hasKey $cfg $k -}}
+{{-     if ne (toString (get $cfg $k)) $v -}}
+{{-       $conflict = true -}}
+{{-     end -}}
+{{-   else -}}
+{{-     $missing = append $missing $k -}}
+{{-   end -}}
+{{- end -}}
 {{- $sww := get $cfg "sandbox_workspace_write" -}}
-{{- if not $sww -}}
+{{- $roots := list -}}
+{{- if $sww -}}
+{{-   $roots = get $sww "writable_roots" | default list -}}
+{{- end -}}
+{{- if or $conflict (and $sww (not (has $taskData $roots))) -}}
+{{-   range $k, $v := $top -}}
+{{-     $cfg = setValueAtPath $k $v $cfg -}}
+{{-   end -}}
+{{-   if not (has $taskData $roots) -}}
+{{-     $cfg = setValueAtPath "sandbox_workspace_write.writable_roots" (append $roots $taskData) $cfg -}}
+{{-   end -}}
+{{ toToml $cfg }}
+{{- else -}}
+{{-   range $missing -}}
+{{ . }} = {{ get $top . | quote }}
+{{ end -}}
+{{-   if and $missing (or .chezmoi.stdin (not $sww)) }}
+{{ end -}}
+{{-   if $sww -}}
+{{ .chezmoi.stdin }}
+{{-   else -}}
 {{- /* Taskwarrior の DB は worktree の外にあるため workspace-write から書けるようにする */ -}}
 {{ with .chezmoi.stdin }}{{ . | trimSuffix "\n" }}
 
 {{ end -}}
 [sandbox_workspace_write]
 writable_roots = [{{ $taskData | quote }}]
-{{ else -}}
-{{-   $roots := get $sww "writable_roots" | default list -}}
-{{-   if has $taskData $roots -}}
-{{ .chezmoi.stdin }}
-{{-   else -}}
-{{-     $cfg = setValueAtPath "sandbox_workspace_write.writable_roots" (append $roots $taskData) $cfg -}}
-{{ toToml $cfg }}
-{{-   end -}}
+{{ end -}}
 {{- end -}}

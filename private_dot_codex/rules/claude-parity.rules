@@ -1,0 +1,147 @@
+# Claude Code (~/.claude/settings.json) の permissions を Codex の execpolicy に写したもの。
+# dot_claude/settings.json の deny / ask を変えたらここも合わせること。
+#   deny -> decision="forbidden"  /  ask -> decision="prompt"
+# 承認モード (auto 相当) は ~/.codex/config.toml の
+# approval_policy = "on-request" + approvals_reviewer = "auto_review" で揃えている。
+#
+# prefix_rule はトークン先頭一致のみなので、次の deny は写せない (auto_review に委ねる):
+#   Bash(curl *|*sh), Bash(wget *|*sh)  パイプ
+#   Bash(*deploy*)                      部分一致
+#   Bash(aws * --no-cli-pager), Bash(gcloud * --quiet)  末尾一致
+#   Read(**/.env), Read(**/.env.*)      コマンドではなくファイル読み取り
+#   Agent(model:*), Slack MCP           Codex に該当機能なし
+#
+# Codex が「常に許可」で書き込む default.rules とは別ファイルにして chezmoi で丸ごと管理する。
+
+# --- git ---
+prefix_rule(
+    pattern = ["git", "push", ["-f", "--force"]],
+    decision = "forbidden",
+    justification = "force push は履歴を壊す。必要ならユーザーに頼むこと",
+    match = ["git push -f origin main", "git push --force origin main"],
+    not_match = ["git push origin main", "git push --force-with-lease origin main"],
+)
+prefix_rule(
+    pattern = ["git", "reset", "--hard"],
+    decision = "forbidden",
+    justification = "未コミットの変更を失う",
+    match = ["git reset --hard HEAD~1"],
+    not_match = ["git reset --soft HEAD~1"],
+)
+prefix_rule(
+    pattern = ["git", "checkout", "."],
+    decision = "forbidden",
+    justification = "作業ツリーの変更をすべて捨てる",
+    match = ["git checkout ."],
+    not_match = ["git checkout main"],
+)
+prefix_rule(
+    pattern = ["git", "clean", "-f"],
+    decision = "forbidden",
+    justification = "未追跡ファイルを削除する",
+    match = ["git clean -f", "git clean -f -d"],
+    not_match = ["git clean -n"],
+)
+prefix_rule(
+    pattern = ["git", "add", [".", "-A"]],
+    decision = "forbidden",
+    justification = "無関係なファイルを巻き込む。パスを指定して add すること",
+    match = ["git add .", "git add -A"],
+    not_match = ["git add README.md"],
+)
+
+# --- 破壊的なファイル操作・プロセス操作・権限昇格 ---
+prefix_rule(
+    pattern = ["rm", ["-rf", "-r"]],
+    decision = "forbidden",
+    justification = "再帰削除は取り返しがつかない",
+    match = ["rm -rf build", "rm -r build"],
+    not_match = ["rm foo.txt"],
+)
+prefix_rule(
+    pattern = ["chmod", ["777", "-R"]],
+    decision = "forbidden",
+    match = ["chmod 777 foo", "chmod -R 755 dir"],
+    not_match = ["chmod +x script.sh"],
+)
+prefix_rule(
+    pattern = ["chown", "-R"],
+    decision = "forbidden",
+    match = ["chown -R me dir"],
+)
+prefix_rule(
+    pattern = [["killall", "pkill"]],
+    decision = "forbidden",
+    match = ["killall Finder", "pkill node"],
+)
+prefix_rule(
+    pattern = ["kill", "-9"],
+    decision = "forbidden",
+    match = ["kill -9 123"],
+    not_match = ["kill 123"],
+)
+prefix_rule(
+    pattern = [["sudo", "su"]],
+    decision = "forbidden",
+    justification = "権限昇格はユーザーが行う",
+    match = ["sudo ls", "su root"],
+)
+
+# --- macOS / リモート操作 ---
+prefix_rule(
+    pattern = [["open", "osascript"]],
+    decision = "forbidden",
+    match = ["open .", "osascript -e 'beep'"],
+)
+prefix_rule(
+    pattern = ["defaults", "write"],
+    decision = "forbidden",
+    match = ["defaults write com.apple.dock autohide -bool true"],
+    not_match = ["defaults read com.apple.dock"],
+)
+prefix_rule(
+    pattern = [["ssh", "scp", "rsync"]],
+    decision = "forbidden",
+    match = ["ssh host", "scp a host:b", "rsync -a a b"],
+)
+
+# --- 公開・デプロイ ---
+prefix_rule(
+    pattern = [["npm", "yarn", "pnpm"], "publish"],
+    decision = "forbidden",
+    match = ["npm publish", "pnpm publish --access public"],
+    not_match = ["npm test"],
+)
+prefix_rule(
+    pattern = ["terraform", ["apply", "destroy"]],
+    decision = "forbidden",
+    match = ["terraform apply", "terraform destroy"],
+    not_match = ["terraform plan"],
+)
+prefix_rule(
+    pattern = ["kubectl", ["apply", "delete"]],
+    decision = "forbidden",
+    match = ["kubectl apply -f a.yaml", "kubectl delete pod x"],
+    not_match = ["kubectl get pods"],
+)
+prefix_rule(
+    pattern = ["helm", ["install", "upgrade"]],
+    decision = "forbidden",
+    match = ["helm install x y", "helm upgrade x y"],
+    not_match = ["helm list"],
+)
+prefix_rule(
+    pattern = [["docker", "podman"], "push"],
+    decision = "forbidden",
+    match = ["docker push img", "podman push img"],
+    not_match = ["docker build ."],
+)
+
+# --- ask ---
+prefix_rule(
+    pattern = ["npm", "install"],
+    decision = "prompt",
+    justification = "依存の追加はユーザーに確認する",
+    match = ["npm install", "npm install lodash"],
+    not_match = ["npm ci"],
+)
