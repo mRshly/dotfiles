@@ -1,0 +1,7 @@
+#!/bin/sh
+# bat の自作テーマ (~/.config/bat/themes) はキャッシュを再生成しないと使えない。
+# テーマファイルが変わったときだけ実行する。
+# themes hash: {{ include "private_dot_config/bat/themes/solarized_osaka_dark.tmTheme" | sha256sum }}
+set -eu
+command -v bat >/dev/null 2>&1 || exit 0
+bat cache --build
