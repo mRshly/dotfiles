@@ -18,3 +18,29 @@ dependencies:
     - path: ~/.local/share/chezmoi/apm/skills/herdr
     - path: ~/.local/share/chezmoi/apm/skills/taskwarrior
     - mizchi/skills/retrospective-codify#ab4eb2f7a92a13fb37c225ab427f2f492143ace1
+    # Frontend: frontend-review-* と、frontend-review-weekly が呼ぶ観点別
+    # サブスキル (*-expert)。各スキルは依存を宣言しないので全部並べる。
+    - mizchi/skills/frontend-review-triage#ab4eb2f7a92a13fb37c225ab427f2f492143ace1
+    - mizchi/skills/frontend-review-ci#ab4eb2f7a92a13fb37c225ab427f2f492143ace1
+    - mizchi/skills/frontend-review-hygiene#ab4eb2f7a92a13fb37c225ab427f2f492143ace1
+    - mizchi/skills/frontend-review-deps#ab4eb2f7a92a13fb37c225ab427f2f492143ace1
+    - mizchi/skills/frontend-review-testing#ab4eb2f7a92a13fb37c225ab427f2f492143ace1
+    - mizchi/skills/frontend-review-security#ab4eb2f7a92a13fb37c225ab427f2f492143ace1
+    - mizchi/skills/frontend-review-state#ab4eb2f7a92a13fb37c225ab427f2f492143ace1
+    - mizchi/skills/frontend-review-performance#ab4eb2f7a92a13fb37c225ab427f2f492143ace1
+    - mizchi/skills/frontend-review-weekly#ab4eb2f7a92a13fb37c225ab427f2f492143ace1
+    - mizchi/skills/frontend-expert#ab4eb2f7a92a13fb37c225ab427f2f492143ace1
+    - mizchi/skills/react-expert#ab4eb2f7a92a13fb37c225ab427f2f492143ace1
+    - mizchi/skills/performance-expert#ab4eb2f7a92a13fb37c225ab427f2f492143ace1
+    - mizchi/skills/security-expert#ab4eb2f7a92a13fb37c225ab427f2f492143ace1
+    - mizchi/skills/frontend-ops-expert#ab4eb2f7a92a13fb37c225ab427f2f492143ace1
+    - mizchi/skills/apm-usage#ab4eb2f7a92a13fb37c225ab427f2f492143ace1
+    - mizchi/skills/ast-grep-practice#ab4eb2f7a92a13fb37c225ab427f2f492143ace1
+    - mizchi/skills/opentelemetry#ab4eb2f7a92a13fb37c225ab427f2f492143ace1
+    - mizchi/skills/gh-fix-ci#ab4eb2f7a92a13fb37c225ab427f2f492143ace1
+    - mizchi/skills/skill-selector#ab4eb2f7a92a13fb37c225ab427f2f492143ace1
+    - mizchi/skills/skill-finder#ab4eb2f7a92a13fb37c225ab427f2f492143ace1
+    - mizchi/skills/extract-glossary#ab4eb2f7a92a13fb37c225ab427f2f492143ace1
+    - mizchi/skills/tech-article-reproducibility#ab4eb2f7a92a13fb37c225ab427f2f492143ace1
+    - mizchi/skills/waxa-eval#ab4eb2f7a92a13fb37c225ab427f2f492143ace1
+    - mizchi/skills/empirical-prompt-tuning#ab4eb2f7a92a13fb37c225ab427f2f492143ace1
