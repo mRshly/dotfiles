@@ -82,7 +82,23 @@ Skills for Claude Code and Codex are managed by
 
 `~/.apm/apm.lock.yaml` is not tracked: apm replaces it with a regular file
 (atomic rename), which would break a symlink. Pin remote packages in the
-manifest to a commit SHA (`owner/repo/path#<sha>`) instead of a branch.
+manifest to a commit SHA (`owner/repo/path#<sha>`) instead of a branch, so
+both hosts resolve the same content.
+
+To add a remote skill, install it at user scope from `~`, then pin it:
+
+```bash
+cd ~ && apm install -g owner/repo/path
+# Take resolved_commit for the package from ~/.apm/apm.lock.yaml, append it
+# to the new line in apm/apm.yml as `#<sha>`, then:
+chezmoi apply
+```
+
+Always pass `-g`. Without it, apm treats the current directory as a project:
+inside this repository it writes `apm.yml`, `apm.lock.yaml`, `.claude/skills/`
+and a `.gitignore` entry here, and it probes the remote owner's
+`.github-private` / `.github` repositories for an org policy (the
+`Policy repo ... not found` warning).
 
 Do not put skills directly in `~/.claude/skills` or `~/.agents/skills` with the
 same name as an apm skill: apm refuses to overwrite unmanaged files.
