@@ -9,8 +9,10 @@
 set -euo pipefail
 
 if ! command -v apm >/dev/null 2>&1; then
-  echo "apm-install: apm が PATH に無いためスキップ (darwin-rebuild switch 後に chezmoi apply を再実行)" >&2
-  exit 0
+  # run_onchange は成功時のみ実行済みとして記録するので、失敗させて
+  # apm 導入後の apply で再実行されるようにする。
+  echo "apm-install: apm が PATH に無い (darwin-rebuild switch 後に chezmoi apply を再実行)" >&2
+  exit 1
 fi
 
 skills_src="{{ .chezmoi.sourceDir }}/apm/skills"
@@ -23,7 +25,10 @@ migrate_legacy() {
   local dest="$1" name="$2"
   # -L も見るのは、リンク先が消えた symlink を -e が偽と判定するため。
   [[ -e $dest || -L $dest ]] || return 0
-  if [[ -L $dest ]] || diff -rq "$dest" "$skills_src/$name" >/dev/null; then
+  # 旧 chezmoi が作った symlink は ~/.agents/skills/<name> -> ~/.claude/skills/<name>
+  # だけ。それ以外のリンクは手で作ったものとみなし、下の中断に回す。
+  if [[ -L $dest && $(readlink "$dest") == "$HOME/.claude/skills/$name" ]] \
+    || { [[ ! -L $dest ]] && diff -rq "$dest" "$skills_src/$name" >/dev/null; }; then
     echo "apm-install: 旧配置を削除: $dest" >&2
     rm -rf "$dest"
     return 0
