@@ -1,0 +1,47 @@
+#!/bin/bash
+# apm/apm.yml か apm/skills/ 以下が変わったら、ユーザースコープへ再配置する。
+# apm.yml: {{ include "apm/apm.yml" | sha256sum }}
+{{- range (glob (joinPath .chezmoi.sourceDir "apm/skills/**")) }}
+{{-   if not (stat .).isDir }}
+# {{ trimPrefix (print $.chezmoi.sourceDir "/") . }}: {{ include . | sha256sum }}
+{{-   end }}
+{{- end }}
+set -euo pipefail
+
+if ! command -v apm >/dev/null 2>&1; then
+  echo "apm-install: apm が PATH に無いためスキップ (darwin-rebuild switch 後に chezmoi apply を再実行)" >&2
+  exit 0
+fi
+
+skills_src="{{ .chezmoi.sourceDir }}/apm/skills"
+
+# chezmoi が直接置いていた旧配置 (~/.claude/skills/<name> の実体と
+# ~/.agents/skills/<name> の symlink) は apm から見ると管理外ファイルなので、
+# 残っていると apm install が衝突で失敗する。apm.lock.yaml にまだ載っていない
+# ものだけを対象に、初回移行として片付ける。
+migrate_legacy() {
+  local dest="$1" name="$2"
+  # -L も見るのは、リンク先が消えた symlink を -e が偽と判定するため。
+  [[ -e $dest || -L $dest ]] || return 0
+  if [[ -L $dest ]] || diff -rq "$dest" "$skills_src/$name" >/dev/null; then
+    echo "apm-install: 旧配置を削除: $dest" >&2
+    rm -rf "$dest"
+    return 0
+  fi
+  # 手で編集された可能性があるものは消さず、人に判断させる。
+  echo "apm-install: $dest が $skills_src/$name と異なるため中断 (差分を確認して片付けてから再実行)" >&2
+  exit 1
+}
+
+lock="$HOME/.apm/apm.lock.yaml"
+for src in "$skills_src"/*/; do
+  name=$(basename "$src")
+  if [[ -f "$lock" ]] && grep -qF "skills/$name/SKILL.md" "$lock"; then
+    continue
+  fi
+  migrate_legacy "$HOME/.claude/skills/$name" "$name"
+  migrate_legacy "$HOME/.agents/skills/$name" "$name"
+done
+
+cd "$HOME"
+apm install -g
