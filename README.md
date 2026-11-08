@@ -47,8 +47,8 @@ written by `herdr integration install`:
   hook in `dot_claude/settings.json`
 - `private_dot_codex/executable_herdr-agent-state.sh` and the `SessionStart`
   hook in `private_dot_codex/hooks.json`
-- `dot_claude/skills/herdr/SKILL.md` (from `herdr --skill`), linked into
-  `~/.agents/skills/herdr` for Codex
+- `apm/skills/herdr/SKILL.md` (from `herdr --skill`), deployed by
+  [apm](#agent-skills-apm)
 
 Do not run `herdr integration install` on the target: it does not recognise
 the `$HOME` form of the hook command and adds a second entry, which the next
@@ -61,10 +61,31 @@ CLAUDE_CONFIG_DIR="$d/claude" herdr integration install claude
 CODEX_HOME="$d/codex" herdr integration install codex
 cp "$d/claude/hooks/herdr-agent-state.sh" dot_claude/hooks/executable_herdr-agent-state.sh
 cp "$d/codex/herdr-agent-state.sh" private_dot_codex/executable_herdr-agent-state.sh
-herdr --skill > dot_claude/skills/herdr/SKILL.md
+herdr --skill > apm/skills/herdr/SKILL.md
 ```
 
 Restart Codex, open `/hooks`, and trust the new `SessionStart` hook.
+
+## Agent skills: apm
+
+Skills for Claude Code and Codex are managed by
+[apm](https://github.com/microsoft/apm) (`apm-cli` from nixpkgs) at user scope.
+
+- `apm/apm.yml` is the manifest. `~/.apm/apm.yml` is a chezmoi symlink to it,
+  so `apm install -g <pkg>` edits the file in this repository.
+- `apm/skills/<name>/` holds the skills written here. The `apm/` directory is
+  in `.chezmoiignore`; apm copies each skill to `~/.claude/skills/<name>`
+  (Claude Code) and `~/.agents/skills/<name>` (Codex).
+- `run_onchange_after_apm-install.sh.tmpl` runs `apm install -g` on
+  `chezmoi apply` whenever the manifest or a skill changes. A skill removed
+  from the manifest is removed from both targets.
+
+`~/.apm/apm.lock.yaml` is not tracked: apm replaces it with a regular file
+(atomic rename), which would break a symlink. Pin remote packages in the
+manifest to a commit SHA (`owner/repo/path#<sha>`) instead of a branch.
+
+Do not put skills directly in `~/.claude/skills` or `~/.agents/skills` with the
+same name as an apm skill: apm refuses to overwrite unmanaged files.
 
 ## Taskwarrior: shared task board for herdr agents
 
@@ -74,8 +95,8 @@ mutable `~/.config/task/taskrc`; data lives in `~/.local/share/task`.
 
 - `uda.agent` holds the herdr agent name (`agent:human` for the human).
 - `task board` lists pending tasks with their assignee.
-- `dot_claude/skills/taskwarrior/SKILL.md` defines the claim / annotate /
-  handoff protocol, linked into `~/.agents/skills/taskwarrior` for Codex.
+- `apm/skills/taskwarrior/SKILL.md` defines the claim / annotate /
+  handoff protocol, deployed by [apm](#agent-skills-apm).
 
 Name agents in herdr (`herdr agent rename <pane> <name>`) before assigning
 tasks to them; the skill uses that name as the assignee.

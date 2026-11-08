@@ -1,0 +1,19 @@
+# Claude Code と Codex に配るエージェントスキルのユーザースコープ manifest。
+# ~/.apm/apm.yml はこのファイルへの symlink (dot_apm/symlink_apm.yml.tmpl)。
+# 変更すると chezmoi apply で `apm install -g` が走る
+# (run_onchange_after_apm-install.sh.tmpl)。ここから消したスキルは
+# 配置先からも消える。
+#
+# apm.lock.yaml は apm が rename で書き換えて symlink を壊すため管理しない。
+# 外部パッケージは `owner/repo/path#<commit SHA>` で固定する。
+name: shadowmercury-agent-skills
+version: 1.0.0
+# claude -> ~/.claude/skills/, codex -> ~/.agents/skills/
+targets: [claude, codex]
+dependencies:
+  apm:
+    # symlink 先なので chezmoi テンプレートは使えない。ユーザースコープは
+    # 絶対パスか ~/ 形式のみ受け付ける。
+    - path: ~/.local/share/chezmoi/apm/skills/devbox
+    - path: ~/.local/share/chezmoi/apm/skills/herdr
+    - path: ~/.local/share/chezmoi/apm/skills/taskwarrior

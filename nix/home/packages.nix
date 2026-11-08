@@ -2,6 +2,10 @@
 
 {
   home.packages = with pkgs; [
+    # エージェントスキルの配布 (apm/apm.yml)。nixpkgs-unstable の 0.33.0 は
+    # websockets 17 で runtime deps check に落ちる時期があったので、flake
+    # update 後にビルドが壊れたらここを疑う。
+    apm-cli
     asciinema
     atuin
     bat
