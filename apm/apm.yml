@@ -44,4 +44,5 @@ dependencies:
     - mizchi/skills/tech-article-reproducibility#ab4eb2f7a92a13fb37c225ab427f2f492143ace1
     - mizchi/skills/waxa-eval#ab4eb2f7a92a13fb37c225ab427f2f492143ace1
     - mizchi/skills/empirical-prompt-tuning#ab4eb2f7a92a13fb37c225ab427f2f492143ace1
-    - mizchi/explainer
+    - mizchi/explainer#ccdd7bacfb47451e38506d837af8a629504960b2
+    - nanaism/yomiyasu#8394e099486aaa2e28cf89992e46f5ebe5ed839d
