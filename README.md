@@ -47,13 +47,15 @@ written by `herdr integration install`:
   hook in `dot_claude/settings.json`
 - `private_dot_codex/executable_herdr-agent-state.sh` and the `SessionStart`
   hook in `private_dot_codex/hooks.json`
-- `apm/skills/herdr/SKILL.md` (from `herdr --skill`), deployed by
-  [apm](#agent-skills-apm)
+
+The herdr skill comes from upstream (`herdrdev/herdr/skills/herdr` in
+`apm/apm.yml`, pinned to a commit) and is deployed by [apm](#agent-skills-apm).
 
 Do not run `herdr integration install` on the target: it does not recognise
 the `$HOME` form of the hook command and adds a second entry, which the next
-`chezmoi apply` then reverts. After upgrading herdr, regenerate the files in
-a scratch directory and copy them in:
+`chezmoi apply` then reverts. After upgrading herdr, regenerate the hook
+scripts in a scratch directory and copy them in, then move the skill's pin in
+`apm/apm.yml` to the commit of the new release:
 
 ```bash
 d=$(mktemp -d); mkdir "$d/claude" "$d/codex"
@@ -61,7 +63,6 @@ CLAUDE_CONFIG_DIR="$d/claude" herdr integration install claude
 CODEX_HOME="$d/codex" herdr integration install codex
 cp "$d/claude/hooks/herdr-agent-state.sh" dot_claude/hooks/executable_herdr-agent-state.sh
 cp "$d/codex/herdr-agent-state.sh" private_dot_codex/executable_herdr-agent-state.sh
-herdr --skill > apm/skills/herdr/SKILL.md
 ```
 
 Restart Codex, open `/hooks`, and trust the new `SessionStart` hook.

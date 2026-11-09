@@ -15,8 +15,8 @@ dependencies:
     # symlink 先なので chezmoi テンプレートは使えない。ユーザースコープは
     # 絶対パスか ~/ 形式のみ受け付ける。
     - path: ~/.local/share/chezmoi/apm/skills/devbox
-    - path: ~/.local/share/chezmoi/apm/skills/herdr
     - path: ~/.local/share/chezmoi/apm/skills/taskwarrior
+    - herdrdev/herdr/skills/herdr#ee5bfb5041bb3e4a49d591c72308aae3c81ecdde
     - mizchi/skills/retrospective-codify#ab4eb2f7a92a13fb37c225ab427f2f492143ace1
     # Frontend: frontend-review-* と、frontend-review-weekly が呼ぶ観点別
     # サブスキル (*-expert)。各スキルは依存を宣言しないので全部並べる。
