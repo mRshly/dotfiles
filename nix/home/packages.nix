@@ -39,6 +39,7 @@
     gnupg
     gwq
     herdr
+    just
     lazydocker
     lazygit
     neovim
