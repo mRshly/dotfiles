@@ -42,6 +42,13 @@ let
       settings = hmConfig.programs.uv.settings;
       show = k: v: if lib.isString v then ''${k} = "${v}"'' else "${k} = ${render v}";
     }
+    {
+      name = "bun";
+      file = "~/.config/.bunfig.toml";
+      # [install] テーブルの中身を install.<key> の形で表示する。
+      settings = hmConfig.programs.bun.settings.install;
+      show = k: v: "install.${k} = ${render v}";
+    }
   ];
 
   row = t:

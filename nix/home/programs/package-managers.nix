@@ -7,7 +7,7 @@
 #   - 依存パッケージの install script を実行しない。
 # 緊急のセキュリティ修正など 7 日を待てない場合は、プロジェクト側の設定か
 # コマンドライン引数で個別に上書きする。
-# 本体 (nodejs / pnpm / yarn-berry / uv) は packages.nix で管理する。
+# 本体 (nodejs / pnpm / yarn-berry / uv / bun) は packages.nix で管理する。
 #
 # 値を変えたら README の表も更新すること。nix flake check
 # (nix/checks/package-manager-policy.nix) が不一致を検出する。
@@ -21,6 +21,7 @@ let
   pnpm = config.programs.pnpm.settings;
   yarn = config.programs.yarn.settings;
   uv = config.programs.uv.settings;
+  bun = config.programs.bun.settings;
 
   uvExcludeNewerDays =
     let
@@ -68,6 +69,16 @@ in
       };
     };
 
+    # bunfig に ignoreScripts は無い。Bun はデフォルトで依存の lifecycle
+    # script を実行せず、例外は組み込みの trustedDependencies 許可リストのみ。
+    # minimumReleaseAge は秒単位。git 連携は旧 bun.lockb 用なので使わない。
+    programs.bun = {
+      enable = true;
+      package = null;
+      enableGitIntegration = false;
+      settings.install.minimumReleaseAge = minimumReleaseAgeMinutes * 60;
+    };
+
     programs.uv = {
       enable = true;
       package = null;
@@ -94,6 +105,10 @@ in
       {
         assertion = uvExcludeNewerDays >= 7;
         message = ''programs.uv.settings: exclude-newer = "<N> days" (N >= 7) が必要です。'';
+      }
+      {
+        assertion = (bun.install.minimumReleaseAge or 0) >= 7 * 24 * 60 * 60;
+        message = "programs.bun.settings: install.minimumReleaseAge >= 604800 (秒) が必要です。";
       }
     ];
   };

@@ -287,6 +287,7 @@ mostly come in through those gaps.
   | pnpm | `~/.config/pnpm/config.yaml` | `minimumReleaseAge: 10080`, `strictDepBuilds: true` |
   | yarn | `~/.yarnrc.yml` | `enableScripts: false`, `npmMinimalAgeGate: 10080` |
   | uv | `~/.config/uv/uv.toml` | `exclude-newer = "7 days"` |
+  | bun | `~/.config/.bunfig.toml` | `install.minimumReleaseAge = 604800` |
   <!-- END generated: package-manager-policy -->
 
   When an urgent security fix cannot wait, override it per project or per

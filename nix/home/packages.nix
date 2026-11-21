@@ -17,6 +17,9 @@
     bat-extras.prettybat
     broot
     btop
+    # JS ランタイム兼パッケージマネージャ。bunfig の隔離設定は
+    # programs/package-managers.nix で管理する。
+    bun
     # Rust は stable のネイティブ開発のみのため rustup や rust-overlay は
     # 使わず nixpkgs 標準で揃える。rustc / cargo / clippy / rustfmt は
     # 同一リビジョン由来なのでバージョンが構造的に一致する。
