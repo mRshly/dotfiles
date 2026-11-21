@@ -5,9 +5,13 @@
   "permissions": {
     "allow": [
       "WebSearch",
-      "WebFetch"
+      "WebFetch",
+      "Bash(herdr agent start *)",
+      "Bash(herdr agent prompt *)"
     ],
-    "ask": ["Bash(npm install *)"],
+    "ask": [
+      "Bash(npm install *)"
+    ],
     "deny": [
       "Agent(model:opus)",
       "Agent(model:fable)",
@@ -65,15 +69,34 @@
   "enabledPlugins": {
     "commit-commands@claude-plugins-official": true,
     "skill-creator@claude-plugins-official": true,
-    "superpowers@superpowers-marketplace": false,
+    "superpowers@superpowers-marketplace": true,
     "feature-dev@claude-plugins-official": true,
-    "rust-analyzer-lsp@claude-plugins-official": true
+    "rust-analyzer-lsp@claude-plugins-official": true,
+    "github@claude-plugins-official": true,
+    "code-simplifier@claude-plugins-official": true,
+    "frontend-design@claude-plugins-official": true,
+    "clangd-lsp@claude-plugins-official": true,
+    "episodic-memory@superpowers-marketplace": true,
+    "superpowers-developing-for-claude-code@superpowers-marketplace": true,
+    "bit-skills@bit-skills": true
   },
   "extraKnownMarketplaces": {
+    "openai-codex": {
+      "source": {
+        "source": "github",
+        "repo": "openai/codex-plugin-cc"
+      }
+    },
     "superpowers-marketplace": {
       "source": {
         "source": "github",
         "repo": "obra/superpowers-marketplace"
+      }
+    },
+    "bit-skills": {
+      "source": {
+        "source": "github",
+        "repo": "bit-vcs/bit-skills"
       }
     }
   },
@@ -95,5 +118,19 @@
         ]
       }
     ]
+  },
+  "sandbox": {
+    "enabled": true,
+    "allowUnsandboxedCommands": false
+  },
+  "remoteControlAtStartup": false,
+  "agentPushNotifEnabled": true,
+  "modelSettings": {
+    "claude-fable-5-2": {
+      "autoCompactWindow": 400000
+    },
+    "claude-opus-5-5": {
+      "effortLevel": "medium"
+    }
   }
 }
