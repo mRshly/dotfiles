@@ -5,5 +5,8 @@ docs
 flake.lock
 flake.nix
 nix
+personas
+README.md
 result
 scripts
+tests
