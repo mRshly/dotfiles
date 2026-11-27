@@ -4,13 +4,26 @@
   丸ごとは管理せず、ここで挙げたキーだけを保証する。
   - 既に揃っていれば live の内容をバイト単位でそのまま返し、
     Codex の整形との差分を作らない。
-  - トップレベルキーが欠けているだけなら先頭に前置する
-    (末尾に書くと最後のテーブルの中に入ってしまうため)。
-  - [sandbox_workspace_write] が無ければ末尾に追記し、既存部分の整形を保つ。
-  - 値が食い違う / writable_roots が足りない時だけ toToml で書き出し直す。
+  - 1 つでも食い違えば toToml で全体を書き出し直す (管理しないキーは残る)。
+    古いテーブルを取り除く必要があり、差分だけを書き換えると壊れやすいため。
+    書き直しは揃うまでの 1 回だけで、以降は上の通りそのまま返す。
+  - herdr-worker の profile は丸ごと保証する。サンドボックスの境界なので、
+    手で足された宛先などを残さない。
   chezmoi re-add は使わないこと (マシン固有の状態を取り込んでしまう)。
+
+  サンドボックスは permission profile で指定する。旧来の sandbox_mode /
+  [sandbox_workspace_write] と併用すると profile が無視されるので取り除く。
+  - extends = ":workspace" が旧 workspace-write に当たる。
+  - Taskwarrior の DB は worktree の外にあるため書き込みを許可する。
+  - Herdr のソケットへの接続を許可する。Codex はソケットの許可を
+    ネットワークのプロキシで扱うので、features.network_proxy と
+    network.enabled が要る。宛先 (domains) は書かないので、外へは出られない。
+  詳しくは docs/claude-sandbox.md の Codex の節。
 */ -}}
-{{- $taskData := joinPath .chezmoi.homeDir ".local/share/task" -}}
+{{- $home := .chezmoi.homeDir -}}
+{{- $taskData := joinPath $home ".local/share/task" -}}
+{{- $herdrSock := joinPath $home ".config/herdr/herdr.sock" -}}
+{{- $profileName := "herdr-worker" -}}
 {{- /*
   承認モードを Claude Code の defaultMode: "auto" に揃える。
   on-request + auto_review は `codex --approve-for-me` と同じで、承認要求を
@@ -20,50 +33,44 @@
 {{- $top := dict
       "approval_policy" "on-request"
       "approvals_reviewer" "auto_review"
-      "sandbox_mode" "workspace-write"
+      "default_permissions" $profileName
       "web_search" "live" -}}
+{{- $profile := dict
+      "extends" ":workspace"
+      "filesystem" (dict $taskData "write")
+      "network" (dict "enabled" true "unix_sockets" (dict $herdrSock "allow")) -}}
 {{- $cfg := dict -}}
 {{- if .chezmoi.stdin -}}
 {{-   $cfg = fromToml .chezmoi.stdin -}}
 {{- end -}}
-{{- $missing := list -}}
-{{- $conflict := false -}}
+{{- $features := get $cfg "features" | default dict -}}
+{{- $perms := get $cfg "permissions" | default dict -}}
+{{- $ok := true -}}
 {{- range $k, $v := $top -}}
-{{-   if hasKey $cfg $k -}}
-{{-     if ne (toString (get $cfg $k)) $v -}}
-{{-       $conflict = true -}}
-{{-     end -}}
-{{-   else -}}
-{{-     $missing = append $missing $k -}}
+{{-   if ne (toString (get $cfg $k)) $v -}}
+{{-     $ok = false -}}
 {{-   end -}}
 {{- end -}}
-{{- $sww := get $cfg "sandbox_workspace_write" -}}
-{{- $roots := list -}}
-{{- if $sww -}}
-{{-   $roots = get $sww "writable_roots" | default list -}}
+{{- if or (hasKey $cfg "sandbox_mode") (hasKey $cfg "sandbox_workspace_write") -}}
+{{-   $ok = false -}}
 {{- end -}}
-{{- if or $conflict (and $sww (not (has $taskData $roots))) -}}
-{{-   range $k, $v := $top -}}
-{{-     $cfg = setValueAtPath $k $v $cfg -}}
-{{-   end -}}
-{{-   if not (has $taskData $roots) -}}
-{{-     $cfg = setValueAtPath "sandbox_workspace_write.writable_roots" (append $roots $taskData) $cfg -}}
-{{-   end -}}
-{{ toToml $cfg }}
-{{- else -}}
-{{-   range $missing -}}
-{{ . }} = {{ get $top . | quote }}
-{{ end -}}
-{{-   if and $missing (or .chezmoi.stdin (not $sww)) }}
-{{ end -}}
-{{-   if $sww -}}
+{{- if ne (toString (get $features "network_proxy")) "true" -}}
+{{-   $ok = false -}}
+{{- end -}}
+{{- if ne (toJson (get $perms $profileName)) (toJson $profile) -}}
+{{-   $ok = false -}}
+{{- end -}}
+{{- if $ok -}}
 {{ .chezmoi.stdin }}
-{{-   else -}}
-{{- /* Taskwarrior の DB は worktree の外にあるため workspace-write から書けるようにする */ -}}
-{{ with .chezmoi.stdin }}{{ . | trimSuffix "\n" }}
-
-{{ end -}}
-[sandbox_workspace_write]
-writable_roots = [{{ $taskData | quote }}]
-{{ end -}}
+{{- else -}}
+{{-   range $k, $v := $top -}}
+{{-     $_ := set $cfg $k $v -}}
+{{-   end -}}
+{{-   $_ := unset $cfg "sandbox_mode" -}}
+{{-   $_ = unset $cfg "sandbox_workspace_write" -}}
+{{-   $_ = set $features "network_proxy" true -}}
+{{-   $_ = set $cfg "features" $features -}}
+{{-   $_ = set $perms $profileName $profile -}}
+{{-   $_ = set $cfg "permissions" $perms -}}
+{{ toToml $cfg }}
 {{- end -}}

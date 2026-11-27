@@ -44,7 +44,7 @@ Its Claude Code and Codex integrations are checked in here instead of being
 written by `herdr integration install`:
 
 - `dot_claude/hooks/executable_herdr-agent-state.sh` and the `SessionStart`
-  hook in `dot_claude/settings.json`
+  hook in `dot_claude/private_settings.json.tmpl`
 - `private_dot_codex/executable_herdr-agent-state.sh` and the `SessionStart`
   hook in `private_dot_codex/hooks.json`
 
@@ -118,8 +118,9 @@ mutable `~/.config/task/taskrc`; data lives in `~/.local/share/task`.
 Name agents in herdr (`herdr agent rename <pane> <name>`) before assigning
 tasks to them; the skill uses that name as the assignee.
 
-Codex's `workspace-write` sandbox cannot write outside the worktree, so
-`~/.local/share/task` is added to `sandbox_workspace_write.writable_roots`.
+Codex's sandbox cannot write outside the worktree, so the `herdr-worker`
+permission profile allows writing `~/.local/share/task` (see
+[Codex workers](docs/claude-sandbox.md#codex-workers)).
 
 ## Codex config.toml
 
@@ -127,8 +128,15 @@ Codex writes runtime state (project trust, `hooks.state` hashes, marketplace
 revisions, desktop appearance) back into `~/.codex/config.toml`, so the file is
 not managed as a whole. `private_dot_codex/modify_private_config.toml` is a
 chezmoi modify template that only ensures the keys it lists and returns the
-live file byte-for-byte when they are already set. Add shared settings to that
+live file byte-for-byte when they are already set. When any of them differs,
+it rewrites the whole file with `toToml`: keys it does not manage keep their
+values, but their order and indentation change. Add shared settings to that
 template; never `chezmoi re-add ~/.codex/config.toml`.
+
+`private_dot_codex/worker.config.toml` is managed as a whole. Herdr workers
+start Codex with `-p worker`, which layers it on top of `config.toml` and
+sets `approval_policy = "never"` (see
+[Herdr workers](docs/claude-sandbox.md#herdr-workers)).
 
 Tests run with a Python that has `tomllib` (the system `python3` is 3.9):
 
@@ -139,19 +147,28 @@ uv run --no-project python -m unittest tests/test_codex_config_modify.py tests/t
 ## Codex permissions: parity with Claude Code
 
 Codex agents started from herdr should not stall on approval dialogs any more
-than Claude Code does, so Codex mirrors `dot_claude/settings.json`:
+than Claude Code does, so Codex mirrors `dot_claude/private_settings.json.tmpl`:
 
 | Claude Code | Codex |
 | --- | --- |
-| `defaultMode: "auto"` | `approval_policy = "on-request"` + `approvals_reviewer = "auto_review"` + `sandbox_mode = "workspace-write"` (same as `--approve-for-me`), ensured by the modify template |
+| `defaultMode: "auto"` | `approval_policy = "on-request"` + `approvals_reviewer = "auto_review"` (same as `--approve-for-me`), ensured by the modify template |
+| `sandbox` | `default_permissions = "herdr-worker"`, a permission profile that extends `:workspace` (see [Codex workers](docs/claude-sandbox.md#codex-workers)) |
 | `allow: WebSearch` | `web_search = "live"` |
 | `deny: Bash(...)` | `decision = "forbidden"` in `private_dot_codex/rules/claude-parity.rules` |
 | `ask: Bash(npm install *)` | `decision = "prompt"` in the same rules file |
 
-`prefix_rule` only matches a token prefix, so pipe (`curl *|*sh`), substring
-(`*deploy*`) and suffix (`aws * --no-cli-pager`) patterns, `Read(**/.env*)`,
-`Agent(...)` and the Slack MCP denies are not mirrored; auto review handles
-those. When the Claude Code deny/ask lists change, update the rules file and
+`prefix_rule` only matches a token prefix, so pipe (`curl *|*sh`) and suffix
+(`aws * --no-cli-pager`) patterns, `Read(**/.env*)`, `Agent(...)`, the Slack
+MCP denies and `ask: Bash(dangerouslyDisableSandbox:true)` are not mirrored;
+auto review handles those.
+
+Deploys are stopped by the Claude Code sandbox's network allowlist, a
+human approval for every unsandboxed retry, and auto mode classifier rules,
+not by a list of CLI names. See
+[Claude Code sandbox and deploy guard](docs/claude-sandbox.md)
+([日本語](docs/claude-sandbox.ja.md)).
+
+When the Claude Code deny/ask lists change, update the rules file and
 `tests/test_codex_rules.py` too. Codex's own "always allow" choices keep going
 to the unmanaged `~/.codex/rules/default.rules`.
 
@@ -229,6 +246,8 @@ binary caches. It does **not** protect the packages those tools download from
 npm / PyPI, Homebrew, or code fetched at run time. Supply chain attacks
 (malicious releases, compromised maintainer accounts, install-script worms)
 mostly come in through those gaps.
+
+- [Claude Code sandbox and deploy guard](docs/claude-sandbox.md) ([日本語](docs/claude-sandbox.ja.md)) covers what the sandbox allows, how deploys are stopped, and how to add an allowed host.
 
 ### Daily
 
