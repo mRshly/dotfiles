@@ -255,6 +255,11 @@ sessions started by hand still have it.
 
 In a new Claude Code session after `chezmoi apply`:
 
+- First prove that the sandbox is on: `touch ~/.sandbox-probe` must fail.
+  If it succeeds, the session runs without the sandbox and every check below
+  is meaningless (on 2026-11-27 an unsandboxed session reached
+  `example.com` and almost passed for a broken allowlist). Turn it on with
+  `/sandbox` and start again.
 - `herdr agent list`, `task list` and `nix develop` work inside the sandbox.
 - `curl -sI https://example.com` fails inside the sandbox (host not
   allowed). This also confirms that the `WebFetch` allow rule does not open

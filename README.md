@@ -67,6 +67,11 @@ cp "$d/codex/herdr-agent-state.sh" private_dot_codex/executable_herdr-agent-stat
 
 Restart Codex, open `/hooks`, and trust the new `SessionStart` hook.
 
+Claude Code's `worktree.baseRef` is `head`: a worktree made with
+`EnterWorktree` starts from the local HEAD instead of `origin/<default>`.
+With the default (`fresh`), unpushed local commits are missing from the
+worktree, and a worker can start from the wrong base without noticing.
+
 ## Agent skills: apm
 
 Skills for Claude Code and Codex are managed by

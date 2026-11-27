@@ -1,0 +1,27 @@
+---
+config:
+  flowchart:
+    wrappingWidth: 480
+---
+%% 出どころ: dot_claude/private_settings.json.tmpl, private_dot_codex/modify_private_config.toml,
+%% private_dot_codex/worker.config.toml, docs/claude-sandbox.md の Herdr workers の試験結果
+%% 末端を 4 つ並べるとスマホで文字が 6px になったので、ワーカーの 2 通りを 1 つにまとめて 2 段に分けた
+flowchart TB
+  cmd("サンドボックスの中で実行")
+  host{"宛先は許可リストにあるか"}
+  ok("そのまま動く")
+  refused("接続を拒否<br/>（1 層目）")
+  isWorker{"ワーカーか<br/>（2 層目）"}
+  worker("外に出ずに失敗を報告<br/>Claude・Codex とも")
+  tool{"Claude か Codex か"}
+  claudeHuman("人が承認<br/>するまで実行しない")
+  codexHuman("自動レビューが判断<br/>（残した穴）")
+
+  cmd --> host
+  host -->|ある| ok
+  host -->|ない| refused
+  refused --> isWorker
+  isWorker -->|はい| worker
+  isWorker -->|いいえ| tool
+  tool -->|Claude| claudeHuman
+  tool -->|Codex| codexHuman
