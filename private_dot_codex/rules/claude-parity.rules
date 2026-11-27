@@ -1,12 +1,12 @@
 # Claude Code (~/.claude/settings.json) の permissions を Codex の execpolicy に写したもの。
-# dot_claude/settings.json の deny / ask を変えたらここも合わせること。
+# dot_claude/private_settings.json.tmpl の deny / ask を変えたらここも合わせること。
 #   deny -> decision="forbidden"  /  ask -> decision="prompt"
 # 承認モード (auto 相当) は ~/.codex/config.toml の
 # approval_policy = "on-request" + approvals_reviewer = "auto_review" で揃えている。
 #
-# prefix_rule はトークン先頭一致のみなので、次の deny は写せない (auto_review に委ねる):
+# prefix_rule はトークン先頭一致のみなので、次の deny / ask は写せない (auto_review に委ねる):
 #   Bash(curl *|*sh), Bash(wget *|*sh)  パイプ
-#   Bash(*deploy*)                      部分一致
+#   ask: Bash(dangerouslyDisableSandbox:true)  Codex にサンドボックス外での再実行の区別がない
 #   Bash(aws * --no-cli-pager), Bash(gcloud * --quiet)  末尾一致
 #   Read(**/.env), Read(**/.env.*)      コマンドではなくファイル読み取り
 #   Agent(model:*), Slack MCP           Codex に該当機能なし

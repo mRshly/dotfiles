@@ -1,0 +1,7 @@
+# Herdr ワーカー用の設定の層。`codex -p worker` で config.toml の上に重なる。
+# ワーカーはサンドボックスの外に出ない: 承認を求めず、サンドボックスで
+# 失敗したコマンドは失敗としてモデルに返る。外に出る必要がある作業
+# (署名付きコミット、push、デプロイ) は chief と人に戻す。
+# サンドボックスの範囲は config.toml の permission profile (herdr-worker) が決める。
+# 詳しくは docs/claude-sandbox.md の Herdr workers の節。
+approval_policy = "never"
