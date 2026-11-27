@@ -1,0 +1,39 @@
+{
+  "checks": [
+    {
+      "name": "claude-layers",
+      "cmd": "chezmoi execute-template < ../../dot_claude/private_settings.json.tmpl | jq -c '{strictAllowlist: .sandbox.network.strictAllowlist, allowedDomains: (.sandbox.network.allowedDomains | length), allowUnsandboxedCommands: .sandbox.allowUnsandboxedCommands, ask: .permissions.ask, deployDeny: [.permissions.deny[] | select(test(\"deploy\"))]}'",
+      "expect": [
+        "{\"strictAllowlist\":true,\"allowedDomains\":14,\"allowUnsandboxedCommands\":true,\"ask\":[\"Bash(npm install *)\",\"Bash(dangerouslyDisableSandbox:true)\"],\"deployDeny\":[]}"
+      ]
+    },
+    {
+      "name": "claude-automode",
+      "cmd": "chezmoi execute-template < ../../dot_claude/private_settings.json.tmpl | jq -r '.autoMode.soft_deny[1][0:23], .autoMode.environment[1][0:14]'",
+      "expect": [
+        "Remote Service Changes:",
+        "Herdr workers:"
+      ]
+    },
+    {
+      "name": "codex-profile",
+      "cmd": "printf '' | chezmoi execute-template --with-stdin --file ../../private_dot_codex/modify_private_config.toml | rg -o '^\\s*(approval_policy|approvals_reviewer|default_permissions|network_proxy|extends|enabled) = .*|herdr\\.sock\" = \"allow\"' | sed 's/^ *//'",
+      "expect": [
+        "approval_policy = \"on-request\"",
+        "approvals_reviewer = \"auto_review\"",
+        "default_permissions = \"herdr-worker\"",
+        "network_proxy = true",
+        "extends = \":workspace\"",
+        "enabled = true",
+        "herdr.sock\" = \"allow\""
+      ]
+    },
+    {
+      "name": "codex-worker-layer",
+      "cmd": "rg -v '^#' ../../private_dot_codex/worker.config.toml",
+      "expect": [
+        "approval_policy = \"never\""
+      ]
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "labels": [
+    "サンドボックスの中で実行",
+    "宛先は許可リストにあるか",
+    "接続を拒否",
+    "ワーカーか",
+    "外に出ずに失敗を報告",
+    "Claude か Codex か",
+    "人が承認",
+    "自動レビューが判断"
+  ],
+  "forbidden": [
+    "agent prompt"
+  ],
+  "edges": [
+    "cmd->host",
+    "host->ok",
+    "host->refused",
+    "refused->isWorker",
+    "isWorker->worker",
+    "isWorker->tool",
+    "tool->claudeHuman",
+    "tool->codexHuman"
+  ]
+}

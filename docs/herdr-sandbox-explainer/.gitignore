@@ -1,0 +1,6 @@
+node_modules/
+.first-reader/
+.vlmkit/
+test-results/
+figures/.figure-check/
+dist/index.open.html
