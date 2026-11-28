@@ -26,3 +26,8 @@ agent merely because it is idle or done, or resume a previous worker session.
 An agent receiving a delegated assignment is a worker: execute that assignment
 without becoming another chief of staff. Explicit human instructions override
 this default. Outside Herdr, do not apply this workflow.
+
+- Chief status updates: keep interim updates to one or two lines; write a
+  full report only when committing, when the human must decide, or when
+  blocked (reason: long per-step reports during the hayase F2 work consumed
+  many tokens)
