@@ -2,7 +2,7 @@
   "private": true,
   "type": "module",
   "devDependencies": {
-    "@mizchi/vlmkit": "^0.24.0",
+    "@mizchi/vlmkit": "^0.28.0",
     "marked": "^18.2.0",
     "mermaid": "^12.3.0",
     "playwright": "^1.65.1"
